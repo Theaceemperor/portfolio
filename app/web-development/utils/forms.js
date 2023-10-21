@@ -1,0 +1,10 @@
+
+
+export function ApplicationForm() {
+
+    return (
+        <>
+        
+        </>
+    )
+}
