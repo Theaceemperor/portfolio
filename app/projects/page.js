@@ -6,17 +6,17 @@ import { BiLinkAlt } from "react-icons/bi";
 
 export default function Page() {
     const [ projectImages,setProjectImages ] = React.useState([
-        { id: 1, image1: '/Portfolio/amber.png', image2: '/Portfolio/amber.png', image3: '/Portfolio/amber.png', image4: '/spades/spades2.png', projectLink: 'https://raconsult.vercel.app', projectName: 'Royal Acumen Consult', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'raconsult', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", image1: '/Portfolio/amber.png', image2: '/spades/spades2.png', projectLink: 'https://raconsult.vercel.app', projectName: 'Royal Acumen Consult', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
 
-        { id: 2, image1: '/linted/1.png', image2: '/linted/2.png', image3: '/linted/3.png', image4: '/linted/4.png', projectLink: 'https://linted.vercel.app', projectName: 'Linted E-commerce', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'linted', image1: '/linted/2.png', image2: '/linted/4.png', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: 'https://linted.vercel.app', projectName: 'Linted E-commerce', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
 
-        { id: 3, image1: '/spades/spades.png', image2: '/spades/spades1.png', image3: '/spades/spades3.png', image4: '/spades/spades2.png', projectLink: 'https://spadeshub.vercel.app', projectName: 'Spades v1', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'spadesv1', image1: '/spades/spades1.png', image2: '/spades/spades2.png', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: 'https://spadeshub.vercel.app', projectName: 'Spades v1', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
 
-        { id: 4, image1: '/hilker/hilker.png', image2: '/hilker/hilker1.png', image3: '/hilker/hilker3.png', image4: '/hilker/hilker4.png', projectLink: '/contact', projectName: 'Hilker Spa', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'hilker-spa', image1: '/hilker/hilker1.png', image2: '/hilker/hilker4.png', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'Hilker Spa', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
 
-        { id: 5, image1: '/landing/landing1.png', image2: '/landing/landing1.png', image3: '/landing/landing2.png', image4: '/landing/landing2.png', projectLink: '/contact', projectName: 'Spades Landing', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'simple-landing-page', image1: '/landing/landing1.png', image2: '/landing/landing2.png', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'Spades Landing', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
         
-        { id: 6, image1: '/isam/isam.png', image2: '/isam/isam.png', image3: '/isam/isam2.png', image4: '/isam/isam3.png', projectLink: '/contact', projectName: 'ISam store', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 'isam', image1: '/isam/isam.png', image2: '/isam/isam3.png', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'ISam store', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
     ]);
 
     return (
@@ -27,13 +27,14 @@ export default function Page() {
                     projectImages.map((items) => (
                         <ProjectPortfolio
                         key={items.id} 
+                        projectId={items.id}
                         image1={items.image1}
                         image2={items.image2}
-                        image3={items.image3}
-                        image4={items.image4}
                         projectLink={items.projectLink}
                         projectName={items.projectName}
                         overview={items.overview}
+                        productDesc1={items.projectDesc1}
+                        productDesc2={items.productDesc2}
                         />
                     ))
                 }

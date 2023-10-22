@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BsGithub } from "react-icons/bs";
 
 
 export function SpadesSubFooter() {
@@ -14,12 +15,14 @@ export function SpadesSubFooter() {
               <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Contact</Link></li>
             </ul>
             <ul>
-              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
-              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
+              <li><Link href={'/web-development'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
+              <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
+              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
               <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
+              <li><Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link></li>
             </ul>
             <ul>
-              <li><Link href={'#cta'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
+              <li><Link href={'https://x.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
               <li><Link href={'/spades/terms'} className="hover:underline underline-offset-2 decoration-amber-600">T & C</Link></li>
               <li><Link href={'/spades/policy'} className="hover:underline underline-offset-2 decoration-amber-600">Privacy</Link></li>
               <li><Link href={'#'}>2023 © spadeshub</Link></li>

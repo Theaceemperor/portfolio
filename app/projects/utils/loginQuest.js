@@ -34,7 +34,7 @@ export function SignUpQuest({color}) {
 export function ContactUs({text}) {
 
     return (
-        <Link href={"https://wa.me/message/LLABQR53DPNME1"} 
+        <Link href={"/contact"} 
         className="flex items-center gap-1">
             Contact us<IoMdContacts className="text-[#de4f0a]"/> {text}
         </Link>

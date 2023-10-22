@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Button } from "@mui/material";
-import { LoginQuest } from "../components/spadesLinks";
 import { LoginButton, VisitHomePage } from "../projects/utils/loginQuest";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/settings/firebase.settings";
@@ -109,13 +108,19 @@ export default function Page() {
                             value={message}
                             />
 
-                            <Button 
-                            variant="outlined"
-                            onClick={() => handlePostMessage()}
-                            color="warning"
-                            >
+                            {
+                                message.length && email.length > 0
+                                ?
+                                <Button 
+                                variant="outlined"
+                                onClick={() => handlePostMessage()}
+                                color="warning"
+                                >
                                 Submit
                             </Button>
+                            :
+                            null
+                            }
                         </form>
                     </div>
                 </div>

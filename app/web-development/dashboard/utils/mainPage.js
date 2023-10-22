@@ -117,7 +117,7 @@ export default function MainDashboard() {
 
                             <H1Link 
                             icon={<IoMdCart />} 
-                            targetLink={"/gift-cards"}
+                            targetLink={"/gift-purchase"}
                             text={"Shop Giftcards"} 
                             />
 
