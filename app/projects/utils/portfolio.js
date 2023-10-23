@@ -23,19 +23,19 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                         <p>{productDesc1}</p>
                     </blockquote>
                     <Image 
-                    src={`${image1}`}
                     alt="project image"
                     width={1080}
                     height={920}
+                    src={image1}
                     className="rounded-md w-auto h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
                 </article>
                 <article className="grid grid-rows-2 gap-2">
                     <Image 
-                    src={`${image2}`}
                     alt="project image"
                     width={1080}
                     height={920}
+                    src={image2}
                     className="rounded-md w-auto h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
                     <blockquote className="text-center p-2 text-sm">
