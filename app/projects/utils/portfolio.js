@@ -27,7 +27,7 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                     width={500}
                     height={500}
                     src={image1}
-                    className="rounded-md w-auto h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
+                    className="rounded-md w-[100%] h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
                 </article>
                 <article className="grid grid-rows-2 gap-2">
