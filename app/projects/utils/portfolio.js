@@ -24,8 +24,8 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                     </blockquote>
                     <Image 
                     alt="project image"
-                    width={1080}
-                    height={920}
+                    width={500}
+                    height={500}
                     src={image1}
                     className="rounded-md w-auto h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
