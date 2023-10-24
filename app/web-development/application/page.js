@@ -9,6 +9,11 @@ import { Button, InputAdornment, TextField } from '@mui/material';
 import { RiAccountCircleLine } from 'react-icons/ri';
 import WebCategories from '../utils/webCategories';
 import { FileUpload1 } from '../utils/uploadBtn';
+import { AdsBadge } from '@/app/components/alert';
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import { db, storage } from '@/settings/firebase.settings';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { signIn } from 'next-auth/react';
 
 const validationRules = yup.object().shape({
     firstName:yup.string().required('this is a required field'),
@@ -33,6 +38,11 @@ export default function Page() {
     const [value, setValue] = React.useState(options[0]);
     const [selectedFile,setSelectedFile] = React.useState(null);
     const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
+    const [ showAlertDialog,setShowAlertDialog ] = React.useState(false);
+
+    const handleCloseAlertDialog = () => {
+        setShowAlertDialog(false);
+    }
 
     const [ timeValue,setTimeValue ] = React.useState(timeOptions[0])
 
@@ -47,6 +57,40 @@ export default function Page() {
             setSelectedFile(readEvent.target.result);
         }
     }
+
+    const handleCreateUser = async () => {
+        setShowActivityIndicator(true);
+        const docRes = await addDoc(collection(db,'users'),{
+            name:values.firstName + ' ' + values.lastName,
+            compname:values.compName,
+            compdesc:values.compDesc,
+            compaddress:values.compAddress,
+            phone:values.compPhone,
+            managementtime: 'dec 30, 2023 00:00:00',
+            devtime:timeValue,
+            devrem: 'waiting...',
+            devlink: '#',
+            category:value,
+            logo:null,
+            email:values.compEmail,
+            password:values.password,
+            joinedAt:new Date().getTime(),
+
+        });
+        const imageRef = ref(storage,`user/${docRes.id}/logo`);
+
+        await uploadString(imageRef,selectedFile,'data_url')
+        .then(async () => {
+            const imgUrl = await getDownloadURL(imageRef);
+            updateDoc(doc(db,'users',docRes.id),{
+                logo:imgUrl,
+            });
+            await signIn("sign-in", {email:values.compEmail,password:values.password}, {callbackUrl: "/web-development/dashboard"})
+            setShowActivityIndicator(false);
+        })
+        .catch((e) => console.error(e))
+    }
+
     const {handleBlur, handleSubmit, handleChange, errors, touched, values} = useFormik({
         initialValues: { firstName: '', lastName: '', compEmail: '', compPhone: '', compName:'', compDesc:'', compAddress: '', category: '', password: '', passwordConfirmation: '', value:value },
         onSubmit: values => {
@@ -61,20 +105,13 @@ export default function Page() {
         <ActivityIndicator />
         :
         <>
-            {/* <Header />
-            <AdsNotification 
-            alertTitle={"Get a Website 30% off"}
-            >
-                <small>Did you know with spades you can get a website built almost free?
-                    We offer premium web development services and management</small> 
-            </AdsNotification> */}
             <blockquote className="w-[300px] flex items-center justify-center">
-                {/* <AdsBadge 
+                <AdsBadge 
                 alertTitle={"Get a Website 50% off"}
                 >
                     <small>Did you know with spades you can get a website built almost free?
                         We offer premium web development services and management</small> 
-                </AdsBadge> */}
+                </AdsBadge>
             </blockquote>
             
             <div className="w-full flex flex-col items-center justify-center px-1 my-5">

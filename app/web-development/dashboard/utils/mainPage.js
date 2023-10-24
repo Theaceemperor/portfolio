@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import { FaBuysellads, FaShoppingCart } from "react-icons/fa";
-import { BlogLink, H1Link } from "@/app/projects/utils/links";
+import { BlogLink, ButtonLink, H1Link } from "@/app/projects/utils/links";
 import { IoMdCart } from "react-icons/io";
 import { GiChatBubble } from "react-icons/gi";
 import { VisitHomePage } from "@/app/projects/utils/loginQuest";
@@ -15,17 +15,30 @@ import { OnLoginNotification } from "@/app/components/alert";
 import { DevPop } from "@/app/components/poppers";
 import Timer from "@/app/components/countdown-timer";
 import DashboardProfile from "./dashboardProfile";
+import DialogSlide from "@/app/components/Dialog";
+import { redirect, useRouter } from "next/navigation";
 
 
 
 export default function MainDashboard() {
     const {data:session} = useSession();
+    const router = useRouter();
+
+    const [ showDialogAlert, setShowDialogAlert ] = React.useState(false);
+
+    const handleCloseDialogAlert = () => {
+        setShowDialogAlert(false);
+    }
+
+    const handleOpenDialogAlert = () => {
+        setShowDialogAlert(true);
+    }
 
     const [dev,setDev] = React.useState([]);
 
         try {
             const handleGetDev = async () => {
-                const q = query(collection(db,'users'),where('email','==',session?.user.email));
+                const q = query(collection(db,'users'),where('email','==',session.user.email));
                 const onSnapShot = await getDocs(q);
         
                 setDev(onSnapShot.docs.map(doc => {
@@ -138,16 +151,27 @@ export default function MainDashboard() {
                         ))
                     }
                 </div>
-                
-                <H1Link 
+            
+                <ButtonLink 
                 icon={<GiChatBubble />}
                 text={"Chat with a developer"}
-                targetLink={"#"}
+                targetLink={handleOpenDialogAlert}
                 />
+                
                 <span className="flex items-center flex-col gap-2 mt-3">
                     <VisitHomePage />
                 </span>
             </main>
+            <DialogSlide handleClose={handleCloseDialogAlert}
+            open={showDialogAlert}
+            header={'Chat with a dev'} 
+            text={
+                <span>
+                    <p>Will you like to chat with a developer? please click the open button to begin conversation. Let us know if you need any direct help or questions. Thank you for using spades Dev!</p>
+                </span>
+            }
+            buttonAction={() => router.push('https://wa.me/message/LLABQR53DPNME1')}
+            />
         </>
     )
 }

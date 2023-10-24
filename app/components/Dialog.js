@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DialogSlide({header,text,open,handleClose}) {
+export default function DialogSlide({header,text,open,handleClose,buttonAction}) {
 
   return (
     <div>
@@ -30,6 +30,7 @@ export default function DialogSlide({header,text,open,handleClose}) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Button onClick={buttonAction}>Open</Button>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>

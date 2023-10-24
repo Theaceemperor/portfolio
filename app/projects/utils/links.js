@@ -37,3 +37,13 @@ export function PLink({text,icon,targetLink}) {
         </div>
     )
 }
+
+export function ButtonLink({ targetLink,text,icon }) {
+
+    return (
+        <div  className="w-full flex items-center justify-center my-1">
+            <button className='px-3 py-1 bg-transparent flex gap-1 items-center' onClick={targetLink}>{text}{icon}
+            </button>
+        </div>
+    )
+} 

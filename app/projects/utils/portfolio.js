@@ -24,8 +24,8 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                     </blockquote>
                     <Image 
                     alt="project image"
-                    width={500}
-                    height={500}
+                    width={1350}
+                    height={650}
                     src={image1}
                     className="rounded-md w-[100%] h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
@@ -33,10 +33,10 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                 <article className="grid grid-rows-2 gap-2">
                     <Image 
                     alt="project image"
-                    width={1080}
-                    height={920}
+                    width={1350}
+                    height={650}
                     src={image2}
-                    className="rounded-md w-auto h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
+                    className="rounded-md w-[100%] h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
                     <blockquote className="text-center p-2 text-sm">
                         <h4 className="font-bold text-amber-600 underline underline-offset-4">Product Description</h4>

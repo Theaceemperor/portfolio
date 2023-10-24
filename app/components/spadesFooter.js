@@ -17,7 +17,7 @@ export function SpadesSubFooter() {
             <ul>
               <li><Link href={'/web-development'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
               <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
-              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
+              <li><Link href={'https://wa.me/message/LLABQR53DPNME1'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
               <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
               <li><Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link></li>
             </ul>
