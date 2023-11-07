@@ -30,8 +30,8 @@ export default function DialogSlide({header,text,open,handleClose,buttonAction})
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={buttonAction}>Open</Button>
           <Button onClick={handleClose}>Close</Button>
+          <Button onClick={buttonAction}>Open</Button>
         </DialogActions>
       </Dialog>
     </div>

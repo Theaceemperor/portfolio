@@ -1,8 +1,4 @@
-
-import { SubNav } from "../components/navBar";
-import { SubHeader } from "./utils/Headers";
-import { SpadesSubFooter } from "../components/spadesFooter";
-import { RowCta } from "./utils/cta";
+import SubLayout from "../components/layout";
 
   export const metadata = {
     title: 'Spadeshub | Our projects',
@@ -10,14 +6,8 @@ import { RowCta } from "./utils/cta";
 
   export default function Layout({ children }) {
     return (
-      <>
-        <SubNav/>
-        <SubHeader />
-        <main>
-          {children}
-        </main>
-        <RowCta />
-        <SpadesSubFooter />
-      </>
+      <SubLayout>
+        {children}
+      </SubLayout>
     )
   }

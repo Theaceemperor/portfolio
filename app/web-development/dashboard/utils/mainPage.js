@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, { Suspense } from "react";
 import { FaBuysellads, FaShoppingCart } from "react-icons/fa";
 import { BlogLink, ButtonLink, H1Link } from "@/app/projects/utils/links";
 import { IoMdCart } from "react-icons/io";
@@ -16,7 +16,8 @@ import { DevPop } from "@/app/components/poppers";
 import Timer from "@/app/components/countdown-timer";
 import DashboardProfile from "./dashboardProfile";
 import DialogSlide from "@/app/components/Dialog";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { ActivityIndicator2, ActivityIndicator3 } from "@/app/components/activity-indicator";
 
 
 
@@ -36,6 +37,7 @@ export default function MainDashboard() {
 
     const [dev,setDev] = React.useState([]);
 
+    React.useEffect(() => {
         try {
             const handleGetDev = async () => {
                 const q = query(collection(db,'users'),where('email','==',session.user.email));
@@ -54,6 +56,7 @@ export default function MainDashboard() {
         } catch (error) {
             
         }
+    })
     
     return (
         <>
@@ -73,44 +76,56 @@ export default function MainDashboard() {
                     </span>
                 </OnLoginNotification>
                 <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-3 my-5">
-                    {
-                        dev.map(item => (
-                            <DashboardProfile key={item.id}
-                            icon={<CgProfile />}
-                            header={"Profile"}
-                            sidetext={"Welcome to Spades"}
-                            r1={ session?.user.name }
-                            r2={ item.data.compname }
-                            r3={ item.data.compdesc }
-                            r4={ session?.user.email }
-                            r5={ item.data.category }
-                            />
-                        ))
-                    }
-                    {
-                        dev.map(item => (
-                            <DashboardProfile  key={item.id}
-                            header={"Current Development"}
-                            l1={"status: "}
-                            l2={"Progress: "}
-                            l3={"Completed Features: "}
-                            l4={"Features requested"}
-                            l5={"Dev time: "}
-                            r5={item.data.devtime}
-                            l6={"Dev time left: "}
-                            r6={item.data.devrem}
-                            r1={item.data.status}
-                            r2={parseInt(item.data.progress)}
-                            r3={item.data.features_completed}
-                            r4={item.data.featuresreq}
-                            >
-                                <p><Link
-                                href={item.data.devlink}
-                                className="underline decoration-[#de4f0a]"
-                                >view this development</Link></p>
-                            </DashboardProfile>
-                        ))
-                    }
+                    <Suspense fallback={
+                        <DashboardProfile>
+                            <ActivityIndicator3 />
+                        </DashboardProfile>
+                    }>
+                        {
+                            dev.map(item => (
+                                <DashboardProfile key={item.id}
+                                icon={<CgProfile />}
+                                header={"Profile"}
+                                sidetext={"Welcome to Spades"}
+                                r1={ session?.user.name }
+                                r2={ session?.user.image + item.data.compname }
+                                r3={ item.data.compdesc }
+                                r4={ session?.user.email }
+                                r5={ item.data.category }
+                                />
+                            ))
+                        }
+                    </Suspense>
+                    <Suspense fallback={
+                        <DashboardProfile>
+                            <ActivityIndicator3 />
+                        </DashboardProfile>
+                    }>
+                        {
+                            dev.map(item => (
+                                <DashboardProfile  key={item.id}
+                                header={"Current Development"}
+                                l1={"status: "}
+                                l2={"Progress: "}
+                                l3={"Completed Features: "}
+                                l4={"Features requested"}
+                                l5={"Dev time: "}
+                                l6={"Dev time left: "}
+                                r1={item.data.status}
+                                r2={parseInt(item.data.progress)}
+                                r3={item.data.features_completed}
+                                r4={item.data.featuresreq}
+                                r5={item.data.devtime}
+                                r6={item.data.devrem}
+                                >
+                                    <p><Link
+                                    href={item.data.devlink}
+                                    className="underline decoration-[#de4f0a]"
+                                    >view this development</Link></p>
+                                </DashboardProfile>
+                            ))
+                        }
+                    </Suspense>
                 </div>
 
                 <div className="my-5 flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-5">

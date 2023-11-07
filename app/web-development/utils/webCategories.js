@@ -19,7 +19,7 @@ export default function WebCategories({onChange,className,options,value,label}) 
         id="controllable-states-demo"
         options={options}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label={`${label}`} />}
+        renderInput={(params) => <TextField {...params} label={`${label}`} required />}
       />
     </div>
   );

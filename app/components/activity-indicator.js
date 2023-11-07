@@ -26,3 +26,15 @@ export function ActivityIndicator2() {
         </div>
     )
 }
+
+export function ActivityIndicator3() {
+
+    return (
+        <div className='h-auto w-full flex justify-center items-center my-10'>
+            <div className="flex flex-col gap-1 items-center justify-center">
+                <CircularProgress color='inherit' />
+                <h1 className="px-2">Loading...</h1>
+            </div>
+        </div>
+    )
+}

@@ -24,7 +24,9 @@ export default function LoginPage() {
            try {
                 const handlereqSubmit = async () => {
                     setShowActivityIndicator(true);
-                    await signIn("sign-in", {email:values.email,password:values.password}, {callbackUrl: "/web-development/dashboard"}).then(() => {
+                    await signIn("sign-in", {email:values.email,password:values.password}, 
+                    // {callbackUrl: "/web-development/dashboard"}
+                    ).then(() => {
                         setShowActivityIndicator(false);
                     })
                 }

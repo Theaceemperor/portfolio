@@ -23,7 +23,7 @@ export function FileUpload1({text,bgColor,selectedFile}) {
             background: 'black', color: '#de4f0a'
         }}>
         {text}
-            <VisuallyHiddenInput type="file" accept='image/*' onChange={selectedFile}/>
+            <VisuallyHiddenInput type="file" accept='image/*' onChange={selectedFile} required />
         </Button>
     )
 }

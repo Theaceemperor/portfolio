@@ -1,7 +1,7 @@
 'use client'
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react';
 import ActivityIndicator from '@/app/components/activity-indicator';
 import Link from 'next/link';
@@ -13,24 +13,28 @@ import { AdsBadge } from '@/app/components/alert';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { db, storage } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-import { signIn } from 'next-auth/react';
+import { CgLink } from 'react-icons/cg';
 
 const validationRules = yup.object().shape({
     firstName:yup.string().required('this is a required field'),
     lastName:yup.string().required('this is a required field'),
     compPhone:yup.string().required('this is a required field'),
     compName:yup.string().required('this is a required field'),
-    compDesc:yup.string().required('this is a required field'),
+    compDesc:yup.string().required('this is a required field').min(120, 'minimum of 120 characters').max(1500, 'maximum of 1500 characters'),
     compAddress:yup.string().required('this is a required field'),
     compEmail:yup.string().required(),
     password:yup.string().required().min(8, 'minimum of 8 characters').max(36, 'maximum of 36 characters')
     .oneOf([yup.ref('passwordConfirmation'),null], "password dosen't match")
 })
 
-const options = ['Personal Web', 'Landing Page', 'Portfolio Site', 'Custom', 'Booking/Consultation', 'Blog', 'Real Estate Agency', 'NGO', 'Restaurant/Cafe', 'E-commerce', 'Landing x Portfolio', 'Ticket Purchse', 'Interior Decor', 'Ads & Traffic', 'Event & Planning', 'Recipe', 'Voting', 'Social', 'Donation', 'Campaign', 'Mobile Bank/Wallet'];
+const options = [ 'Personal Web', 'Landing Page', 'Portfolio Site', 'Spa', 'Custom', 'Booking/Consultation', 'Blog', 'Real Estate Agency', 'NGO', 'Restaurant/Cafe', 'E-commerce', 'Landing x Portfolio', 'Ticket Purchse', 'Interior Decor', 'Ads & Traffic', 'Event & Planning', 'Recipe', 'Voting', 'Social', 'Donation', 'Campaign', 'Mobile Bank/Wallet' ];
 
 const timeOptions = [
     '30 days', '60 days', '90 days', '120 days'
+]
+
+const typeOptions = [
+    'Private', 'Public', 'Commercial'
 ]
 
 export default function Page() {
@@ -38,13 +42,13 @@ export default function Page() {
     const [value, setValue] = React.useState(options[0]);
     const [selectedFile,setSelectedFile] = React.useState(null);
     const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
-    const [ showAlertDialog,setShowAlertDialog ] = React.useState(false);
 
     const handleCloseAlertDialog = () => {
         setShowAlertDialog(false);
     }
 
     const [ timeValue,setTimeValue ] = React.useState(timeOptions[0])
+    const [ privacy,setPrivacy ] = React.useState(typeOptions[0])
 
     const imageToPost = (e) => {
         const reader = new FileReader();
@@ -66,14 +70,17 @@ export default function Page() {
             compdesc:values.compDesc,
             compaddress:values.compAddress,
             phone:values.compPhone,
-            managementtime: 'dec 30, 2023 00:00:00',
+            managementtime: null,
             devtime:timeValue,
             devrem: 'waiting...',
+            status: 'waiting...',
+            progress: '0',
             devlink: '#',
             category:value,
             logo:null,
             email:values.compEmail,
             password:values.password,
+            role:'user',
             joinedAt:new Date().getTime(),
 
         });
@@ -85,7 +92,7 @@ export default function Page() {
             updateDoc(doc(db,'users',docRes.id),{
                 logo:imgUrl,
             });
-            await signIn("sign-in", {email:values.compEmail,password:values.password}, {callbackUrl: "/web-development/dashboard"})
+            router.push('/web-development/application/next-step');
             setShowActivityIndicator(false);
         })
         .catch((e) => console.error(e))
@@ -105,7 +112,7 @@ export default function Page() {
         <ActivityIndicator />
         :
         <>
-            <blockquote className="w-[300px] flex items-center justify-center">
+            <blockquote className="w-[50%] flex items-center justify-center">
                 <AdsBadge 
                 alertTitle={"Get a Website 50% off"}
                 >
@@ -116,7 +123,7 @@ export default function Page() {
             
             <div className="w-full flex flex-col items-center justify-center px-1 my-5">
                 <h1 className="text-center">WEB DEVELOPMENT APPLICATION</h1>
-                <h3 className="text-center py-2 text-lg">Get your desired web page in just a few clicks</h3>
+                <h3 className="text-center py-2 text-md underline underline-offset-2"><Link href={'#apply'} className='flex justify-center items-center text-amber-600'>Get your desired web page in just a few clicks <CgLink /></Link></h3>
                 <form className="p-2 md:p-5 lg:p-5 flex flex-col gap-5 bg-[wheat] rounded-lg shadow-lg shadow-black/70"
                 onSubmit={handleSubmit}>
                     <h3 className="text-gray-800 text-center font-bold text-lg">FILL AND SUBMIT TO PROCEED</h3>
@@ -238,7 +245,15 @@ export default function Page() {
                           }}
                           label={"Select Dev time"}
                           options={timeOptions}
-                          />
+                        />
+                        <WebCategories
+                        value={privacy} 
+                        onChange={(event, newValue) => {
+                            setPrivacy(newValue);
+                          }}
+                          label={"Privacy"}
+                          options={typeOptions}
+                        />
                     </div>
 
                     <div className="lg:grid md:grid md:grid-cols-2 flex flex-col gap-5 w-full">

@@ -5,8 +5,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Spadeshub | Optimized digital marketing at your fingertips',
-  description: 'Empowering brands for digital success; we are your partner in online growth, data-driven strategies and digital innovation. Get fast full-stack react web applications alongside premium and reliable search engine optimization(SEO) services for individuals and businesses alike.',
-  icons: { icon: '/icon.png' }
+  description: "Elevate your online presence with our comprehensive web development and SEO services. We craft beautiful websites that rank high and drive conversions for your business.",
+  icons: '/icon.png',
 }
 
 export default function RootLayout({ children }) {

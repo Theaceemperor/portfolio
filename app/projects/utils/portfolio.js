@@ -16,12 +16,12 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                 <Link href={`${projectLink}`} className="flex items-center gap-1 justify-center">{projectName} <BiLinkAlt className="text-amber-600"/></Link>
             </h2>
             <p className="text-center text-sm px-1">{overview}</p>
-            <div className="grid grid-cols-2 gap-2 px-2">
-                <article className="grid grid-rows-2 gap-2">
-                    <blockquote className="text-center p-2 text-sm">
-                        <h4 className="font-bold text-amber-600 underline underline-offset-4">Product Description</h4>
-                        <p>{productDesc1}</p>
-                    </blockquote>
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2 px-2">
+                <article className="flex flex-col sm:grid sm:grid-rows-2 gap-2">
+                    <aside className="p-2 text-sm">
+                        <h4 className="text-center font-bold text-amber-600 underline underline-offset-4">Product Description</h4>
+                        <blockquote className="text-xs">{productDesc1}</blockquote>
+                    </aside>
                     <Image 
                     alt="project image"
                     width={1350}
@@ -30,7 +30,7 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                     className="rounded-md w-[100%] h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
                 </article>
-                <article className="grid grid-rows-2 gap-2">
+                <article className="flex flex-col sm:grid sm:grid-rows-2 gap-2">
                     <Image 
                     alt="project image"
                     width={1350}
@@ -38,10 +38,10 @@ export function ProjectPortfolio({ projectLink, projectName, projectId, image1, 
                     src={image2}
                     className="rounded-md w-[100%] h-auto hover:border hover:border-amber-600 hover:shadow-sm hover:shadow-amber-600"
                     />
-                    <blockquote className="text-center p-2 text-sm">
+                    <aside className="text-center p-2 text-sm">
                         <h4 className="font-bold text-amber-600 underline underline-offset-4">Product Description</h4>
-                        <p>{productDesc2}</p>
-                    </blockquote>
+                        <blockquote className="text-xs">{productDesc2}</blockquote>
+                    </aside>
                 </article>
             </div>
         </div>

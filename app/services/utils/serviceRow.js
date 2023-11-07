@@ -1,7 +1,6 @@
-import { redirect } from "next/navigation";
 
 
-export function ServiceRow({ Service, serviceDescription }) {
+export function ServiceRow({ Service, serviceDescription, clickRedirect }) {
 
     return (
         <article className="bg-[url('/img/1.jpg')] bg-center bg-cover h-[50vh] sm:h-[80vh] w-[95%] rounded-md">
@@ -10,7 +9,7 @@ export function ServiceRow({ Service, serviceDescription }) {
                         <h1>{Service}</h1>
                         <small className="hover:text-[wheat] text-lg p-2">{serviceDescription}</small>
                         <button className="hover:transition-colors hover:border-y ease-linear border-[wheat] text-[22px]"
-                        onClick={() => redirect('https://x.com/@spadeshub')}>
+                        onClick={clickRedirect}>
                             Book now
                         </button>
                     </aside>

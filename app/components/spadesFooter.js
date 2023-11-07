@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BsGithub } from "react-icons/bs";
+import { IoHome } from "react-icons/io5";
 
 
 export function SpadesSubFooter() {

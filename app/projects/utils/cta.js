@@ -29,7 +29,7 @@ export function RowCta() {
               className="rounded-full border-2 border-amber-600 animate-bounce w-8 h-8"
               />
               </Link>
-              <Link href={'https://x.com/@spadeshub'}>
+              <Link href={'https://twitter.com/@spadeshub'}>
               <FaXTwitter
               className="rounded-full border-2 text-[wheat] font-bold border-amber-600 animate-bounce text-3xl p-1"
               />
