@@ -182,6 +182,7 @@ export default function Page() {
             featuresreq:NaN,
             features_completed:0,
             managementtime: null,   
+            discountCode:values.giftcardCode,
         }).then(() => {
             setShowAlertDialog(true);
             router.push('/web-development');
@@ -190,7 +191,7 @@ export default function Page() {
     }
 
     const {handleBlur, handleSubmit, handleChange, errors, touched, values} = useFormik({
-        initialValues: { mainPages: selectMainPages, subPages: value, brandColors: '', majorComponents: selectMajorComponents, minorComponents: selectMinorComponents, backendServices: selectBackendServices, devSupport: selectDevSupport, complementaryServ: selectComplementaryServices, managementPeriod: '', customEmail: '', customDomain: '', password: '' },
+        initialValues: { mainPages: selectMainPages, subPages: value, brandColors: '', majorComponents: selectMajorComponents, minorComponents: selectMinorComponents, backendServices: selectBackendServices, devSupport: selectDevSupport, complementaryServ: selectComplementaryServices, managementPeriod: '', customEmail: '', customDomain: '', password: '', giftcardCode: '' },
         onSubmit: values => {
            handleCreateUser();
         },
@@ -457,6 +458,7 @@ export default function Page() {
                         />
                         {errors.customDomain && touched.customDomain
                         ? <span className="text-red-500">{errors.customDomain}</span> : null}
+                        
 
                         <TextField 
                         required
@@ -471,6 +473,15 @@ export default function Page() {
                         {errors.password && touched.password
                         ? <span className="text-red-500">{errors.password}</span> : null}
     
+                        <TextField
+                        id="giftcardCode" 
+                        label="Giftcard Code" 
+                        variant="filled"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.giftcardCode} 
+                        />
+                        
                         <blockquote className='flex flex-row gap-5 items-center justify-center'>
                             <label><Link href={'/spades/terms'} className='hover:underline hover:text-amber-600'>Agree to T & C</Link></label>
                             <input 

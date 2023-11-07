@@ -88,7 +88,7 @@ export default function MainDashboard() {
                                 header={"Profile"}
                                 sidetext={"Welcome to Spades"}
                                 r1={ session?.user.name }
-                                r2={ session?.user.image + item.data.compname }
+                                r2={ item.data.compname }
                                 r3={ item.data.compdesc }
                                 r4={ session?.user.email }
                                 r5={ item.data.category }
