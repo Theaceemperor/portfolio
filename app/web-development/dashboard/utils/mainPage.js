@@ -76,56 +76,44 @@ export default function MainDashboard() {
                     </span>
                 </OnLoginNotification>
                 <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-3 my-5">
-                    <Suspense fallback={
-                        <DashboardProfile>
-                            <ActivityIndicator3 />
-                        </DashboardProfile>
-                    }>
-                        {
-                            dev.map(item => (
-                                <DashboardProfile key={item.id}
-                                icon={<CgProfile />}
-                                header={"Profile"}
-                                sidetext={"Welcome to Spades"}
-                                r1={ session?.user.name }
-                                r2={ item.data.compname }
-                                r3={ item.data.compdesc }
-                                r4={ session?.user.email }
-                                r5={ item.data.category }
-                                />
-                            ))
-                        }
-                    </Suspense>
-                    <Suspense fallback={
-                        <DashboardProfile>
-                            <ActivityIndicator3 />
-                        </DashboardProfile>
-                    }>
-                        {
-                            dev.map(item => (
-                                <DashboardProfile  key={item.id}
-                                header={"Current Development"}
-                                l1={"status: "}
-                                l2={"Progress: "}
-                                l3={"Completed Features: "}
-                                l4={"Features requested"}
-                                l5={"Dev time: "}
-                                l6={"Dev time left: "}
-                                r1={item.data.status}
-                                r2={parseInt(item.data.progress)}
-                                r3={item.data.features_completed}
-                                r4={item.data.featuresreq}
-                                r5={item.data.devtime}
-                                r6={item.data.devrem}
-                                >
-                                    <p><Link
-                                    href={item.data.devlink}
-                                    className="underline decoration-[#de4f0a]"
-                                    >view this development</Link></p>
-                                </DashboardProfile>
-                            ))
-                        }
-                    </Suspense>
+                    {
+                        dev.map(item => (
+                            <DashboardProfile key={item.id}
+                            icon={<CgProfile />}
+                            header={"Profile"}
+                            sidetext={"Welcome to Spades"}
+                            r1={ session?.user.name }
+                            r2={ item.data.compname }
+                            r3={ item.data.compdesc }
+                            r4={ session?.user.email }
+                            r5={ item.data.category }
+                            />
+                        ))
+                    }
+                    {
+                        dev.map(item => (
+                            <DashboardProfile  key={item.id}
+                            header={"Current Development"}
+                            l1={"status: "}
+                            l2={"Progress: "}
+                            l3={"Completed Features: "}
+                            l4={"Features requested"}
+                            l5={"Dev time: "}
+                            l6={"Dev time left: "}
+                            r1={item.data.status}
+                            r2={parseInt(item.data.progress)}
+                            r3={item.data.features_completed}
+                            r4={item.data.featuresreq}
+                            r5={item.data.devtime}
+                            r6={item.data.devrem}
+                            >
+                                <p><Link
+                                href={item.data.devlink}
+                                className="underline decoration-[#de4f0a]"
+                                >view this development</Link></p>
+                            </DashboardProfile>
+                        ))
+                    }
                 </div>
 
                 <div className="my-5 flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-5">

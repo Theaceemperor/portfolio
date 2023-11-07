@@ -483,7 +483,7 @@ export default function Page() {
                         />
                         
                         <blockquote className='flex flex-row gap-5 items-center justify-center'>
-                            <label><Link href={'/spades/terms'} className='hover:underline hover:text-amber-600'>Agree to T & C</Link></label>
+                            <label><Link href={'/spades/terms'} className='text-black hover:underline hover:text-amber-600'>Agree to T & C</Link></label>
                             <input 
                             type='checkbox'
                             required
