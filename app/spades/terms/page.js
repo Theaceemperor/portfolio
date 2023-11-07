@@ -4,7 +4,7 @@ export default function Page() {
 
     return (
         <>
-            <h2 className="about-h2 text-center">TERMS OF USE</h2>
+            <h2 className="about-h2 text-center my-10 font-bold underline">TERMS OF USE</h2>
             <p className="text-lg p-3 text-center">Introduction:
                 <br />Use of the service is subject to the following terms of use.
                 Terms of use are intended to ensure proper use of the

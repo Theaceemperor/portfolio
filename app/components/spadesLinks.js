@@ -1,7 +1,6 @@
 'use client'
 import { useRef } from "react";
 import { useIsVisible } from "./useIsVisible";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GiSpades } from "react-icons/gi";
 

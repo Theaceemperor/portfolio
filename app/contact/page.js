@@ -47,7 +47,7 @@ export default function Page() {
                     <p className="font-bold">Write a message or give us some feedback/review</p>
                 </div>
                 <div className="flex flex-col my-10 p-3 text-center items-center justify-center gap-5 lg:grid lg:grid-cols-2">
-                    <div className="flex flex-col shadow-xl gap-5 rounded-lg py-3 px-1">
+                    <div className="flex flex-col shadow-xl gap-5 rounded-lg p-3">
                         <blockquote className="text-center flex flex-col items-center">
                             <h3 className="font-bold text-lg">Email Address</h3>
                             <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:text-amber-600">spadesinstitute.empire@gmail.com</Link>

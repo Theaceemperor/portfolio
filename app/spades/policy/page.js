@@ -4,7 +4,7 @@ export default function Page() {
 
     return (
         <>
-            <h2 className="about-h2 text-center">Privacy Policy</h2>
+            <h2 className="text-center font-bold text-lg underline my-10">Privacy Policy</h2>
             <p className="text-lg p-3 text-center">
                 When using the service information regarding your habits,
                 products and services (purchased or sold), information or
