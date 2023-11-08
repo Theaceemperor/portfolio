@@ -3,9 +3,9 @@ import Image from "next/image";
 export default function Page() {
 
     return (
-        <div>
+        <div className="w-auto h-auto">
             <Image 
-            src={'/img/invoice.jpg'}
+            src={'/img/invoice.png'}
             alt="Pricing Image"
             width={920}
             height={1020}
