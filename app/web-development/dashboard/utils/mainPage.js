@@ -1,12 +1,12 @@
 'use client'
-import React, { Suspense } from "react";
+import React from "react";
 import { FaBuysellads, FaShoppingCart } from "react-icons/fa";
 import { BlogLink, ButtonLink, H1Link } from "@/app/projects/utils/links";
 import { IoMdCart } from "react-icons/io";
-import { GiChatBubble } from "react-icons/gi";
+import { GiChatBubble, GiSpades } from "react-icons/gi";
 import { VisitHomePage } from "@/app/projects/utils/loginQuest";
 import Link from "next/link";
-import { CgProfile } from 'react-icons/cg';
+import { CgLink, CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from "react-icons/bi";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/settings/firebase.settings";
@@ -17,7 +17,7 @@ import Timer from "@/app/components/countdown-timer";
 import DashboardProfile from "./dashboardProfile";
 import DialogSlide from "@/app/components/Dialog";
 import { useRouter } from "next/navigation";
-import { ActivityIndicator2, ActivityIndicator3 } from "@/app/components/activity-indicator";
+import { FaLaptopCode } from "react-icons/fa6";
 
 
 
@@ -75,42 +75,53 @@ export default function MainDashboard() {
                         Logged in as {session?.user.name}
                     </span>
                 </OnLoginNotification>
-                <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-3 my-5">
+                <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-3 px-3 my-5">
                     {
                         dev.map(item => (
                             <DashboardProfile key={item.id}
                             icon={<CgProfile />}
                             header={"Profile"}
-                            sidetext={"Welcome to Spades"}
+                            sidetext={<span className="flex items-center">Welcome to Spades Dev <GiSpades className="text-xl" /></span>}
+                            l1={'User: '}
                             r1={ session?.user.name }
+                            l2={'Company Name: '}
                             r2={ item.data.compname }
+                            l3={'Company Description: '}
                             r3={ item.data.compdesc }
+                            l4={'User Email: '}
                             r4={ session?.user.email }
+                            l5={'Web Category: '}
                             r5={ item.data.category }
-                            />
+                            >
+                                <Link href={'#'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">View full profile <CgLink /></Link>
+                            </DashboardProfile>
                         ))
                     }
                     {
                         dev.map(item => (
                             <DashboardProfile  key={item.id}
-                            header={"Current Development"}
+                            header={<span className="flex items-center gap-2">Current Development <FaLaptopCode className="text-2xl text-amber-600" /></span>}
+                            sidetext={<span className="uppercase">{item.data.compname}</span>}
                             l1={"status: "}
                             l2={"Progress: "}
                             l3={"Completed Features: "}
-                            l4={"Features requested"}
-                            l5={"Dev time: "}
-                            l6={"Dev time left: "}
+                            l4={"Features requested: "}
+                            l5={"Dev Time: "}
+                            l6={"Dev Time left: "}
+                            l7={'Development Link: '}
                             r1={item.data.status}
                             r2={parseInt(item.data.progress)}
                             r3={item.data.features_completed}
                             r4={item.data.featuresreq}
                             r5={item.data.devtime}
                             r6={item.data.devrem}
-                            >
-                                <p><Link
+                            r7={<Link
                                 href={item.data.devlink}
-                                className="underline decoration-[#de4f0a]"
-                                >view this development</Link></p>
+                                className="underline decoration-amber-600"
+                                >view this development here!</Link>
+                            }
+                            >    
+                                <Link href={'#'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">View full Dev details <CgLink /></Link>
                             </DashboardProfile>
                         ))
                     }
