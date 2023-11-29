@@ -63,7 +63,7 @@ export default function MainDashboard() {
             <main>
                 <blockquote className="my-5">
                     <h3 className="flex flex-row gap-2 items-center px-5"> <CgProfile /> { session?.user.email }
-                        <BiLogOutCircle className="text-xl text-[#de4f0a]"
+                        <BiLogOutCircle className="text-xl text-amber-600"
                         onClick={() => signOut()}
                         />
                     </h3>
@@ -110,13 +110,13 @@ export default function MainDashboard() {
                             l6={"Dev Time left: "}
                             l7={'Development Link: '}
                             r1={item.data.status}
-                            r2={parseInt(item.data.progress)}
+                            r2={parseInt(item.data.progress) + '%' }
                             r3={item.data.features_completed}
                             r4={item.data.featuresreq}
                             r5={item.data.devtime}
                             r6={item.data.devrem}
                             r7={<Link
-                                href={item.data.devlink}
+                                href={'https://' + item.data.devlink}
                                 className="underline decoration-amber-600"
                                 >view this development here!</Link>
                             }
@@ -135,7 +135,7 @@ export default function MainDashboard() {
                         l2={"Count: "}
                         r2={"0"}
                         >
-                            <small><button><i className="underline decoration-[#de4f0a]">expand</i></button></small>
+                            <small><button><i className="underline decoration-amber-600">expand</i></button></small>
                             <FaShoppingCart />
 
                         </DashboardProfile>
@@ -151,7 +151,7 @@ export default function MainDashboard() {
                             <BlogLink />
                             
                             <H1Link 
-                            icon={<FaBuysellads className="text-xl text-[#de4f0a]"/>} 
+                            icon={<FaBuysellads className="text-xl text-amber-600"/>} 
                             text={"Post ads"} 
                             targetLink={"/contact"}/>
                         </blockquote>
