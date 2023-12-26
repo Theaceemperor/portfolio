@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Button } from "@mui/material";
-import { LoginButton, VisitHomePage } from "../projects/utils/loginQuest";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/settings/firebase.settings";
 import { FaXTwitter } from "react-icons/fa6";
 import { OnLoginNotification } from "../components/alert";
+import { LoginButton, LoginButton2, VisitHomePage } from "../components/client/ReusableComponents";
 
 
 export default function Page() {
@@ -52,7 +52,7 @@ export default function Page() {
                             <h3 className="font-bold text-lg">Email Address</h3>
                             <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:text-amber-600">spadesinstitute.empire@gmail.com</Link>
                         </blockquote>
-                        <blockquote className="text-center flex flex-col items-center gap-1">
+                        <blockquote className="text-center flex flex-col items-center gap-2">
                             <h3 className="font-bold text-lg">Socials</h3>
                             <ul className="flex gap-5">
                                 <li>
@@ -72,6 +72,9 @@ export default function Page() {
                                         className="rounded-full border-2 border-amber-600 animate-bounce w-8 h-8"
                                         />
                                     </Link>
+                                </li>
+                                <li>
+                                    <Link href={'https://www.nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 animate-bounce' /></Link>
                                 </li>
                             </ul>
                         </blockquote >
@@ -134,7 +137,7 @@ export default function Page() {
                 </div>
 
                 <div className="flex flex-col items-center my-5 justify-center lg:flex-row md:flex-row gap-5">
-                    <LoginButton />
+                    <LoginButton2 />
                     <VisitHomePage />
                 </div>
                 <div className="flex items-center justify-center my-10">

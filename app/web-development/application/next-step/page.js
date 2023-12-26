@@ -15,9 +15,9 @@ import Chip from '@mui/material/Chip';
 import { db } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import ActivityIndicator from '@/app/components/activity-indicator';
-import WebCategories from '../../utils/webCategories';
 import { OnLoginNotification } from '@/app/components/alert';
 import Link from 'next/link';
+import { WebCategories } from '@/app/components/client/ReusableComponents';
 
 const validationRules = yup.object().shape({
     customEmail:yup.string().required('this is a required field'),

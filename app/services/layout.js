@@ -1,4 +1,4 @@
-import SubLayout from "../components/layout";
+import { BaseLayout } from "../components/client/ReusableComponents";
 
   export const metadata = {
     title: 'Spadeshub | Our services',
@@ -6,8 +6,8 @@ import SubLayout from "../components/layout";
 
   export default function Layout({ children }) {
     return (
-      <SubLayout>
+      <BaseLayout>
         {children}
-      </SubLayout>
+      </BaseLayout>
     )
   }

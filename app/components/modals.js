@@ -45,8 +45,8 @@ export function DevPop() {
             display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'
           }}
           >
-            <span className='flex items-center gap-1 font-bold text-md'>Add new development <SiXdadevelopers
-            className='text-[#de4f0a]' /> </span>
+            <span className='flex items-center gap-1 font-bold text-md text-amber-600'>Add new development <SiXdadevelopers
+            className='text-amber-600' /> </span>
           </Button>
           <Popover
             {...bindPopover(popupState)}

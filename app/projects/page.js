@@ -1,100 +1,48 @@
 'use client'
 import React from "react";
-import { ProjectPortfolio } from "./utils/portfolio";
 import Link from "next/link";
 import { BiLink, BiLinkAlt } from "react-icons/bi";
 import MySwiper from "../components/swiper";
+import Image from "next/image";
+import { PortfolioProject, Project } from "../components/client/ReusableComponents";
 
 export default function Page() {
-    const [ projectImages,setProjectImages ] = React.useState([
-        { id: 'raconsult', projectDesc1: <span>
-            <b className="underline">Overview: </b>Revolutionize your consultation services with our React-based module. Our cutting-edge technology creates a seamless user experience and streamlined workflow for your business.
-            <br />
-            This React-based module can provide several benefits for consultation services, including but not limited to:
-            <ul>
-                <li>1. Increased efficiency and productivity through streamlined workflows and automation</li>
-                <li>2. Enhanced user experience and interactivity with fast-loading, responsive, and dynamic interfaces</li>
-                <li>3. Scalability and flexibility to accommodate changing business needs</li>
-                <li>4. Improved performance and speed, resulting in faster load times and smoother user experience</li>
-                <li>5. Seamless integration with other technologies and platforms, providing a comprehensive solution for your business.</li>
-                <li>6. High search engine ranking</li>
-            </ul>
-            <ul className="flex flex-col my-2 text-center">
-                <b>Clients using this module:</b>
-                <li className="flex items-center gap-1 justify-center">1. <Link href={'royalacumenconsultation.com'} className="flex items-center gap-1 hover:text-amber-600 hover:underline">Royal acumen consult <BiLink /></Link></li>
-            </ul>
-        </span>, productDesc2: <span>
-        This React-based module can offer business and individuals alike flexibility to consultation services in several ways, including:
-        <br />
-        1. <b className="underline">Customization:</b> React allows for easy customization and reusability of components, enabling businesses to readily adapt to changing demands and requirements.
-        <br />
-        2. <b className="underline">Scalability:</b> This module with the aid of React allows for easy scaling up or down of the application as per the business needs.
-        <br />
-        3. <b className="underline">Faster deployment:</b> React reduces the time to market for businesses by offering faster development and deployment cycles. 
-        <br />
-        4. <b className="underline">Cross-platform compatibility:</b> This React-based module can work on any device and can be deployed on multiple platforms, providing flexibility across different markets.
-        <br />
-        5. <b className="underline">Integration with other technologies:</b> React can easily integrate with other technologies, providing a comprehensive solution for consultation services that may require different tools. In summary, this React-based consultation business module offers your business the opportunity to be more adaptable, agile, and responsive in their consultation services.
-        <br />
-        <b className="underline">Pricing: </b>This module is a <b>one-time investment</b> of <b>$438</b> which includes a <b>custom domain name(yourbusiness.com)</b> and a <b>pro email(custom@yourbusiness.com)</b>.
-        </span>, image1: '/portfolio/raconsult/raconsult2.PNG', image2: '/portfolio/raconsult/raconsult.PNG', projectLink: 'https://royalacumenconsult.com', projectName: 'Consultation business module', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+    const projectsData = [
+        { id: 1, title: 'Catalyst Canvas', description: "Catalyst Canvas is a dynamic and engaging website module designed to showcase the impactful work of a charitable organization or non-profit entity. Seamlessly blending modern design with user-friendly functionality, Catalyst Canvas aims to provide visitors with a rich and interactive experience.", imageUrl: '/portfolio/catalyst_canvas.PNG', link: 'https://catalystcanvas.vercel.app' },
 
-        { id: 'tymcuisine', image1: '/portfolio/tymcuisine/2.PNG', image2: '/portfolio/tymcuisine/3.PNG', projectDesc1: <span>
-            Experience delectable dishes with our React-based cuisine website module. Our cutting-edge technology offers a seamless and interactive user experience that elevates your culinary journey.
-            <br />
-            Our React-based cuisine website module can provide several features that make it seamless and interactive, including but not limited to:
-            <br />
-            1. Fast loading times and high performance for smooth and uninterrupted browsing.
-            <br />
-            2. Interactive and engaging user interface with responsive design and customizable components.
-            <br />
-            3. Dynamic and real-time updates for menu items, pricing, and deals that keep users informed and engaged.
-            <br />
-            4. Easy navigation and search functionality that help users find what they are looking for quickly and efficiently.
-            <br />
-            5. Integration with other platforms like social media, online ordering, and reservation systems that enhance the user experience.
-            <br />
-            6. Personalization options like favorite dish lists, reviews, and ratings that make the module feel tailored to each user’s preferences. 
-            <br />
-            In summary, the React-based cuisine website module provides an immersive and user-friendly experience that brings the best of culinary delights to the user's doorstep.
-        </span>, productDesc2: <b className="text-center text-sm p-2 flex justify-center items-center">This website is still under development!</b>, projectLink: 'https://tymcuisine.vercel.app', projectName: 'Cuisine website module', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
-        
-        { id: 'linted', image1: '/portfolio/linted/4.PNG', image2: '/portfolio/linted/2.PNG', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: 'https://linted.vercel.app', projectName: 'Linted E-commerce', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 2, title: 'HarmonyHub Consult', description: "Developed by the innovation software company, Spadeshub, HarmonyHub Consult is a dynamic platform crafted for seamless interactions between clients and experts. The objective is to simplify the consultation process, offering a mordern and efficient solution.", imageUrl: '/portfolio/consult.PNG', link: 'https://spadesconsult.vercel.app' },
 
-        { id: 'spadesv1', image1: '/portfolio/spades/spades2.PNG', image2: '/portfolio/spades/spades1.PNG', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: 'https://spadeshub.vercel.app', projectName: 'Spades v1', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 3, title: 'FlexiScape', description: '', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app' },
 
-        { id: 'hilker-spa', image1: '/portfolio/hilker/hilker1.PNG', image2: '/portfolio/hilker/hilker.PNG', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'Hilker Spa', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
+        { id: 4, title: 'ZenFit Spa', description: "ZenFit Spa, a visionary project by Spadeshub, is a comprehensive spa and fitness website designed to elevate spa and fitness brands, setting them on the path for active online success. The platform embodies the essence of wellness and rejuvenation while fostering a dynamic online presence.", imageUrl: '/portfolio/zenfit.PNG', link: 'https://zenfitspa.vercel.app' },
 
-        { id: 'simple-landing-page', image1: '/portfolio/landing/landing2.PNG', image2: '/portfolio/landing/landing1.PNG', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'Spades Landing', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
-        
-        { id: 'isam', image1: '/portfolio/isam/isam3.PNG', image2: '/portfolio/isam/isam.PNG', projectDesc1: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", productDesc2: "This will be a block of text to describe the product, check in later for the product's description; or visit the product page!", projectLink: '/contact', projectName: 'ISam store', overview: 'This project was built with React using Nextjs as a framework for development. It is fast and optimized for S.E.O' },
-    ]);
+        { id: 5, title: 'DataVista Analytics', description: "DataVista Analytics, a project by Spadeshub, is dedicated to supporting data scientists and analysts with a straightforward portfolio website. This platform serves as a hub to showcase their skills and projects in a user-friendly manner.", imageUrl: '/portfolio/analytics.PNG', link: 'https://spadesanalytics.vercel.app' },
+
+        { id: 6, title: 'PersonalHub', description: `PersonalHub, an individual endeavor powered by Spadeshub, is a distinctive personal website that offers a unique blend of exclusive content, confidentials, insights, and features a dedicated section for careers and certifications. The primary objective is to create a personalized and engaging space for users to subscribe to premium content, access a decisive "About" column, explore careers and certifications, and participate in a vibrant community through a chat interface.`, imageUrl: '/portfolio/personal.PNG', link: 'https://spadespersonal.vercel.app' },
+
+        { id: 7, title: 'Linted Ecommerce', description: "Welcome to MarketMingle, your go-to destination for a unique and delightful shopping experience. This small e-commerce store is designed to bring you exclusive features, easy navigation, and a curated selection of products that make every purchase special.", imageUrl: '/portfolio/linted.PNG', link: 'https://linted.vercel.app' },
+
+        { id: 8, title: 'FlavorFiesta', description: "Embark on a culinary journey with FlavorFiesta, a tantalizing cuisine website model meticulously crafted for discerning food enthusiasts. Immerse yourself in an exclusive list of menus, where each dish is a symphony of flavors curated to elevate your dining experience. The primary objective of FlavorFiesta is to offer a feast for the senses, blending exquisite tastes with a visually delightful presentation.", imageUrl: '/portfolio/cuisine.PNG', link: 'https://tymcuisine.vercel.app' },
+        //{ id: 9, title: '', description: '', imageUrl: '', link: '' },
+    ]
 
     return (
-        <section className="flex flex-col gap-5 justify-center items-center my-10">
-            <div className="flex flex-col gap-2 items-center justify-center mb-5">
-                <h3><Link href={'#our-clients'} className="flex items-center justify-center underline underline-offset-8 hover:text-amber-600">Our Clients <BiLink /></Link></h3>
-                <MySwiper />
-            </div>
-            <p className="px-2 text-md text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center gap-1">Get your desired website in a few clicks <BiLinkAlt /></Link></p>
+        <main>
+            <article className="flex items-center justify-center">
+                <div className="flex flex-col gap-2 items-center justify-center mb-5 mt-4 shadow shadow-black/50 dark:shadow-amber-600/80 rounded w-fit p-4">
+                    <h3><Link href={'#our-clients'} className="flex items-center justify-center underline underline-offset-4 hover:text-amber-600 font-bold">Our Clients <BiLink /></Link></h3>
+                    <MySwiper />
+                </div>
+            </article>
+
+            <p className="px-2 text-md text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center mb-4 gap-1">Get your desired website in a few clicks <BiLinkAlt /></Link></p>
             <h3><Link href={'#our-projects'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8">Our Projects <BiLink /></Link></h3>
-            <div id="portfolio" className="flex flex-col gap-24">
-                {
-                    projectImages.map((items) => (
-                        <ProjectPortfolio
-                        key={items.id} 
-                        projectId={items.id}
-                        image1={items.image1}
-                        image2={items.image2}
-                        projectLink={items.projectLink}
-                        projectName={items.projectName}
-                        overview={items.overview}
-                        productDesc1={items.projectDesc1}
-                        productDesc2={items.productDesc2}
-                        />
-                    ))
-                }
-            </div>
-        </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+                {projectsData.map(project => (
+                    <Project key={project.id} description={project.description} imageUrl={project.imageUrl} link={`/projects/[project]?project=${project.id}`} title={project.title} />
+                ))}
+            </section>
+        </main>
     )
 }

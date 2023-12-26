@@ -1,11 +1,9 @@
 'use client'
 import Link from "next/link";
-import { ServiceRow } from "./utils/serviceRow";
 import React from "react";
-import { SpadesStats } from "./utils/stats";
-import { LoginQuest, VisitHomePage } from "../projects/utils/loginQuest";
 import { CgLink } from "react-icons/cg";
 import { redirect } from "next/navigation";
+import { LoginQuest, ServiceRow, SpadesStats, VisitHomePage } from "../components/client/ReusableComponents";
 
 const devRedirect = () => {
     redirect('web-development/application')
@@ -31,7 +29,7 @@ export default function Page() {
         { id: 'forex-trading', service: 'FX(Forex) trading and account management', serviceDescription: "Maximize profits with our expert Forex trading and investment management services." },
     ]);
     return (
-        <>
+        <main>
             <SpadesStats />
 
             <p className="text-center"><Link href={'/gift-purchase'}>Purchase our services using our giftcard <i>here!</i></Link></p>
@@ -59,6 +57,6 @@ export default function Page() {
             <blockquote className="flex items-center justify-center">
                 <VisitHomePage />
             </blockquote>
-        </>
+        </main>
     )
 }

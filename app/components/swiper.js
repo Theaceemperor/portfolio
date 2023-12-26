@@ -60,6 +60,11 @@ export default function MySwiper() {
                         <h3><Link href={'https://cleminsights.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">Clem Insights<BiLink /></Link></h3>
                       </span>
                     </div>
+                    <div className="swiper-slide">
+                      <span className="p-4 flex items-center justify-center">
+                        <h3><Link href={'https://nexvault.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">NexVault<BiLink /></Link></h3>
+                      </span>
+                    </div>
                   </div>
                   <div className="swiper-pagination"></div>
               </div>

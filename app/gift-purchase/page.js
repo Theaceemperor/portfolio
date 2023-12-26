@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
 import { authOptions } from "../api/auth/[...nextauth]/route"
-import GiftCard from "./utills/gift-cards";
+import GiftCard from "../components/client/gift-cards";
 
 
 

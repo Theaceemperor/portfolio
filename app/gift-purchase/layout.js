@@ -1,13 +1,13 @@
-import SubLayout from "../components/layout";
+import { BaseLayout } from "../components/client/ReusableComponents";
 
   export const metadata = {
-    title: 'Spadeshub | Spades gift purchase',
+    title: 'Spadeshub | Spades Gift purchase',
   }
 
   export default function Layout({ children }) {
     return (
-      <SubLayout>
+      <BaseLayout>
         {children}
-      </SubLayout>
+      </BaseLayout>
     )
   }

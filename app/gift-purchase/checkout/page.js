@@ -1,5 +1,4 @@
-import GiftCardCheckout from "../utills/giftcard-checkout";
-
+import { GiftCardCheckout } from "@/app/components/client/ReusableComponents";
 
 export default function Page() {
 

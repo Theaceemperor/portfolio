@@ -1,19 +1,18 @@
 'use client'
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import ActivityIndicator from '@/app/components/activity-indicator';
 import Link from 'next/link';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { RiAccountCircleLine } from 'react-icons/ri';
-import WebCategories from '../utils/webCategories';
-import { FileUpload1 } from '../utils/uploadBtn';
 import { AdsBadge } from '@/app/components/alert';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { db, storage } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { CgLink } from 'react-icons/cg';
+import { FileUpload1, WebCategories } from '@/app/components/client/ReusableComponents';
 
 const validationRules = yup.object().shape({
     firstName:yup.string().required('this is a required field'),

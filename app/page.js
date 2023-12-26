@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import { HeaderText } from './components/headerText';
-import { AffiliateLink, LoginQuest } from './components/spadesLinks';
-import { HomeNav } from './components/navBar';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
+import Image from 'next/image';
+import { AffiliateLink, HeaderText, HomeNav, LoginQuest } from './components/client/ReusableComponents';
 
 export default function Home() {
   return (
-    <main className='text-center flex flex-col gap-5 h-screen justify-center items-center border-y-8 border-black dark:border-amber-600 max-w-screen'>
+    <main className='text-center flex flex-col gap-5 min-h-screen justify-center items-center border-y-8 border-black dark:border-amber-600 max-w-screen'>
       <HomeNav />
       <HeaderText />
       <div id='about-us' className='text-center px-3 flex flex-col gap-5 text-sm'>
@@ -19,6 +18,7 @@ export default function Home() {
       <div  className='text-2xl flex flex-row gap-5 items-center justify-center font-bold p-1 text-amber-600'>
         <Link href={'https://twitter.com/@spadeshub'}><FaXTwitter /></Link>
         <Link href={'mailto:spadesinstitute.empire@gmail.com'}><SiGmail /></Link>
+        <Link href={'https://www.nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 bg-amber-600 rounded-full' /></Link>
       </div>
     </main>
   )
