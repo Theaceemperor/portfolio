@@ -463,7 +463,7 @@ export function PortfolioBtn() {
 export function SpadesSubFooter() {
 
     return (
-        <footer id="footer" className="mx-1 my-5 border-y rounded-md border-amber-600">
+        <footer id="footer" className="mx-1 my-5 rounded shadow">
           <div className="flex flex-col sm:grid sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
             <ul className="flex flex-col gap-1">
               <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
