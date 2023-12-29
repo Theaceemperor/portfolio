@@ -9,12 +9,11 @@ import Popover from '@mui/material/Popover';
 import { MdUnsubscribe } from "react-icons/md";
 import { SiXdadevelopers } from 'react-icons/si';
 
-export function SubscribePop({children}) {
-  return (
+export function SubscribePop({children}) { (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
         <div>
-          <MdUnsubscribe className='text-xl text-[#de4f0a]' {...bindTrigger(popupState)} />
+          <MdUnsubscribe className='text-xl text-amber-600' {...bindTrigger(popupState)} />
           <Popover
             {...bindPopover(popupState)}
             anchorOrigin={{
@@ -75,7 +74,7 @@ export function PopperPopupState({children,buttonText}) {
       {(popupState) => (
         <div>
           <Button variant="contained" {...bindToggle(popupState)}
-          //className='bg-black text-[wheat] hover:bg-[#de4f0a]/70 hover:text-black'
+          //className='bg-black text-[wheat] hover:bg-amber-600 hover:text-black'
           style={{
             background: 'black', color: 'wheat',
           }}>

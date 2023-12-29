@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "@mui/material";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/setting/firebase.settings";
+import { db } from "@/mysettings/firebase.settings";
 import { FaXTwitter } from "react-icons/fa6";
 import { OnLoginNotification } from "../components/alert";
 import { LoginButton2, VisitHomePage } from "../components/client/ReusableComponents";

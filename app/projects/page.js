@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import { BiLink, BiLinkAlt } from "react-icons/bi";
 import MySwiper from "../components/swiper";
-import Image from "next/image";
 import { Project } from "../components/client/ReusableComponents";
 
 export default function Page() {

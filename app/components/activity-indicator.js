@@ -1,6 +1,5 @@
 
 import { CircularProgress } from "@mui/material";
-import { GiSpades } from "react-icons/gi";
 
 
 export default function ActivityIndicator() {
