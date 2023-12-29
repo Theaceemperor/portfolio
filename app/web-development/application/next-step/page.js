@@ -338,7 +338,7 @@ export default function Page() {
                                 multiple
                                 value={selectBackendServices}
                                 onChange={handleSelectBackendServices}
-                                input={<OutlinedInput id="select-multiple-chip" label="Backend Services" required />}
+                                input={<OutlinedInput id="select-multiple-chip" label="Backend Services" />}
                                 renderValue={(selected) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                     {selected.map((value) => (
@@ -370,7 +370,7 @@ export default function Page() {
                                 multiple
                                 value={selectDevSupport}
                                 onChange={handleSelectDevSupport}
-                                input={<OutlinedInput id="select-multiple-chip" label="Dev support" required />}
+                                input={<OutlinedInput id="select-multiple-chip" label="Dev support" />}
                                 renderValue={(selected) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                     {selected.map((value) => (
@@ -402,7 +402,7 @@ export default function Page() {
                                 multiple
                                 value={selectComplementaryServices}
                                 onChange={handleSelectComplementaryServices}
-                                input={<OutlinedInput id="select-multiple-chip" label="Complementary service" required />}
+                                input={<OutlinedInput id="select-multiple-chip" label="Complementary service" />}
                                 renderValue={(selected) => (
                                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                     {selected.map((value) => (
@@ -434,8 +434,7 @@ export default function Page() {
                           options={managementPeriod}
                         />
                     
-                        <TextField 
-                        required
+                        <TextField
                         id="customEmail" 
                         label="Preferred custom email"
                         type='email' 

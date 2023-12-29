@@ -122,8 +122,7 @@ export default function Page() {
             
             <div className="w-full flex flex-col items-center justify-center px-1 my-5">
                 <h1 className="text-center font-bold">WEB DEVELOPMENT APPLICATION</h1>
-                <h3 className="text-center py-2 text-md underline underline-offset-2"><Link href={'#apply'} className='flex justify-center items-center text-amber-600'>Get your desired web page in just a few clicks <CgLink /></Link></h3>
-                <form className="p-2 md:p-5 lg:p-5 flex flex-col gap-5 bg-[wheat] rounded-lg shadow-lg shadow-black/70"
+                <form className="p-2 md:p-5 lg:p-5 flex flex-col gap-5 bg-wheat rounded-lg shadow-lg shadow-black/70"
                 onSubmit={handleSubmit}>
                     <h3 className="text-gray-800 text-center font-bold text-lg">FILL AND SUBMIT TO PROCEED</h3>
                     <div className="lg:grid  md:grid md:grid-cols-2 flex flex-col gap-5 w-full">

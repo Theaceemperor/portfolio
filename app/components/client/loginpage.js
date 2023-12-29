@@ -44,7 +44,7 @@ export default function LoginPage() {
         <ActivityIndicator />
         :
         <>
-            <h1 className="flex items-center gap-1 px-2 justify-center text-[#de4f0a] text-center my-5 text-2xl">LOGIN<GiSpades /></h1>
+            <h1 className="flex items-center gap-1 px-2 justify-center text-amber-600 text-center my-5 text-2xl">LOGIN<GiSpades /></h1>
             <div className="w-full flex flex-col items-center justify-center gap-5 my-5 px-1">
                 <form 
                 onSubmit={handleSubmit}
@@ -88,7 +88,7 @@ export default function LoginPage() {
                 <LoginButton
                 />
                 </form>
-                <p className="text-center">Don't have a current development? Create one <Link href={'web-development/application'}><i className="underline text-[#de4f0a]">here</i></Link></p>
+                <p className="text-center">Don't have a current development? Create one <Link href={'web-development/application'}><i className="underline text-amber-600">here</i></Link></p>
                 
                 <VisitHomePage />
                 

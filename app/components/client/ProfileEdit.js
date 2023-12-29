@@ -133,7 +133,7 @@ export function EditAddress() {
         :
         <section>
             <form className="flex max-w-md my-8 flex-col border-2 border-violet-950/20 bg-white bg-violet-950/30 rounded-md shadow-md p-3 gap-4 w-full" onSubmit={handleSubmit}>
-                <h3 className='text-center text-indigo-950/80 font-bold'>Update Company Adress</h3>
+                <h3 className='text-center text-indigo-950/80 font-bold'>Update Company Address</h3>
                 <div className='flex flex-row items-center gap-4'>
                     <div className='w-full flex flex-col gap-2 placeholder:text-indigo-950/80'>
                         <TextField

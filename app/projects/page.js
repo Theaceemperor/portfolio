@@ -35,7 +35,7 @@ export default function Page() {
                 </div>
             </article>
 
-            <p className="px-2 text-md text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center mb-4 gap-1">Get your desired website in a few clicks <BiLinkAlt /></Link></p>
+            <p className="px-2 text-md text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center mb-4 gap-1">Get your desired website in few clicks <BiLinkAlt /></Link></p>
             <h3><Link href={'#our-projects'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8">Our Projects <BiLink /></Link></h3>
 
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8">

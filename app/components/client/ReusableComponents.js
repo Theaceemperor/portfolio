@@ -145,7 +145,7 @@ export function WebCategories({onChange,className,options,value,label}) {
 export function FileUpload1({text,selectedFile}) {
 
     return (
-        <Button component="label" variant="contained" startIcon={<FaCloudUploadAlt className='text-[#de4f0a]'/>}
+        <Button component="label" variant="contained" startIcon={<FaCloudUploadAlt className='text-amber-600'/>}
         style={{
             background: 'black', color: '#de4f0a'
         }}>
@@ -234,7 +234,7 @@ export function BlogLink() {
             <h1 className="px-3">
                 <Link href={"https://x.com/@spadeshub"}
                 className="flex items-center justify-center">
-                    <FaBlog className="text-[#de4f0a]"/>log
+                    <FaBlog className="text-amber-600"/>log
                 </Link>
             </h1>
         </div>
@@ -271,7 +271,7 @@ export function ProductPage6({name,price,stock,product,available,amount,imageSrc
                 width={920}
                 height={1080}
                 src={imageSrc}
-                className="h-auto w-full rounded-md border-b border-[#de4f0a] shadow-inner"
+                className="h-auto w-full rounded-md border-b border-amber-600 shadow-inner"
                 alt="gift card"
                 />
                 <div className="flex justify-evenly gap-8 px-2 w-full items-center">
@@ -342,7 +342,7 @@ export function GiftCardCheckout() {
                 src={"/img/bg.png"}
                 />
             </div>
-            <h4 className="text-sm flex items-center gap-1 px-2 border-b border-[#de4f0a] text-center">Gift card <TbGiftCardFilled className="text-[#de4f0a]"
+            <h4 className="text-sm flex items-center gap-1 px-2 border-b border-amber-600 text-center">Gift card <TbGiftCardFilled className="text-amber-600"
             /> will be sent to provided Email.</h4>
             
             <LoginQuest />
@@ -369,7 +369,7 @@ export function LoginQuest({color}) {
         <div className="flex my-5 items-center justify-center">
             <Link 
             href={"/web-development/dashboard"}
-            className={`text-md flex items-center gap-1 px-2 text-[#de4f0a] text-center ${color}`}>
+            className={`text-md flex items-center gap-1 px-2 text-amber-600 text-center ${color}`}>
                 <i>login to dashboard</i><GiSpades />
             </Link>
         </div>
@@ -382,7 +382,7 @@ export function SignUpQuest({color}) {
         <div>
             <Link 
             href={"/web-development/application"}
-            className={`text-sm flex items-center gap-1 px-2 text-[#de4f0a] text-center ${color}`}>
+            className={`text-sm flex items-center gap-1 px-2 text-amber-600 text-center ${color}`}>
                 <i>Get a website here</i><GiSpades />
             </Link>
         </div>
@@ -394,7 +394,7 @@ export function ContactUs({text}) {
     return (
         <Link href={"/contact"} 
         className="flex items-center gap-1">
-            Contact us<IoMdContacts className="text-[#de4f0a]"/> {text}
+            Contact us<IoMdContacts className="text-amber-600"/> {text}
         </Link>
     )
 }
@@ -407,9 +407,8 @@ export function LoginButton({onClick}) {
         style={{
             background: 'black',
             opacity: 1,
-            color: '#be4f0a'
         }}
-        className="bg-black/70 flex items-center gap-1 px-2 py-1 rounded-md"
+        className="bg-black/70 text-amber-600 flex items-center gap-1 px-2 py-1 rounded-md"
         onClick={onClick}
         >LogIn<GiSpades className="text-xl"/>
         </button>
@@ -430,9 +429,9 @@ export function LoginButton2() {
 export function VisitHomePage() {
 
     return (
-        <Link href="/"><i className="text-[#de4f0a] flex items-center gap-0.5">
+        <Link href="/"><i className="text-amber-600 flex items-center gap-0.5">
             H<Image 
-            className="w-[32px] h-auto rounded-full border-2 border-[#be4f0a]" 
+            className="w-[32px] h-auto rounded-full border-2 border-amber-600" 
             width={50} 
             height={32} 
             src="/img/SPADES3.png" 
@@ -447,9 +446,9 @@ export function VisitHomePage() {
 export function PortfolioBtn() {
 
     return (
-        <Link href="/web-design/portfolio"><i className="text-[#de4f0a] flex items-center gap-0.5">
+        <Link href="/web-design/portfolio"><i className="text-amber-600 flex items-center gap-0.5">
             Portf<Image 
-            className="w-[32px] h-auto rounded-full border-2 border-[#be4f0a]" 
+            className="w-[32px] h-auto rounded-full border-2 border-amber-600" 
             width={50} 
             height={32} 
             src="/img/SPADES3.png" 
@@ -482,7 +481,7 @@ export function SpadesSubFooter() {
                   <Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaXTwitter className="text-2xl text-amber-600 rounded-full text-center" /></Link>
                   <Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link>
                   <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><SiGmail className="text-amber-600 text-2xl text-center" /></Link>
-                  <Link href={'https://www.nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
+                  <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
                 </blockquote>
               </li>
             </ul>
@@ -490,7 +489,7 @@ export function SpadesSubFooter() {
               <li><Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
               <li><Link href={'/spades/terms'} className="hover:underline underline-offset-2 decoration-amber-600">T & C</Link></li>
               <li><Link href={'/spades/policy'} className="hover:underline underline-offset-2 decoration-amber-600">Privacy</Link></li>
-              <li><Link href={'#'}>2023 © spadeshub</Link></li>
+              <li>2023 © spadeshub</li>
             </ul>
           </div>
         </footer>
@@ -524,7 +523,7 @@ export function RowCta() {
               className="rounded-full border-2 text-[wheat] font-bold border-amber-600 animate-bounce text-3xl p-1"
               />
               </Link>
-              <Link href={'https://www.nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
+              <Link href={'https://nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
             </article>
           </div>
           <ContactUs />
@@ -642,8 +641,8 @@ export function ButtonField({ link1,link2,linktitle1,linktitle2 }) {
 
     return (
         <div className="max-h-[50px] flex text-center flex-row justify-between items-center lg:mx-5 my-5 text-sm gap-1">
-            <Link href={link1} className="underline decoration-[#be4f0a] font-bold hover:border-y hover:border-[#be4f0a] px-2 py-1 hover:rounded-lg duration-500 hover:decoration-transparent">{linktitle1}</Link>
-            <Link href={link2} className="underline decoration-[#be4f0a] font-bold hover:border-y hover:border-[#be4f0a] px-2 py-1 hover:rounded-lg duration-500 hover:decoration-transparent">{linktitle2}</Link>
+            <Link href={link1} className="underline decoration-amber-600 font-bold hover:border-y hover:border-amber-600 px-2 py-1 hover:rounded-lg duration-500 hover:decoration-transparent">{linktitle1}</Link>
+            <Link href={link2} className="underline decoration-amber-600 font-bold hover:border-y hover:border-amber-600 px-2 py-1 hover:rounded-lg duration-500 hover:decoration-transparent">{linktitle2}</Link>
         </div>
     )
 }
@@ -665,7 +664,7 @@ export function ShoppingCart() {
     return (
         <Link 
         href="/gift-purchase"
-        className="text-md text-[#de4f0a]"
+        className="text-md text-amber-600"
         >
             <ImCart />
         </Link>
