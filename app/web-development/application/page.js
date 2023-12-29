@@ -11,7 +11,6 @@ import { AdsBadge } from '@/app/components/alert';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { db, storage } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-import { CgLink } from 'react-icons/cg';
 import { FileUpload1, WebCategories } from '@/app/components/client/ReusableComponents';
 
 const validationRules = yup.object().shape({
