@@ -2,7 +2,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "@/settings/firebase.settings";
+import { db } from "@/setting/firebase.settings";
 import { CgLink, CgProfile } from "react-icons/cg";
 import Link from "next/link";
 import { GiSpades } from "react-icons/gi";
