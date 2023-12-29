@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BiLink, BiLinkAlt } from "react-icons/bi";
 import MySwiper from "../components/swiper";
 import Image from "next/image";
-import { PortfolioProject, Project } from "../components/client/ReusableComponents";
+import { Project } from "../components/client/ReusableComponents";
 
 export default function Page() {
     const projectsData = [
@@ -12,7 +12,7 @@ export default function Page() {
 
         { id: 2, title: 'HarmonyHub Consult', description: "Developed by the innovation software company, Spadeshub, HarmonyHub Consult is a dynamic platform crafted for seamless interactions between clients and experts. The objective is to simplify the consultation process, offering a mordern and efficient solution.", imageUrl: '/portfolio/consult.PNG', link: 'https://spadesconsult.vercel.app' },
 
-        { id: 3, title: 'FlexiScape', description: '', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app' },
+        { id: 3, title: 'FlexiScape', description: 'A very cool and informative landing page tailored for any purpose, from; individuals, to small business as well as coporates willing to showcase specific products or services.', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app' },
 
         { id: 4, title: 'ZenFit Spa', description: "ZenFit Spa, a visionary project by Spadeshub, is a comprehensive spa and fitness website designed to elevate spa and fitness brands, setting them on the path for active online success. The platform embodies the essence of wellness and rejuvenation while fostering a dynamic online presence.", imageUrl: '/portfolio/zenfit.PNG', link: 'https://zenfitspa.vercel.app' },
 

@@ -65,7 +65,39 @@ const projectsData = [
 
     { id: 2, title: 'HarmonyHub Consult', description: "Developed by the innovation software company, Spadeshub, HarmonyHub Consult is a dynamic platform crafted for seamless interactions between clients and experts. The objective is to simplify the consultation process, offering a mordern and efficient solution.", imageUrl: '/portfolio/consult.PNG', link: 'https://spadesconsult.vercel.app' },
 
-    { id: 3, title: 'FlexiScape', description: '', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app' },
+    { id: 3, title: 'FlexiScape', description: 'A very cool and informative landing page tailored for any purpose, from; individuals, to small business as well as coporates willing to showcase specific products or services.', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app', detailedDesc: 
+    <div>
+        Elevate your client's/customer's service/product curiousity and experience with our customizable, scalable, fast, informative and user-friendly React-based landing page module.
+        <br />
+        <b>Key Features:</b>
+        <p>The FlexiScape landing page module is developed using React has several unique features that distinguish it from competitors. Here are some of those features:
+        </p>
+        {/* <ul>
+            <li><b>1. Integrated Socials:</b> Foster community engagement with seamless integration of social media profiles.</li>
+            <li><b>2. Membership Management:</b> Streamline and enhance user experience with a robust membership management system.
+            </li>
+            <li><b>3. Point System:</b> Implement a rewarding point system to incentivize user engagement and loyalty.</li>
+            <li><b>4. Mini Ecommerce Store Page:</b> Provide users with the opportunity to explore and purchase fitness and spa-related products through a user-friendly store page.</li>
+            <li><b>5. Blog:</b> Share insights, tips, and updates with an integrated blog, establishing ZenFit Spa as a valuable resource.</li>
+            <li><b>6. Exclusive Stack of Services:</b> Showcase a curated selection of fitness and rejuvenation services for an exclusive user experience.</li>
+            <li><b>7. Seamless User Experience and Navigation:</b> Prioritize user satisfaction with an intuitive interface and easy navigation.</li>
+            <li><b>8. Admin Management:</b> Facilitate efficient administration of the platform for seamless operation.</li>
+        </ul> */}
+        <b>Open for Custom Features:</b> Tailor the platform to specific needs with an open approach to custom features.
+        <br/>
+        <ul>
+            <b>Technology Used:</b>
+            Leveraging the advanced technologies of Spadeshub, ZenFit Spa utilizes React, Next.js, Node.js, and Tailwind CSS to ensure a seamless and engaging web experience. The consistent use of JavaScript across the stack guarantees a dynamic and responsive interface.
+        </ul>
+        <ul>
+            <b>Our Role:</b>
+            As with previous projects, Spadeshub leads the full-stack development of ZenFit Spa, from initial prototyping to deployment. The comprehensive approach ensures a cohesive platform that aligns with the vision of spa and fitness brands.
+        </ul>
+        <ul>
+            <b>Ongoing Development and Improvement:</b>
+            FlexiScape is an ongoing project, actively under development and improvement. Spadeshub continues to enhance and refine the platform, ensuring it evolves with the latest trends and technologies to deliver an unparalleled online experience.
+        </ul>
+    </div>  },
 
     { id: 4, title: 'ZenFit Spa', description: "ZenFit Spa, a visionary project by Spadeshub, is a comprehensive spa and fitness website designed to elevate spa and fitness brands, setting them on the path for active online success. The platform embodies the essence of wellness and rejuvenation while fostering a dynamic online presence.", imageUrl: '/portfolio/zenfit.PNG', link: 'https://zenfitspa.vercel.app', detailedDesc: 
     <div>
@@ -102,7 +134,7 @@ const projectsData = [
             ZenFit Spa is an ongoing project, actively under development and improvement. Spadeshub continues to enhance and refine the platform, ensuring it evolves with the latest trends and technologies to deliver an unparalleled online experience.
         </ul>
         These unique features of the spa website module help businesses create an immersive and relaxing user experience, resulting in increased customer satisfaction and retention.
-    </div>  },
+    </div> },
 
     { id: 5, title: 'DataVista Analytics', description: "DataVista Analytics, a project by Spadeshub, is dedicated to supporting data scientists and analysts with a straightforward portfolio website. This platform serves as a hub to showcase their skills and projects in a user-friendly manner.", imageUrl: '/portfolio/analytics.PNG', link: 'https://spadesanalytics.vercel.app' },
 
@@ -234,7 +266,7 @@ export default function Page({ params }) {
                 <div className="max-w-2xl mx-auto">
                     {/* Project Image (if available) */}
                     {project.imageUrl && project.imageUrl.length > 0 && (
-                        <Image src={project.imageUrl} alt={`${project.title} Image`} width={500} height={500} quality={100} priority className="w-full h-60 object-cover mb-6 rounded-md" />
+                        <Image src={project.imageUrl} alt={`${project.title} Image`} width={500} height={500} quality={100} priority className="w-full h-auto object-cover mb-6 rounded-md" />
                     )}
 
                     {/* Project Title */}

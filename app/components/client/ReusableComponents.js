@@ -332,7 +332,7 @@ export function GiftCardCheckout() {
 
     return (
         <section className="flex flex-col items-center justify-center my-5 gap-5 P-2 text-center">
-            <h1 className="px-5">Thank you for your purchase!</h1>
+            <h1 className="px-5 font-bold text-xl">Thank you for your purchase!</h1>
             <div>
                 <Image 
                 width={560}
@@ -343,7 +343,7 @@ export function GiftCardCheckout() {
                 />
             </div>
             <h4 className="text-sm flex items-center gap-1 px-2 border-b border-[#de4f0a] text-center">Gift card <TbGiftCardFilled className="text-[#de4f0a]"
-            /> sent to provided Email.</h4>
+            /> will be sent to provided Email.</h4>
             
             <LoginQuest />
             
@@ -421,7 +421,7 @@ export function LoginButton2() {
     return (
         <Link 
         href={"/web-development/dashboard"}
-        className="flex gap-1 items-center justify-center"
+        className="flex gap-1 items-center justify-center text-amber-600"
         >LogIn<GiSpades className="text-lg"/>
         </Link>
     )

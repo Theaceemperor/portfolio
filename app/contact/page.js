@@ -41,11 +41,7 @@ export default function Page() {
 
     return (
         <>
-            <main>
-                <div className="flex flex-col justify-center items-center text-center px-1">
-                    <h1 className="text-2xl w-[fit-content] px-2 border-y border-amber-600 rounded-md my-8 py-1">CONTACT US</h1>
-                    <p className="font-bold">Write a message or give us some feedback/review</p>
-                </div>
+            <main className="px-2">
                 <div className="flex flex-col my-10 p-3 text-center items-center justify-center gap-5 lg:grid lg:grid-cols-2">
                     <div className="flex flex-col shadow-xl gap-5 rounded-lg p-3">
                         <blockquote className="text-center flex flex-col items-center">
@@ -84,6 +80,10 @@ export default function Page() {
                         </blockquote>
                     </div>
                     <div>
+                        <div className="flex flex-col justify-center items-center text-center px-1">
+                            <h1 className="text-2xl w-[fit-content] px-2 border-y border-amber-600 rounded-md my-8 py-1">CONTACT US</h1>
+                            <p className="font-bold">Write a message or give us some feedback/review</p>
+                        </div>
                         <form className="flex flex-col gap-5 p-1">
                             <div className="flex flex-col md:grid md:grid-cols-2 lg:grid lg:grid-cols-2 gap-5 md:gap-3 lg:gap-3 w-full">
                                 <input

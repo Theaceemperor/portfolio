@@ -132,7 +132,7 @@ export function OnLoginNotification({children,alertTitle}) {
   };
 
   return (
-      <div className="fixed top-0 right-0 z-40 w-[300px]">
+      <div className="fixed top-12 right-0 z-30 w-[300px]">
           <Collapse in={open}>
               <Alert 
               icon={<BsPersonCheck className="text-xl text-[#de4f0a]"/>}
