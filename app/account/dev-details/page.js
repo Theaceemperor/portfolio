@@ -1,7 +1,7 @@
 'use client'
 import { EditCustomDomain, EditCustomEmail } from "@/app/components/client/ProfileEdit";
 import { DashboardProfile } from "@/app/components/client/ReusableComponents";
-import { db } from "@/mysettings/firebase.settings";
+import { db } from "@/settings/firebase.settings";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import Link from "next/link";

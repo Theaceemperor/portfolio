@@ -1,6 +1,6 @@
-import { db } from "@/setting/firebase.settings";
+import { db } from "@/settings/firebase.settings";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions = {

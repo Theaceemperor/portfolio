@@ -7,7 +7,7 @@ import Link from "next/link";
 import { CgLink, CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from "react-icons/bi";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "@/mysettings/firebase.settings";
+import { db } from "@/settings/firebase.settings";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaLaptopCode } from "react-icons/fa6";

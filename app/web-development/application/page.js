@@ -9,8 +9,9 @@ import { Button, InputAdornment, TextField } from '@mui/material';
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { AdsBadge } from '@/app/components/alert';
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
-import { db, storage } from '@/mysettings/firebase.settings';
+import { db, storage } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { CgLink } from 'react-icons/cg';
 import { FileUpload1, WebCategories } from '@/app/components/client/ReusableComponents';
 
 const validationRules = yup.object().shape({

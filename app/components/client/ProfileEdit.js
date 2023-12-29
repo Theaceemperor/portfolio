@@ -1,11 +1,12 @@
 'use client'
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { Button,TextField } from '@mui/material';
 import { collection, updateDoc,doc, query, where,getDocs } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import { GiMagicPalm } from 'react-icons/gi';
-import { db } from '@/mysettings/firebase.settings';
+import { db } from '@/settings/firebase.settings';
 import ActivityIndicator from '../activity-indicator';
 import Customdialog from './CustomDialog';
 

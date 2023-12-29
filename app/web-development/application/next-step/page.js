@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import { db } from '@/mysettings/firebase.settings';
+import { db } from '@/settings/firebase.settings';
 import { addDoc, collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import ActivityIndicator from '@/app/components/activity-indicator';
 import { OnLoginNotification } from '@/app/components/alert';
