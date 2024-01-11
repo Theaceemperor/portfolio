@@ -25,14 +25,10 @@ const validationRules = yup.object().shape({
     .oneOf([yup.ref('passwordConfirmation'),null], "password dosen't match")
 })
 
-const options = [ 'Personal Web', 'Landing Page', 'Portfolio Site', 'Spa', 'Custom', 'Booking/Consultation', 'Blog', 'Real Estate Agency', 'NGO', 'Restaurant/Cafe', 'E-commerce', 'Landing x Portfolio', 'Ticket Purchse', 'Interior Decor', 'Ads & Traffic', 'Event & Planning', 'Recipe', 'Voting', 'Social', 'Donation', 'Campaign', 'Mobile Bank/Wallet' ];
+const options = [ 'Blog', 'Booking/Consultation', 'Custom', 'E-commerce', 'Fitness', 'Hire Services', 'Insights/Analytics', 'Interior Decor', 'Landing Page', 'NGO', 'Portfolio', 'Real Estate Agency', 'Restaurant/Cafe', 'Spa', 'Spa & Fitness', ];
 
 const timeOptions = [
-    '30 days', '60 days', '90 days', '120 days'
-]
-
-const typeOptions = [
-    'Private', 'Public', 'Commercial'
+    '$500 - $1999', '$2000 - $4999', '$5000 - $9999', 'custom'
 ]
 
 export default function Page() {
@@ -46,7 +42,6 @@ export default function Page() {
     }
 
     const [ timeValue,setTimeValue ] = React.useState(timeOptions[0])
-    const [ privacy,setPrivacy ] = React.useState(typeOptions[0])
 
     const imageToPost = (e) => {
         const reader = new FileReader();
@@ -69,10 +64,11 @@ export default function Page() {
             compaddress:values.compAddress,
             phone:values.compPhone,
             managementtime: null,
-            devtime:timeValue,
+            budget:timeValue,
+            devtime:'waiting...',
             devrem: 'waiting...',
             status: 'waiting...',
-            progress: '0',
+            progress: 1,
             devlink: '#',
             category:value,
             logo:null,
@@ -109,8 +105,8 @@ export default function Page() {
         ?
         <ActivityIndicator />
         :
-        <>
-            <blockquote className="w-[50%] flex items-center justify-center">
+        <main>
+            <blockquote className="relative top-4 left-4 max-w-[90%] sm:max-w-[300px] overflow-hidden">
                 <AdsBadge 
                 alertTitle={"Get a Website 50% off"}
                 >
@@ -119,12 +115,12 @@ export default function Page() {
                 </AdsBadge>
             </blockquote>
             
-            <div className="w-full flex flex-col items-center justify-center px-1 my-5">
+            <div className="my-5 p-2">
                 <h1 className="text-center font-bold">WEB DEVELOPMENT APPLICATION</h1>
-                <form className="p-2 md:p-5 lg:p-5 flex flex-col gap-5 bg-wheat rounded-lg shadow-lg shadow-black/70"
+                <form className="p-2 sm:p-5 flex flex-col mt-4 items-center justify-center gap-5 bg-wheat rounded-lg shadow-lg shadow-black/70 "
                 onSubmit={handleSubmit}>
                     <h3 className="text-gray-800 text-center font-bold text-lg">FILL AND SUBMIT TO PROCEED</h3>
-                    <div className="lg:grid  md:grid md:grid-cols-2 flex flex-col gap-5 w-full">
+                    <div className="lg:grid md:grid md:grid-cols-2 flex flex-col gap-5 w-full">
                         <TextField 
                         required
                         id="firstName"
@@ -157,7 +153,19 @@ export default function Page() {
                         ? <span className="text-red-500">{errors.lastName}</span> : null}
 
                     </div>
-                    <div className=" lg:grid md:grid md:grid-cols-2 flex flex-col gap-5 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                        <TextField
+                        required 
+                        id="compName" 
+                        label="Company Name" 
+                        variant="filled"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.compName} 
+                        />
+                        {errors.compName && touched.compName
+                        ? <span className="text-red-500">{errors.compName}</span> : null}
+
                         <TextField 
                         id="compEmail" 
                         label="Company Email"
@@ -167,8 +175,8 @@ export default function Page() {
                         onBlur={handleBlur}
                         value={values.compEmail}
                         />
-                        {errors.CompEmail && touched.CompEmail
-                        ? <span className="text-red-500">{errors.CompEmail}</span> : null}
+                        {errors.compEmail && touched.compEmail
+                        ? <span className="text-red-500">{errors.compEmail}</span> : null}
 
                         <TextField 
                         required
@@ -183,19 +191,27 @@ export default function Page() {
                         {errors.compPhone && touched.compPhone
                         ? <span className="text-red-500">{errors.compPhone}</span> : null}
 
-                    </div>
-                    <TextField
-                    required 
-                    id="compName" 
-                    label="Company Name" 
-                    variant="filled"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.compName} 
-                    />
-                    {errors.compName && touched.compName
-                    ? <span className="text-red-500">{errors.compName}</span> : null}
+                        <WebCategories
+                        value={value} 
+                        onChange={(event, newValue) => {
+                            setValue(newValue);
+                        }}
+                        label={"Web Category"}
+                        options={options}
+                        />
+                        
+                        <FileUpload1 text={"Upload Logo"} selectedFile={imageToPost}/>
+                        
+                        <WebCategories
+                        value={timeValue} 
+                        onChange={(event, newValue) => {
+                            setTimeValue(newValue);
+                          }}
+                          label={"Budget"}
+                          options={timeOptions}
+                        />
 
+                    </div>
                     <TextField 
                     required
                     id="compDesc" 
@@ -205,6 +221,7 @@ export default function Page() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.compDesc} 
+                    className='w-full'
                     />
                     {errors.compDesc && touched.compDesc
                     ? <span className="text-red-500">{errors.compDesc}</span> : null}
@@ -217,43 +234,13 @@ export default function Page() {
                     variant="filled" 
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.compAddress} 
+                    value={values.compAddress}
+                    className='w-full' 
                     />
                     {errors.compAddress && touched.compAddress
                     ? <span className="text-red-500">{errors.compAddress}</span> : null}
 
-                    <div className="flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5">
-                        <WebCategories
-                        value={value} 
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                          }}
-                          label={"Web category/type"}
-                          options={options}
-                          />
-                        <FileUpload1 text={"Upload Logo"} selectedFile={imageToPost}/>
-                    </div>
-                    
-                    <div className="flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 w-full">
-                        <WebCategories
-                        value={timeValue} 
-                        onChange={(event, newValue) => {
-                            setTimeValue(newValue);
-                          }}
-                          label={"Select Dev time"}
-                          options={timeOptions}
-                        />
-                        <WebCategories
-                        value={privacy} 
-                        onChange={(event, newValue) => {
-                            setPrivacy(newValue);
-                          }}
-                          label={"Privacy"}
-                          options={typeOptions}
-                        />
-                    </div>
-
-                    <div className="lg:grid md:grid md:grid-cols-2 flex flex-col gap-5 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                         <TextField 
                         required
                         id="password" 
@@ -283,9 +270,9 @@ export default function Page() {
                     color='warning'
                     type="submit">Proceed</Button>
                 </form>
-                <p className="my-5 text-center px-2">Have a current development? Tap on the spades icon to login or login <Link href={'/web-development'}><i className="underline text-[#de4f0a]">here</i></Link></p>
+                <p className="my-5 text-center px-2">Tap on the spades icon to login or login <Link href={'/web-development'}><i className="underline text-amber-600">here</i></Link></p>
             </div>
-        </>
+        </main>
     )
 }
         

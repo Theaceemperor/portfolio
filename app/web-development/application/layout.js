@@ -3,7 +3,8 @@ import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation";
 
 export const metadata = {
-    title: 'Spadeshub | Build fast react website with spades',
+    title: 'Spadeshub | Sign Up',
+    description: 'Sign up to build fast and secure react web applications with spades'
   }
 
   export default async function Layout({ children }) {

@@ -5,7 +5,10 @@ import { useFormik } from "formik";
 import { TextField,Button,Select,MenuItem } from "@mui/material";
 import { TbGiftCardFilled } from "react-icons/tb";
 import { AdsNotification } from "../components/alert";
-import { ContactUs, FileUpload1, MyGiftProducts } from "../components/client/ReusableComponents";
+import { ContactUs, PaymentFileUpload } from "../components/client/ReusableComponents";
+import Payment from "../components/payment";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/settings/firebase.settings";
 
 const validationRules = yup.object().shape({
     email:yup.string().required('This field is required'),
@@ -18,14 +21,22 @@ export default function GiftCard() {
     const {handleBlur, handleSubmit, handleChange, errors, touched, values} = useFormik({
         initialValues: {currency: currency, amount: amount, email: ''},
         onSubmit: values => {
-           try {
-                console.log(values);
-           } catch (error) {
-                console.error(error);
-           }
+            
         },
         validationSchema:validationRules
     });
+
+    const orderDetails = {
+        currency: currency,
+        amount: amount,
+        email: values.email
+    }
+
+    const handleSuccessFunction = () => {
+        setAmount('');
+        setCurrency('');
+        values.email('');
+    }
 
     const handleAmountChange = (event) => {
         setAmount(event.target.value);
@@ -35,23 +46,26 @@ export default function GiftCard() {
         setCurrency(event.target.value);
     };
 
+    const changedAmount = amount*100;
+    const convertedAmount = changedAmount*1100;
+
     return (
         <>
             <main>
                 <blockquote className="flex justify-center items-center my-5">
                     <h1 className="flex gap-1 justify-center items-center px-5">Purchase Spades gitft-card <TbGiftCardFilled 
-                    className="text-[#de4f0a] text-xl"/> </h1>   
+                    className="text-amber-600 text-xl"/> </h1>   
                 </blockquote>
                 <AdsNotification 
                 alertTitle={"Website in few flicks"}
                 >
                     <span>Grow your network in a few clicks by getting a professional website for yourself or business </span> 
                 </AdsNotification>
-                <blockquote className="flex flex-col lg:flex-row md:flex-row gap-3 items-center justify-center my-5">
+                {/* <blockquote className="flex flex-col lg:flex-row md:flex-row gap-3 items-center justify-center my-5">
                     <MyGiftProducts />
-                </blockquote>
-                <div className="w-full flex my-5 items-center justify-center">
-                    <form className="bg-[wheat] flex flex-col gap-5 p-5 items-center rounded-lg" onSubmit={handleSubmit}>
+                </blockquote> */}
+                <div className="p-2 flex my-5 items-center justify-center">
+                    <form className="bg-wheat flex flex-col gap-5 p-5 items-center rounded-lg" onSubmit={handleSubmit}>
                         <div className="gap-5 items-center grid grid-cols-2">
                         <div className="text-gray-800 flex flex-col gap-1 items-center">
                             <small className="font-bold">Currency</small>
@@ -111,35 +125,28 @@ export default function GiftCard() {
                         ? <span className="text-red-500">{errors.email}</span> : null}
 
                         <span className="text-center text-sm text-black flex flex-col gap-1 items-center justify-center">
-                            <b>Upload transaction confirmation/hash</b>
+                            <b>Upload transaction confirmation/hash after successful crypto payment</b>
                             <br />
-                            <h5>Pay to the following bitcoin wallet</h5>
-                            <p>copy and paste the below wallet and send bitcoin only!</p>
+                            <h5>Pay with Bitcoin</h5>
                             <input 
                             readOnly={true}
                             value={"bc1qjef244zt8glzk3z80d6x50sryeufkuc8kfxtss"}
-                            className="w-full border-y text-center border-[#de4f0a] py-1 px-2 rounded-lg bg-transparent"
+                            className="w-full border-y text-center border-amber-600 py-1 px-2 rounded-lg bg-transparent overflow-x-scroll"
                             />
                         </span>
                         
                         <span className="text-center text-sm text-black flex flex-col gap-1 items-center justify-center">
-                            <h5>Pay to the following USDT [ERC20] wallet</h5>
-                            <p>copy and paste the below wallet and send USDT [ERC20] only!</p>
+                            <h5>Pay with USDT [ERC20]</h5>
                             <input 
                             readOnly={true}
                             value={"0xec10Ed071DAA66d1d6C540Cebf899b56cCCE5444"}
-                            className="w-full border-y text-center border-[#de4f0a] py-1 px-2 rounded-lg bg-transparent"
+                            className="w-full border-y text-center border-amber-600 py-1 px-2 rounded-lg bg-transparent"
                             />
                         </span>
                         
-                        <FileUpload1 />
+                        <PaymentFileUpload />
                         
-                        <Button type="submit"
-                        style={{
-                             color: 'black'
-                        }}>
-                            Proceed
-                        </Button>
+                        <Payment amount={convertedAmount} email={values.email} orderDetails={orderDetails} name={'Spades Gift Card'} successFunction={handleSuccessFunction} />
 
                     </form>
                 </div>

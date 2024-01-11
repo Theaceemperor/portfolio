@@ -16,6 +16,7 @@ import { ShortProfile } from "@/app/components/client/profile";
 import { BlogLink, ButtonLink, DashboardProfile, DialogSlide, H1Link, VisitHomePage } from "@/app/components/client/ReusableComponents";
 import { DevPop } from "@/app/components/modals";
 import Timer from "@/app/components/countdown-timer";
+import LinearWithValueLabel from "@/app/components/client/progress";
 
 
 export default function Dashboard() {
@@ -87,7 +88,7 @@ export default function Dashboard() {
                             l6={"Dev Time left: "}
                             l7={'Development Link: '}
                             r1={item.data.status}
-                            r2={parseInt(item.data.progress) + '%' }
+                            r2={<LinearWithValueLabel progressValue={item.data.progress} />}
                             r3={item.data.features_completed}
                             r4={item.data.featuresreq}
                             r5={item.data.devtime}

@@ -11,11 +11,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { useIsVisible } from '../useIsVisible';
 import { GiSpades } from 'react-icons/gi';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaBlog, FaXTwitter } from 'react-icons/fa6';
+import { FaBlog, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail, SiWebpack } from 'react-icons/si';
-import { BsGithub } from 'react-icons/bs';
+import { BsGithub, BsPersonCheck } from 'react-icons/bs';
 import { IoMdContacts, IoMdStats } from 'react-icons/io';
 import { TbGiftCardFilled } from 'react-icons/tb';
 import { PopperPopupState } from '../modals';
@@ -24,9 +24,13 @@ import { PiWebhooksLogoFill } from 'react-icons/pi';
 import { SessionProvider } from 'next-auth/react';
 import styled from '@emotion/styled';
 import { FaCloudUploadAlt } from 'react-icons/fa';
-import { Autocomplete, TextField } from '@mui/material';
+import { Alert, AlertTitle, Autocomplete, Collapse, Rating, TextField, Typography } from '@mui/material';
 import { CgLink } from 'react-icons/cg';
 import ChatComponent from './ChatComponent';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { db } from '@/settings/firebase.settings';
+import { ActivityIndicator2 } from '../activity-indicator';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -42,8 +46,153 @@ const VisuallyHiddenInput = styled('input')({
     left: 0,
     whiteSpace: 'nowrap',
     width: 1,
-  });
+});
 
+
+export function WriteReview() {
+    const [formInput,setFormInput] = React.useState('');
+    const [formName,setFormName] = React.useState('');
+    const [value, setValue] = React.useState(3);
+    const [showalert, setShowalert] = React.useState(false);
+    const [showActivityIndicator, setShowActivityIndicator] = React.useState(false);
+
+    const handleAddReview = async () => {
+        setShowActivityIndicator(true);
+        await addDoc(collection(db,'spades-reviews'), {
+            name:formName,
+            review:formInput,
+            rating:value,
+            sentAt:new Date().getTime()
+        })
+        .then(() => {
+                setFormInput('');
+                setFormName('');
+                setShowActivityIndicator(false);
+                setShowalert(true);
+        }).catch((e) => console.error(e));
+    }
+
+    return (
+        showActivityIndicator
+        ?
+        <ActivityIndicator2 />
+        :
+        <div>
+            <div className="mt-8 flex flex-col gap-2 items-center justify-center">
+                <h3>Write a review</h3>
+                <form className="bg-wheat flex flex-col gap-2 rounded-lg items-center justify-center p-4 sm:w-auto sm:max-w-lg w-[90%]">
+                    <div className="flex flex-col lg:flex-row md:flex-row w-full gap-5">
+                        <TextField 
+                        variant="filled"
+                        label={"Your name"}
+                        onChange={(text) => setFormName(text.target.value)}
+                        value={formName}
+                        />
+                        <TextField 
+                        variant="filled"
+                        label={"Your review"}
+                        multiline={true}
+                        value={formInput}
+                        onChange={(text) => setFormInput(text.target.value)}
+                        />
+                    </div>
+                    <Typography component="legend">Rate us</Typography>
+                        <Rating
+                            name="simple-controlled"
+                            value={value}
+                            onChange={(event, newValue) => {
+                            setValue(newValue);
+                            }}
+                        />
+                    <Button 
+                    color="warning"
+                    onClick={() => handleAddReview()}>Post</Button>
+                </form>
+            </div>
+            {
+                showalert
+                ?
+                <Notification alertTitle={'Review Sent'}>
+                    Thank you for your review!
+                </Notification>
+                :
+                null
+            }
+        </div>
+    )
+}
+
+export function Notification({children,alertTitle}) {
+    const [open, setOpen] = React.useState(true);
+  
+      setInterval(() => {
+        setOpen(false);
+      }, 15000);
+    
+    const handleClose = () => {
+      setOpen(false);
+    };
+  
+    return (
+        <div className="fixed top-16 right-0 z-20 max-w-sm w-[300px]">
+            <Collapse in={open}>
+                <Alert 
+                icon={<BsPersonCheck className="text-xl text-amber-600"/>}
+                severity="success"
+                >
+                    <div className="flex justify-between items-center">
+                        <AlertTitle>{alertTitle}</AlertTitle>
+                        <AiOutlineCloseCircle 
+                        onClick={handleClose}
+                        className="text-xl fixed top-0 right-0"/>
+                    </div>
+                    <blockquote>
+                      {children}
+                    </blockquote>
+                </Alert>        
+            </Collapse>
+        </div>
+            
+    )
+}     
+
+export function FAQ({ question, answer }) {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
+    const [open,setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+    return (
+        <div ref={ref} className={`px-4 py-2 shadow shadow-shadow-color rounded min-w-full max-w-md transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+            <span className="flex flex-row gap-4 font-bold text-lg"> 
+                {question}
+                {
+                    open
+                    ?
+                    <button className="focus:outline-none" onClick={handleClose}><FaMinus /></button>
+                    :
+                    <button className="focus:outline-none" onClick={handleOpen}><FaPlus /></button>
+                }
+            </span>
+            {
+                open
+                ?
+                <blockquote className="flex flex-col gap-1 mt-1">
+                    <hr className="border-light-blue mx-2 sm:mx-4" />
+                    <p className='text-gray-600'>{answer}</p>
+                </blockquote>
+                :
+                null
+            }
+        </div>
+    )
+}
 
 export function SectionHeader({ headerText,headerLink,style }) {
 
@@ -52,7 +201,7 @@ export function SectionHeader({ headerText,headerLink,style }) {
     )
 }
 
-  export function ProjectSubHeader({ backgroundImage, pageTitle }) {
+export function ProjectSubHeader({ backgroundImage, pageTitle }) {
     const subheaderStyle = {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
@@ -75,19 +224,23 @@ export function SectionHeader({ headerText,headerLink,style }) {
 }
 
 export function Project({ title, description, imageUrl, link }) {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
 
     return (
-        <div className='mb-8 bg-white rounded-md p-2 shadow-lg'>
-            <Image src={imageUrl} alt={`${title} Image`} width={500} height={500} quality={100} className='rounded-md mb-4' />
-            <h3 className='text-xl font-bold mb-2'>{title}</h3>
-            <p className='text-gray-600 mb-4 dark:text-[#d1d1d1]'><b>Purpose/Objective:</b> {description}</p>
-            {
-                link
-                ?
-                <Link href={link} className='text-amber-600 hover:underline'>Learn more</Link>
-                :
-                null
-            }
+        <div ref={ref} className={`bg-white rounded-md p-2 shadow-lg dark:shadow-amber-600 dark:shadow-md overflow-hidden transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+            <Image src={imageUrl} alt={`${title} Image`} width={500} height={500} quality={100} className='rounded-md mb-4 object-cover w-full h-auto' />
+            <div>
+                <h3 className='text-xl font-bold mb-2 text-amber-600'>{title}</h3>
+                <p className='text-gray-600 mb-4 dark:text-gray-500'><b>Purpose/Objective:</b> {description}</p>
+                {
+                    link
+                    ?
+                    <Link href={link} className='text-amber-600 hover:underline'>Learn more</Link>
+                    :
+                    null
+                }
+            </div>
         </div>
     )
 }
@@ -102,7 +255,7 @@ export function PortfolioProject({ projectId,projectImage,projectTitle,children,
         <div id={projectId} ref={ref} className={`max-w-sm bg-white rounded overflow-hidden shadow-lg transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"} `}>
             {projectImage}
             <div className="px-6 py-4">
-                <Link href={projectLink} className="font-bold text-xl mb-2 capitalize flex items-center">{projectTitle} <CgLink className='text-amber-600' /></Link>
+                <Link href={projectLink} className="font-bold text-xl mb-2 capitalize flex items-center text-amber-600">{projectTitle} <CgLink className='text-amber-600' /></Link>
                 <article className="text-gray-700 text-base">{overview}</article>
                 {
                     readMore
@@ -135,11 +288,24 @@ export function WebCategories({onChange,className,options,value,label}) {
             }}
             id="controllable-states-demo"
             options={options}
-            sx={{ width: 300 }}
+            sx={{ width: '100%' }}
             renderInput={(params) => <TextField {...params} label={`${label}`} required />}
         />
         </div>
     );
+}
+
+export function PaymentFileUpload({text,selectedFile}) {
+
+    return (
+        <Button component="label" variant="contained" startIcon={<FaCloudUploadAlt className='text-amber-600'/>}
+        style={{
+            background: 'black', color: '#de4f0a'
+        }}>
+        {text}
+            <VisuallyHiddenInput type="file" accept='image/*' onChange={selectedFile} />
+        </Button>
+    )
 }
 
 export function FileUpload1({text,selectedFile}) {
@@ -156,11 +322,13 @@ export function FileUpload1({text,selectedFile}) {
 }
 
 export function SpadesStats() {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
 
     return (
-        <section id="stats">
+        <section ref={ref} id="stats" className={`transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
             <div className="px-2 flex flex-col justify-center items-center my-10 gap-5" id="stats">
-                <h3 className="flex gap-1 text-lg font-bold items-center"><Link href={"/services#stats"} className="flex items-center justify-center">Our stats <IoMdStats /></Link></h3>
+                <h3 className="flex gap-1 text-lg font-bold items-center"><Link href={"/about#stats"} className="flex items-center justify-center">Our stats <IoMdStats /></Link></h3>
                 <article className="text-center flex flex-col gap-3 sm:grid sm:grid-cols-2 sm:gap-5">
                     <blockquote className="w-40 flex flex-col gap-3 p-1 border-l border-amber-600 px-1 border-t rounded-md">
                         <GiSpades className="text-lg" />
@@ -389,11 +557,24 @@ export function SignUpQuest({color}) {
     )
 }
 
+export function SignUp({color}) {
+
+    return (
+        <div>
+            <Link 
+            href={"/web-development/application"}
+            className={`text-sm flex items-center gap-1 px-2 text-amber-600 dark:text-wheat text-center ${color}`}>
+                <i>Apply Here</i><GiSpades className="text-amber-600" />
+            </Link>
+        </div>
+    )
+}
+
 export function ContactUs({text}) {
 
     return (
         <Link href={"/contact"} 
-        className="flex items-center gap-1">
+        className="flex items-center gap-1 text-amber-600 dark:text-wheat">
             Contact us<IoMdContacts className="text-amber-600"/> {text}
         </Link>
     )
@@ -467,8 +648,11 @@ export function SpadesSubFooter() {
             <ul className="flex flex-col gap-1">
               <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
               <li><Link href={'/#about'} className="hover:underline underline-offset-2 decoration-amber-600">About us</Link></li>
-              <li><Link href={'/projects#portfolio'} className="hover:underline underline-offset-2 decoration-amber-600">Projects</Link></li>
-              <li><Link href={'/services#services'} className="hover:underline underline-offset-2 decoration-amber-600">Services</Link></li>
+              <li><Link href={'/about#services'} className="hover:underline underline-offset-2 decoration-amber-600">Services</Link></li>
+              <li><Link href={'/projects#portfolio'} className="hover:underline underline-offset-2 decoration-amber-600">Products</Link></li>
+              <li><Link href={'/gift-purchase'} className="hover:underline underline-offset-2 decoration-amber-600">Giftcards</Link></li>
+              <li><Link href={'/about#reviews'} className="hover:underline underline-offset-2 decoration-amber-600">Reviews</Link></li>
+              <li><Link href={'/about#faq'} className="hover:underline underline-offset-2 decoration-amber-600">FAQ</Link></li>
               <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Contact</Link></li>
             </ul>
             <ul className="flex flex-col gap-1">
@@ -476,6 +660,7 @@ export function SpadesSubFooter() {
               <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
               <li><Link href={'/spades/pricing'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
               <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
+              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Docs</Link></li>
               <li>
                 <blockquote className="flex flex-row gap-5 mt-1 sm:items-center sm:justify-center">
                   <Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaXTwitter className="text-2xl text-amber-600 rounded-full text-center" /></Link>
@@ -501,8 +686,8 @@ export function RowCta() {
     const isVisible1 = useIsVisible(ref);
 
     return (
-        <section id="cta" ref={ref} className={`my-10 px-2 flex flex-col gap-3 items-center justify-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-          <div className="bg-[url('/img/cta.png')] h-56 w-72 sm:w-96 bg-center bg-cover shadow-md dark:shadow-amber-600 shadow-black rounded-md flex justify-center items-end py-1">
+        <section id="cta" ref={ref} className={`my-10 flex flex-col gap-3 items-center justify-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+          <div className="bg-[url('/img/cta.png')] h-56 w-[90%] sm:max-w-md bg-center bg-cover shadow-md dark:shadow-amber-600 shadow-black rounded-md flex justify-center items-end py-1">
             <article className="flex flex-row gap-5">
               <Link href={'mailto:spadesinstitute.empire@gmail.com'}>
                 <SiGmail
@@ -547,7 +732,7 @@ export function HomeNav() {
         <nav className='sm:relative sm:left-40'>
           <ul className='flex items-center justify-end gap-3 sm:gap-5 font-semibold'>
             <li><Link href={'/projects'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Products</Link></li>
-            <li><Link href={'/services'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Services</Link></li>
+            <li><Link href={'/about'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>About Us</Link></li>
             <li><Link href={'/contact'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Contact</Link></li>
           </ul>
           <ChatComponent />
@@ -556,21 +741,20 @@ export function HomeNav() {
 }
 
 export function SubNav() {
-  const router = useRouter();
+  const pathName = usePathname();
 
     return (
       <section>
         <div id="sub-header" className="flex items-center justify-center">
           <nav className="fixed top-2 z-40 text-amber-600 bg-black/80 py-2 px-5 rounded-md">
             <ul className='flex items-center justify-between gap-3 sm:gap-5 font-semibold'>
-              <li><Link href={'/projects'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Products</Link></li>
-              <li><Link href={'/services'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Services</Link></li>
-              <li><Link href={'/contact'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Contact</Link></li>
-              <li><Link href={'/web-development'} className='flex items-center'><GiSpades /></Link></li>
+              <li><Link href={'/projects'} className={pathName === '/projects' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Products</Link></li>
+              <li><Link href={'/about'} className={pathName === '/about' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link></li>
+              <li><Link href={'/contact'} className={pathName === '/contact' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link></li>
+              <li><Link href={'/web-development'} className={pathName === '/web-development' ? 'text-wheat font-bold flex items-center' : 'flex items-center'}><GiSpades /></Link></li>
             </ul>
           </nav>
         </div>
-        {/* <IoHome className="fixed bottom-0 right-0 m-1 text-5xl font-bold animate-bounce rounded-full text-amber-600 bg-black/90 p-1 border-2 border-amber-600" onClick={() => router.push('/')} /> */}
         <ChatComponent />
       </section>
     )

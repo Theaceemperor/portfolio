@@ -1,7 +1,7 @@
 import { BaseLayout } from "../components/client/ReusableComponents";
 
   export const metadata = {
-    title: 'Spadeshub | Our services',
+    title: 'Spadeshub | About Us',
   }
 
   export default function Layout({ children }) {

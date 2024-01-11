@@ -1,5 +1,5 @@
 'use client'
-import { ProjectSubHeader, SectionHeader } from "@/app/components/client/ReusableComponents";
+import { ContactUs, SectionHeader, SignUp } from "@/app/components/client/ReusableComponents";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -61,9 +61,9 @@ const projectsData = [
             <li>- Backend: nodejs</li>
         </ul>
         Catalyst Canvas aims to create a digital space that not only informs but also inspires visitors to actively participate in the organization's mission. Through thoughtful design and user-centric features, Catalyst Canvas stands as a testament to the organization's commitment to positive change and community impact.
-    </div> },
+    </div>, price: 1320 },
 
-    { id: 2, title: 'HarmonyHub Consult', description: "Developed by the innovation software company, Spadeshub, HarmonyHub Consult is a dynamic platform crafted for seamless interactions between clients and experts. The objective is to simplify the consultation process, offering a mordern and efficient solution.", imageUrl: '/portfolio/consult.PNG', link: 'https://spadesconsult.vercel.app' },
+    { id: 2, title: 'HarmonyHub Consult', description: "Developed by the innovation software company, Spadeshub, HarmonyHub Consult is a dynamic platform crafted for seamless interactions between clients and experts. The objective is to simplify the consultation process, offering a mordern and efficient solution.", imageUrl: '/portfolio/consult.PNG', link: 'https://spadesconsult.vercel.app',  price: 'contact us' },
 
     { id: 3, title: 'FlexiScape', description: 'A very cool and informative landing page tailored for any purpose, from; individuals, to small business as well as coporates willing to showcase specific products or services.', imageUrl: '/portfolio/landing.PNG', link: 'https://spadeslanding.vercel.app', detailedDesc: 
     <div>
@@ -97,7 +97,7 @@ const projectsData = [
             <b>Ongoing Development and Improvement:</b>
             FlexiScape is an ongoing project, actively under development and improvement. Spadeshub continues to enhance and refine the platform, ensuring it evolves with the latest trends and technologies to deliver an unparalleled online experience.
         </ul>
-    </div>  },
+    </div>, price: 870  },
 
     { id: 4, title: 'ZenFit Spa', description: "ZenFit Spa, a visionary project by Spadeshub, is a comprehensive spa and fitness website designed to elevate spa and fitness brands, setting them on the path for active online success. The platform embodies the essence of wellness and rejuvenation while fostering a dynamic online presence.", imageUrl: '/portfolio/zenfit.PNG', link: 'https://zenfitspa.vercel.app', detailedDesc: 
     <div>
@@ -134,9 +134,9 @@ const projectsData = [
             ZenFit Spa is an ongoing project, actively under development and improvement. Spadeshub continues to enhance and refine the platform, ensuring it evolves with the latest trends and technologies to deliver an unparalleled online experience.
         </ul>
         These unique features of the spa website module help businesses create an immersive and relaxing user experience, resulting in increased customer satisfaction and retention.
-    </div> },
+    </div>, price: '1480 - $2000' },
 
-    { id: 5, title: 'DataVista Analytics', description: "DataVista Analytics, a project by Spadeshub, is dedicated to supporting data scientists and analysts with a straightforward portfolio website. This platform serves as a hub to showcase their skills and projects in a user-friendly manner.", imageUrl: '/portfolio/analytics.PNG', link: 'https://spadesanalytics.vercel.app' },
+    { id: 5, title: 'DataVista Analytics', description: "DataVista Analytics, a project by Spadeshub, is dedicated to supporting data scientists and analysts with a straightforward portfolio website. This platform serves as a hub to showcase their skills and projects in a user-friendly manner.", imageUrl: '/portfolio/analytics.PNG', link: 'https://spadesanalytics.vercel.app', price: ' contact us' },
 
     { id: 6, title: 'PersonalHub', description: `PersonalHub, an individual endeavor powered by Spadeshub, is a distinctive personal website that offers a unique blend of exclusive content, confidentials, insights, and features a dedicated section for careers and certifications. The primary objective is to create a personalized and engaging space for users to subscribe to premium content, access a decisive "About" column, explore careers and certifications, and participate in a vibrant community through a chat interface.`, imageUrl: '/portfolio/personal.PNG', link: 'https://spadespersonal.vercel.app', detailedDesc: 
     <div>
@@ -179,9 +179,9 @@ const projectsData = [
         </ul>
     </div>  },
 
-    { id: 7, title: 'Linted Ecommerce', description: "Welcome to MarketMingle, your go-to destination for a unique and delightful shopping experience. This small e-commerce store is designed to bring you exclusive features, easy navigation, and a curated selection of products that make every purchase special.", imageUrl: '/portfolio/linted.PNG', link: 'https://linted.vercel.app' },
+    { id: 7, title: 'Linted Ecommerce', description: "Welcome to MarketMingle, your go-to destination for a unique and delightful shopping experience. This small e-commerce store is designed to bring you exclusive features, easy navigation, and a curated selection of products that make every purchase special.", imageUrl: '/portfolio/linted.PNG', link: 'https://linted.vercel.app', price: ' contact us' },
 
-    { id: 8, title: 'FlavorFiesta', description: "Embark on a culinary journey with FlavorFiesta, a tantalizing cuisine website model meticulously crafted for discerning food enthusiasts. Immerse yourself in an exclusive list of menus, where each dish is a symphony of flavors curated to elevate your dining experience. The primary objective of FlavorFiesta is to offer a feast for the senses, blending exquisite tastes with a visually delightful presentation.", imageUrl: '/portfolio/cuisine.PNG', link: 'https://tymcuisine.vercel.app', detailedDesc: 
+    { id: 8, title: 'TastyBites', description: "Embark on a culinary journey with TastyBites, a tantalizing cuisine website model meticulously crafted for discerning food enthusiasts. Immerse yourself in an exclusive list of menus, where each dish is a symphony of flavors curated to elevate your dining experience. The primary objective of TastyBites is to offer a feast for the senses, blending exquisite tastes with a visually delightful presentation.", imageUrl: '/portfolio/cuisine.PNG', link: 'https://thefoodalleyways.vercel.app', detailedDesc: 
     <div>
         <b>Key Features:</b>
         <ul>
@@ -190,32 +190,32 @@ const projectsData = [
         </ul>
         <ul>
             <b>2. Easy Navigation:</b>
-            <li>Navigate the FlavorFiesta universe effortlessly with an intuitively designed interface, ensuring a smooth and enjoyable exploration of culinary offerings.</li>
+            <li>Navigate the TastyBites universe effortlessly with an intuitively designed interface, ensuring a smooth and enjoyable exploration of culinary offerings.</li>
         </ul>
         <ul>
             <b>3. Integration with Social Media:</b>
-            <li>Share your gastronomic adventures with friends and followers through seamless integration with popular social media platforms. Spread the joy of FlavorFiesta far and wide.</li>
+            <li>Share your gastronomic adventures with friends and followers through seamless integration with popular social media platforms. Spread the joy of TastyBites far and wide.</li>
         </ul>
         <ul>
             <b>4. Visual Delight:</b>
-            <li>Immerse yourself in a visual feast as FlavorFiesta showcases enticing images of dishes, creating an appetizing anticipation before each culinary exploration.</li>
+            <li>Immerse yourself in a visual feast as TastyBites showcases enticing images of dishes, creating an appetizing anticipation before each culinary exploration.</li>
         </ul>
         <br/>
         <ul>
             <b>Your Culinary Experience:</b>
-            <li>FlavorFiesta transcends the ordinary, providing a digital haven for those who savor the artistry of food. Whether you're a seasoned gourmet or a culinary explorer, this platform invites you to discover, savor, and share the richness of flavors that define each menu.</li>
+            <li>TastyBites transcends the ordinary, providing a digital haven for those who savor the artistry of food. Whether you're a seasoned gourmet or a culinary explorer, this platform invites you to discover, savor, and share the richness of flavors that define each menu.</li>
         </ul>
         <br/>
         <ul>
             <b>Ongoing Culinary Exploration:</b>
-            <li>FlavorFiesta is a living project, continually evolving to bring you the latest in gastronomic delights. Our commitment to ongoing development ensures that your culinary journey remains fresh, exciting, and always ready to surprise your palate.</li>
+            <li>TastyBites is a living project, continually evolving to bring you the latest in gastronomic delights. Our commitment to ongoing development ensures that your culinary journey remains fresh, exciting, and always ready to surprise your palate.</li>
         </ul>
         <br/>
         <ul>
             <b>Technology Stack:</b>
-            Built on a foundation of cutting-edge technologies, FlavorFiesta seamlessly integrates React, Next.js, Node.js, Tailwind CSS, and Firebase for a dynamic and secure user experience. The use of JavaScript ensures an interactive interface that mirrors the vibrancy of the culinary world.
+            Built on a foundation of cutting-edge technologies, TastyBites seamlessly integrates React, Next.js, Node.js, Tailwind CSS, and Firebase for a dynamic and secure user experience. The use of JavaScript ensures an interactive interface that mirrors the vibrancy of the culinary world.
         </ul>
-    </div> },
+    </div>, price: 1550 },
     //{ id: 9, title: '', description: '', imageUrl: '', link: '' },
 ]
 
@@ -271,14 +271,23 @@ export default function Page({ params }) {
 
                     {/* Project Title */}
                     <SectionHeader headerLink={project.link} headerText={project.title} />
+                    <div>
+                        <p>Value - ${project.price} License fee included</p>
+                        <ContactUs />
+                    </div>
 
                     {/* Project Description */}
-                    <p className="text-lg text-gray-700 mb-8">{project.description}</p>
+                    <div className="text-lg text-gray-700 mb-8">{project.description}</div>
 
                     {/* Additional Project Details can be added here */}
-                    <p className="text-lg text-gray-700 mb-8">{project.detailedDesc}</p>
+                    <div className="text-lg text-gray-700 mb-8">{project.detailedDesc}</div>
 
                     <Link href={project.link} className="flex items-center justify-center px-4 py-2 rounded-full hover:bg-amber-600 hover:text-black text-amber-600 transition duration-300 font-semibold" target="_blank" rel="noopener noreferrer">View live here</Link>
+
+                    <div className="flex items-center justify-around">
+                        <ContactUs />
+                        <SignUp />
+                    </div>
                 </div>
             </section>
         </main>

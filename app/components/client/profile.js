@@ -48,7 +48,7 @@ export function ShortProfile() {
                     r2={ item.data.compname }
                     l3={'Company Description: '}
                     r3={ item.data.compdesc }
-                    l4={'User Email: '}
+                    l4={'Email: '}
                     r4={ session?.user.email }
                     l5={'Web Category: '}
                     r5={ item.data.category }

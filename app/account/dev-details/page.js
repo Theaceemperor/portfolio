@@ -55,7 +55,6 @@ export default function Page() {
                         l5={"Dev Time: "}
                         l6={"Dev Time left: "}
                         l7={'Development Link: '}
-                        l8={'Backend Services: '}
                         l9={'Brand Colors: '}
                         l10={'Complementary Services: '}
                         r1={item.data.status}
@@ -69,32 +68,9 @@ export default function Page() {
                             className="underline decoration-amber-600"
                             >view this development here!</Link>
                         }
-                        r8={...item.data.backendService}
                         r9={item.data.brandColors}
                         r10={item.data.complementaryService}
                         >    
-                            <ul className="text-sm flex flex-col gap-3">
-                                <li className="flex flex-col">
-                                    <small className="font-bold">Dev Support: </small>
-                                    {item.data.devSupport}
-                                </li>
-                                <li className="flex flex-col">
-                                    <small className="font-bold">Main Pages: </small>
-                                    {...item.data.mainPages}
-                                </li>
-                                <li className="flex flex-col">
-                                    <small className="font-bold">Major Components: </small>
-                                    {...item.data.majorComponents}
-                                </li>
-                                <li className="flex flex-col">
-                                    <small className="font-bold">Minor Components: </small>
-                                    {...item.data.minorComponents}
-                                </li>
-                                <li className="flex flex-col">
-                                    <small className="font-bold">Sub Pages: </small>
-                                    {...item.data.subPages}
-                                </li>
-                            </ul>
                         </DashboardProfile>
                     ))
                 }

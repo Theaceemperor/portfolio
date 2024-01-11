@@ -28,10 +28,10 @@ export function AdsNotification({children,alertTitle}) {
     };
 
     return (
-        <div className="fixed bottom-[50vh] top-[50vh] right-0 z-40 w-[300px]">
+        <div className="fixed bottom-[50vh] top-[50vh] right-1 z-20 max-w-[300px]">
             <Collapse in={open}>
                 <Alert 
-                icon={<FaBuysellads className="text-xl text-[#de4f0a]"/>}
+                icon={<FaBuysellads className="text-xl text-amber-600"/>}
                 color="info"
                 className=""
                 >
@@ -63,12 +63,12 @@ export function AdsBadge({children,alertTitle}) {
     };
 
     return (
-        <div className="flex items-center justify-center w-full my-5">
+        <div className="flex items-center justify-center my-5">
             <Collapse in={open}>
                 <Alert 
-                icon={<RiAdvertisementFill className="text-xl text-[#de4f0a]"/>}
+                icon={<RiAdvertisementFill className="text-xl text-amber-600"/>}
                 color="info"
-                className="w-[350px]"
+                className="max-w-[300px]"
                 >
                     <div className="flex justify-between items-center gap-8">
                         <AlertTitle>{alertTitle}</AlertTitle>

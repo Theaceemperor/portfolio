@@ -88,7 +88,7 @@ export default function LoginPage() {
                 <LoginButton
                 />
                 </form>
-                <p className="text-center">Don't have a current development? Create one <Link href={'web-development/application'}><i className="underline text-amber-600">here</i></Link></p>
+                <p className="text-center">Don't have a development? Create <Link href={'web-development/application'}><i className="underline text-amber-600">here</i></Link></p>
                 
                 <VisitHomePage />
                 

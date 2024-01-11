@@ -70,7 +70,7 @@ export default function Page() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 animate-bounce' /></Link>
+                                    <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 animate-bounce dark:bg-wheat rounded-full dark:border-2 dark:border-amber-600' /></Link>
                                 </li>
                             </ul>
                         </blockquote >
