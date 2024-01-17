@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { CgLink } from "react-icons/cg";
 import { redirect } from "next/navigation";
-import { FAQ, LoginQuest, SectionHeader, ServiceRow, SpadesStats, VisitHomePage, WriteReview } from "../components/client/ReusableComponents";
+import { FAQ, LoginQuest, SectionHeader, ServiceCard, ServiceRow, SpadesStats, TeamMemberCard, VisitHomePage, WriteReview } from "../components/client/ReusableComponents";
 import Image from "next/image";
 import { ReviewSwiper } from "../components/swiper";
 
@@ -18,20 +18,21 @@ const faqData = [
 
 const servicesFeaturesData = [
     { title: 'Website Development & Design', description: "Spades offers a unique and customized web experience to each client's needs. We model our designs to the caliber the large organization gets." },
-    { title: 'Website Management & Maintenance', description: 'Description of service 2' },
-    { title: 'Website Rennovation & Upgrade', description: 'Description of service 3' },
-    { title: 'Developing Ecommerce for Businesses', description: 'Description of service 3' },
-    { title: 'Search Engine Optimization (SEO)', description: 'Description of service 3' },
-    { title: 'High Quality Graphics Design', description: 'Description of service 3' },
+    { title: 'Website Management & Maintenance', description: 'We offer incredible web-management services, including; asset upgrade, asset maintenance and update.' },
+    { title: 'Website Rennovation & Upgrade', description: 'Rennovate and upgade your already available we asset with our unrivalled technique.' },
+    { title: 'Developing Ecommerce for Businesses', description: 'We develop and deploy standard ecommerce websites for small businesses and institutions.' },
+    { title: 'Search Engine Optimization (SEO)', description: 'We offer exclusive and inclusive (web-development inclusive) S. E. O services that ensure you rank high in search egines.' },
+    { title: 'High Quality Graphics Design', description: 'We deliver high quality graphics to our clients, either you have an idea or not.' },
+]
+
+const teamMembers = [
+    { imageUrl: '/img/1.jpg', name: 'Excellent .O. Omoobajesu', position: 'Co-Founder' },
+    { imageUrl: '/img/1.jpg', name: 'Andrew Wisdom', position: 'Sales Manager' },
+    { imageUrl: '/img/1.jpg', name: 'Nathan Gates', position: 'Product & Graphic Designer' },
 ]
 
 export default function Page() {
-    const [ services,setServices ] = React.useState([
-        { id: 'web-development', service: 'Web Development', serviceDescription: 'We offer incredible premium web-development services, easily proceed to develop a website of your choice for either commercial or personal use via our dev service. We build dreams!' },
-        { id: 'web-management', service: 'Web Management', serviceDescription: 'We offer incredible web-management services, including; asset upgrade, asset maintenance and update.' },
-        { id: 'search-engine-optimization', service: 'Search Engine Optimization(S.E.O)', serviceDescription: 'We offer exclusive and inclusive (web-development inclusive) S. E. O services that ensure you rank high in search egines.' },
-        { id: 'forex-trading', service: 'FX(Forex) trading and account management', serviceDescription: "Maximize profits with our expert Forex trading and investment management services." },
-    ]);
+
     return (
         <main>
             <SpadesStats />
@@ -60,26 +61,9 @@ export default function Page() {
                     <h3 className="text-2xl font-bold mb-4"><Link href={'#our-team'} className="flex items-center hover:text-ocean-blue">Our Team</Link></h3>
                     {/* Include team member profiles with images and descriptions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Team Member 1 */}
-                        <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color">
-                            <Image src={'/img/1.jpg'} alt="Team member 1" width={500} height={500} quality={80} className="w-full h-40 object-cover mb-4 rounded-md" />
-                            <h4 className="text-amber-600 text-lg font-bold mb-2">Excellent .O. Omoobajesu</h4>
-                            <p className="text-gray-600">Co-Founder</p>
-                        </div>
-                        
-                        {/* Team Member 1 */}
-                        <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color">
-                            <Image src={'/img/1.jpg'} alt="Team member 2" width={500} height={500} quality={80} className="w-full h-40 object-cover mb-4 rounded-md" />
-                            <h4 className="text-amber-600 text-lg font-bold mb-2">Nathan</h4>
-                            <p className="text-gray-600">Graphic Designer</p>
-                        </div>
-                        
-                        {/* Team Member 1 */}
-                        <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color">
-                            <Image src={'/img/1.jpg'} alt="Team member 3" width={500} height={500} quality={80} className="w-full h-40 object-cover mb-4 rounded-md" />
-                            <h4 className="text-amber-600 text-lg font-bold mb-2">Wisdom Andrew</h4>
-                            <p className="text-gray-600">Sales Manager</p>
-                        </div>
+                        {teamMembers.map((item, index) => (
+                            <TeamMemberCard key={index} item={item} />
+                        ))}
                     </div>
                 </section>
 
@@ -90,12 +74,7 @@ export default function Page() {
                     {/*  Services/Features Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {servicesFeaturesData.map((item, index) => (
-                            <div key={index} className="bg-white p-4 rounded-md shadow-md shadow-shadow-color">
-                                <h4 className="text-lg font-bold mb-2 text-amber-600">{item.title}</h4>
-
-                                {/* Service/Feature Description */}
-                                <p className="text-sm text-gray-600">{item.description}</p>
-                            </div>
+                            <ServiceCard key={index} item={item} />
                         ))}
                     </div>
                 </section>
@@ -139,7 +118,7 @@ export default function Page() {
                 <VisitHomePage />
             </blockquote>
 
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mt-8">
                 <ReviewSwiper />
             </div>
 

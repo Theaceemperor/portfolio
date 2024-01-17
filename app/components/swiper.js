@@ -4,13 +4,17 @@ import { Rating } from "@mui/material";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 import { BiLink } from "react-icons/bi";
 import Swiper from "swiper";
 import { Pagination,Navigation,Autoplay } from 'swiper/modules';
 import { timeAgo } from "./time-ago";
+import { GiSpades } from "react-icons/gi";
+import { useIsVisible } from "./useIsVisible";
 
 export function ReviewSwiper() {
+  const ref = React.useRef();
+  const isVisible1 = useIsVisible(ref);
   const [reviews,setReviews] = React.useState([]);
 
   const handleGetReviews = async () => {
@@ -31,7 +35,7 @@ export function ReviewSwiper() {
       modules: [Navigation, Pagination, Autoplay],
       autoplay: {
           delay:5000,
-          disableOnInteraction: false,
+          disableOnInteraction: true,
       },
       loop: true,
       effect: 'cube',
@@ -54,23 +58,29 @@ export function ReviewSwiper() {
   })
 
     return (
-        <section id="reviews" className="w-[90%] sm:w-auto sm:max-w-lg">
+        <section ref={ref} id="reviews" className={`w-[90%] sm:w-auto sm:max-w-lg transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
             {/* <!-- Slider main container --> */}
             <div className="container bg-black rounded-md"> 
               <div className="swiper">
                   <div className="swiper-wrapper">
                     {reviews.map((item) => (
                       <div key={item.id} className="swiper-slide">
-                        <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color overflow-hidden">
-                            <h4 className="text-lg font-bold mb-2 text-amber-600">{item.data.name}</h4>
+                        <Suspense fallback={
+                          <div className="flex items-center text-amber-600 animate-pulse">
+                            Sp<GiSpades/>des
+                          </div>
+                        }>
+                          <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color overflow-hidden">
+                              <h4 className="text-lg font-bold mb-2 text-amber-600">{item.data.name}</h4>
 
-                            {/* Service/Feature Description */}
-                            <p className="text-sm text-gray-600">{item.data.review}</p>
-                            <small className="text-gray-600">{timeAgo(item.data.sentAt)}</small>
-                            <div>
-                              <Rating name="simple-controlled" value={item.data.rating} />
-                            </div>
-                        </div>
+                              {/* Service/Feature Description */}
+                              <p className="text-sm text-gray-600">{item.data.review}</p>
+                              <small className="text-gray-600">{timeAgo(item.data.sentAt)}</small>
+                              <div>
+                                <Rating name="simple-controlled" value={item.data.rating} />
+                              </div>
+                          </div>
+                        </Suspense>
                       </div>
                     ))}
                   </div>

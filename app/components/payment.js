@@ -14,7 +14,7 @@ export default function Payment ({ email, amount, name, phone, orderDetails, onC
       phone,
     },
     publicKey,
-    text: "Pay with Card",
+    text: "Pay Now",
     onSuccess: () =>
       {
         const handleSendOrder = async () => {

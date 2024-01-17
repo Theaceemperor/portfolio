@@ -49,7 +49,36 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
+export function TeamMemberCard({ item }) {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
+
+    return (
+        <div ref={ref} className={`bg-white p-4 rounded-md shadow-md shadow-shadow-color transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"} `}>
+            <Image src={item.imageUrl} alt={`${item.position} Image`} width={500} height={500} quality={80} className="w-full h-40 object-cover mb-4 rounded-md" />
+            <h4 className="text-amber-600 text-lg font-bold mb-2">{item.name}</h4>
+            <p className="text-gray-600">{item.position}</p>
+        </div>
+    )
+}
+
+export function ServiceCard({ item }) {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
+
+    return (
+        <div ref={ref} className={`bg-white p-4 rounded-md shadow-md shadow-shadow-color transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"} `}>
+            <h4 className="text-lg font-bold mb-2 text-amber-600">{item.title}</h4>
+
+            {/* Service/Feature Description */}
+            <p className="text-sm text-gray-600">{item.description}</p>
+        </div>
+    )
+}
+
 export function WriteReview() {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
     const [formInput,setFormInput] = React.useState('');
     const [formName,setFormName] = React.useState('');
     const [value, setValue] = React.useState(3);
@@ -80,7 +109,7 @@ export function WriteReview() {
         <div>
             <div className="mt-8 flex flex-col gap-2 items-center justify-center">
                 <h3>Write a review</h3>
-                <form className="bg-wheat flex flex-col gap-2 rounded-lg items-center justify-center p-4 sm:w-auto sm:max-w-lg w-[90%]">
+                <form ref={ref} className={`bg-wheat flex flex-col gap-2 rounded-lg items-center justify-center p-4 sm:w-auto sm:max-w-lg w-[90%] transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
                     <div className="flex flex-col lg:flex-row md:flex-row w-full gap-5">
                         <TextField 
                         variant="filled"
@@ -641,9 +670,11 @@ export function PortfolioBtn() {
 }
 
 export function SpadesSubFooter() {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
 
     return (
-        <footer id="footer" className="mx-1 my-5 rounded shadow">
+        <footer ref={ref} id="footer" className={`mx-1 my-5 rounded shadow transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
           <div className="flex flex-col sm:grid sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
             <ul className="flex flex-col gap-1">
               <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
