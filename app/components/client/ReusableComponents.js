@@ -772,22 +772,45 @@ export function HomeNav() {
 }
 
 export function SubNav() {
-  const pathName = usePathname();
+    const pathName = usePathname();
+    // state for scroll direction
+    const [prevScrollPosition,setPrevScrollPosition] = React.useState(0);
+    //state for overall navbar visibility on scroll
+    const [isNavbarVisible, setNavbarVisible] = React.useState(true);
+
+    //function to handle scroll events
+    const handleScroll = () => {
+        const currentScrollPosition = window.scrollY;
+
+        if (currentScrollPosition > prevScrollPosition) {
+        // scrolling down, hide the navbar
+        setNavbarVisible(false);
+        } else {
+        //scrolling up, show the NavBar
+        setNavbarVisible(true);
+        }
+
+        // update the previous scroll position
+        setPrevScrollPosition(currentScrollPosition);
+    };
+
+    // effect to add and remove event listener for scroll
+    React.useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [prevScrollPosition]);
 
     return (
-      <section>
-        <div id="sub-header" className="flex items-center justify-center">
-          <nav className="fixed top-2 z-40 text-amber-600 bg-black/80 py-2 px-5 rounded-md">
-            <ul className='flex items-center justify-between gap-3 sm:gap-5 font-semibold'>
-              <li><Link href={'/projects'} className={pathName === '/projects' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Products</Link></li>
-              <li><Link href={'/about'} className={pathName === '/about' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link></li>
-              <li><Link href={'/contact'} className={pathName === '/contact' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link></li>
-              <li><Link href={'/web-development'} className={pathName === '/web-development' ? 'text-wheat font-bold flex items-center' : 'flex items-center'}><GiSpades /></Link></li>
-            </ul>
-          </nav>
+        <div className='flex items-center justify-center'>
+            <nav className={`${isNavbarVisible || window.scrollY === 0 ? 'translate-y-0 top-2' : '-translate-y-full top-0'} transform transition-transform duration-300 ease-in-out fixed z-40 text-amber-600 bg-black/80 py-2 px-5 rounded-md`}>
+                <ul className='flex items-center justify-between gap-3 sm:gap-5 font-semibold'>
+                    <li><Link href={'/projects'} className={pathName === '/projects' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Products</Link></li>
+                    <li><Link href={'/about'} className={pathName === '/about' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link></li>
+                    <li><Link href={'/contact'} className={pathName === '/contact' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link></li>
+                    <li><Link href={'/web-development'} className={pathName === '/web-development' ? 'text-wheat font-bold flex items-center' : 'flex items-center'}><GiSpades /></Link></li>
+                </ul>
+            </nav>
         </div>
-        <ChatComponent />
-      </section>
     )
 }
 

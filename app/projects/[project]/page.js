@@ -136,7 +136,114 @@ const projectsData = [
         These unique features of the spa website module help businesses create an immersive and relaxing user experience, resulting in increased customer satisfaction and retention.
     </div>, price: '1480 - $2000' },
 
-    { id: 5, title: 'DataVista Analytics', description: "DataVista Analytics, a project by Spadeshub, is dedicated to supporting data scientists and analysts with a straightforward portfolio website. This platform serves as a hub to showcase their skills and projects in a user-friendly manner.", imageUrl: '/portfolio/analytics.PNG', link: 'https://spadesanalytics.vercel.app', price: ' contact us' },
+    { id: 5, title: 'DataVista Analytics', description: "The Data Analytics Website Module provides a powerful and intuitive platform for data analysts and their clients, offering a myriad of benefits that enhance collaboration, project management, and data visualization.", imageUrl: '/portfolio/analytics.PNG', link: 'https://datavistaanalytics.vercel.app', detailedDesc: 
+    <div>
+        <div>
+            <b>Benefits: </b>
+            <ul>
+                <li><b>1. Streamlined Collaboration:</b> Facilitate seamless collaboration between data analysts and clients with dedicated project management tools, real-time communication features, and shared dashboards. The module's intuitive interface promotes efficient collaboration and ensures that all stakeholders are on the same page.</li>
+                <li><b>2. Showcase Projects Effectively:</b> Empower data analysts to showcase their expertise and completed projects through a visually appealing and customizable portfolio. Clients can easily explore past work, enabling a transparent and engaging experience.
+                </li>
+                <li><b>3. Robust Data Visualization:</b> Enable data analysts to create interactive and insightful data visualizations. The module supports a wide range of charts, graphs, and filters, allowing analysts to convey complex findings in an easily understandable format. Clients benefit from a visually rich experience that enhances data comprehension.</li>
+                <li><b>4. Comprehensive Project Management:</b> Enhance project management capabilities with dedicated pages for creating, editing, and managing data analysis projects. The module includes detailed project timelines, milestones, and progress indicators, ensuring that both analysts and clients have a comprehensive view of project status.</li>
+                <li><b>5. Client-Centric Features:</b> Enhance project management capabilities with dedicated pages for creating, editing, and managing data analysis projects. The module includes detailed project timelines, milestones, and progress indicators, ensuring that both analysts and clients have a comprehensive view of project status.</li>
+                <li><b>6. Seamless User Experience and Navigation:</b> Prioritize user satisfaction with an intuitive interface and easy navigation.</li>
+                <li><b>7. Personalized Settings:</b> Empower users with personalized settings, including account preferences, security configurations, and notification settings. Analysts and clients alike can tailor their experience to suit their unique needs and preferences</li>
+            </ul>
+        </div>
+        
+        <div>
+            <b>Key Features: </b>
+            <ul>
+                <li>
+                    <b>1. Homepage:</b> 
+                    <p>Overview of the company, services, and frequently asked questions (FAQ).</p>
+                    <p>Call-to-action (CTA) section for user engagement.</p>
+                </li>
+                
+                <li>
+                    <b>2. Dashboard Homepage:</b> 
+                    <p>Analytics tools overview</p>
+                    <p>Display of recent projects and key metrics.</p>
+                </li>
+                
+                <li>
+                    <b>3. Data Visualization Page:</b> 
+                    <p>Create, edit, and analyze data visualizations.</p>
+                    <p>Support for various charts, graphs, and filters.</p>
+                </li>
+                
+                <li>
+                    <b>4. Projects Page:</b> 
+                    <p>Project management tools for creating, viewing, and managing data analysis projects.</p>
+                    <p>Detailed project timelines, milestones, and progress indicators.</p>
+                </li>
+                
+                <li>
+                    <b>5. Portfolio Page:</b> 
+                    <p>Showcase completed and ongoing projects in a visually appealing portfolio.</p>
+                    <p>Highlight key achievements and expertise.</p>
+                </li>
+                
+                <li>
+                    <b>6. Settings page:</b> 
+                    <p>Account settings for personalized configurations.</p>
+                    <p>Security settings, notification preferences, and other customizable options.</p>
+                </li>
+                
+                <li>
+                    <b>7. Project Management Page:</b> 
+                    <p>Detailed project management features, including project details, data import, and collaboration tools.</p>
+                </li>
+                
+                <li>
+                    <b>8. Client Access Page:</b> 
+                    <p>Secure login for clients</p>
+                    <p>Access to shared dashboards and reports.</p>
+                </li>
+                
+                <li>
+                    <b>9. Client Feedback Page:</b> 
+                    <p>Section for clients to provide feedback on project deliverables.</p>
+                    <p>Ratings and reviews for completed projects.</p>
+                </li>
+                
+                <li>
+                    <b>10. Shared Dashboard Page:</b> 
+                    <p>Display of key metrics, visualizations, and insights for a broader audience.</p>
+                </li>
+                
+                <li>
+                    <b>11. Login Page:</b> 
+                    <p>unified login page for both analysts and clients.</p>
+                    <p>Role selection during login and signup process.</p>
+                </li>
+                
+                <li>
+                    <b>12. Shared Dashboard Page:</b> 
+                    <p>Landing page with a cookie banner for user consent.</p>
+                </li>
+            </ul>
+        </div>
+        <b>Open for Custom Features:</b> Tailor the platform to specific needs with an open approach to custom features. This module is available for both individual analysts, teams, businesses and institutions
+        <br/>
+        <div>
+            <b>Technology Used:</b>
+            Leveraging the advanced technologies of Spadeshub, ZenFit Spa utilizes React, Next.js, Node.js, and Tailwind CSS to ensure a seamless and engaging web experience. The consistent use of JavaScript across the stack guarantees a dynamic and responsive interface.
+        </div>
+        <div>
+            <b>Our Role:</b>
+            As with previous projects, Spadeshub leads the full-stack development of ZenFit Spa, from initial prototyping to deployment. The comprehensive approach ensures a cohesive platform that aligns with the vision of spa and fitness brands.
+        </div>
+        <div>
+            <b>Ongoing Development and Improvement:</b>
+            DataVista is an ongoing project, actively under development and improvement. Spadeshub continues to enhance and refine the platform, ensuring it evolves with the latest trends and technologies to deliver an unparalleled online experience.
+        </div>
+        <div>
+            <b>Conclusion:</b>
+            The Data Analytics Website Module stands as a versatile and comprehensive solution, offering benefits that cater to the unique needs of both data analysts and their clients. From streamlined collaboration to robust data visualization and personalized settings, the module transforms the data analysis experience into an engaging and efficient process for all users.
+        </div>
+    </div>, price: '50,000 min budget. Please contact us.' },
 
     { id: 6, title: 'PersonalHub', description: `PersonalHub, an individual endeavor powered by Spadeshub, is a distinctive personal website that offers a unique blend of exclusive content, confidentials, insights, and features a dedicated section for careers and certifications. The primary objective is to create a personalized and engaging space for users to subscribe to premium content, access a decisive "About" column, explore careers and certifications, and participate in a vibrant community through a chat interface.`, imageUrl: '/portfolio/personal.PNG', link: 'https://spadespersonal.vercel.app', detailedDesc: 
     <div>
