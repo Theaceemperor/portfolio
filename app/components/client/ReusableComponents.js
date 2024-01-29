@@ -675,8 +675,8 @@ export function SpadesSubFooter() {
 
     return (
         <footer ref={ref} id="footer" className={`mx-1 my-5 rounded shadow transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-          <div className="flex flex-col sm:grid sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
-            <ul className="flex flex-col gap-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
+            <ul className="flex flex-col space-y-2">
               <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
               <li><Link href={'/#about'} className="hover:underline underline-offset-2 decoration-amber-600">About us</Link></li>
               <li><Link href={'/about#services'} className="hover:underline underline-offset-2 decoration-amber-600">Services</Link></li>
