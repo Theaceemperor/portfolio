@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react';
+import React, { Suspense, useRef } from 'react';
 import Link from "next/link";
 import { ImCart } from 'react-icons/im';
 import Button from '@mui/material/Button';
@@ -13,7 +13,7 @@ import { useIsVisible } from '../useIsVisible';
 import { GiSpades } from 'react-icons/gi';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaBlog, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
+import { FaBlog, FaInstagram, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail, SiWebpack } from 'react-icons/si';
 import { BsGithub, BsPersonCheck } from 'react-icons/bs';
 import { IoMdContacts, IoMdStats } from 'react-icons/io';
@@ -31,6 +31,7 @@ import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { db } from '@/settings/firebase.settings';
 import { ActivityIndicator2 } from '../activity-indicator';
+import { timeAgo } from '../time-ago';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -48,6 +49,71 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
+
+export function SubscribeBox() {
+
+    return (
+        <div id='subscription' className='mb-4 container mx-auto'>
+            <p className='mb-2 p-1 text-sm text-gray-500 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
+            <form className='flex flex-col space-y-2 p-2 items-center'>
+                <label htmlFor='subscription-email font-medium'>Email</label>
+                <div className='flex flex-col sm:flex-row space-x-2 space-y-2'>
+                    <input
+                    id='subscribeEmail'
+                    name='subscribeEmail'
+                    placeholder='Subscribe to our newsletter'
+                    className='min-w-full sm:w-1/2 lg:w-1/3 rounded bg-transparent px-2 py-1 text-amber-600 focus:outline-none outline-none border border-gray-400 placeholder:italic'  
+                    />
+                    <button className='px-4 py-2 rounded hover:bg-amber-600 hover:text-black transition duration-300 ease-in-out' type='submit'>Subsribe</button>
+                </div>
+            </form>
+        </div>
+    )
+}
+
+export function ReviewsSection() {
+    const ref = React.useRef();
+    const isVisible1 = useIsVisible(ref);
+    const [reviews,setReviews] = React.useState([]);
+  
+    const handleGetReviews = async () => {
+        const docRes = await getDocs(collection(db,'spades-reviews'));
+        setReviews(docRes.docs.map(doc => {
+            return {
+                id:doc.id,
+                data:{
+                    ...doc.data()
+                }
+            }
+        }))
+    }
+    handleGetReviews();
+
+    return (
+        <section ref={ref} id="reviews" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 px-4 2xl:px-0 transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+            {reviews.map((item) => (
+                <div key={item.id} className="">
+                <Suspense fallback={
+                    <div className="flex items-center text-amber-600 animate-pulse">
+                    Sp<GiSpades/>des
+                    </div>
+                }>
+                    <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color overflow-hidden">
+                        <h4 className="text-lg font-bold mb-2 text-amber-600">{item.data.name}</h4>
+
+                        {/* Service/Feature Description */}
+                        <p className="text-sm text-gray-600">{item.data.review}</p>
+                        <small className="text-gray-600">{timeAgo(item.data.sentAt)}</small>
+                        <div>
+                        <Rating name="simple-controlled" value={item.data.rating} />
+                        </div>
+                    </div>
+                </Suspense>
+                </div>
+            ))}
+        </section>
+    )
+}
 
 export function TeamMemberCard({ item }) {
     const ref = React.useRef();
@@ -257,7 +323,7 @@ export function Project({ title, description, imageUrl, link }) {
     const isVisible1 = useIsVisible(ref);
 
     return (
-        <div ref={ref} className={`bg-white rounded-md p-2 shadow-lg dark:shadow-amber-600 dark:shadow-md overflow-hidden transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+        <div ref={ref} className={`bg-white rounded-md p-2 shadow-lg dark:shadow-amber-600 dark:shadow overflow-hidden transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
             <Image src={imageUrl} alt={`${title} Image`} width={500} height={500} quality={100} className='rounded-md mb-4 object-cover w-full h-auto' />
             <div>
                 <h3 className='text-xl font-bold mb-2 text-amber-600'>{title}</h3>
@@ -675,39 +741,42 @@ export function SpadesSubFooter() {
 
     return (
         <footer ref={ref} id="footer" className={`mx-1 my-5 rounded shadow transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
-            <ul className="flex flex-col space-y-2">
-              <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
-              <li><Link href={'/#about'} className="hover:underline underline-offset-2 decoration-amber-600">About us</Link></li>
-              <li><Link href={'/about#services'} className="hover:underline underline-offset-2 decoration-amber-600">Services</Link></li>
-              <li><Link href={'/projects#portfolio'} className="hover:underline underline-offset-2 decoration-amber-600">Products</Link></li>
-              <li><Link href={'/gift-purchase'} className="hover:underline underline-offset-2 decoration-amber-600">Giftcards</Link></li>
-              <li><Link href={'/about#reviews'} className="hover:underline underline-offset-2 decoration-amber-600">Reviews</Link></li>
-              <li><Link href={'/about#faq'} className="hover:underline underline-offset-2 decoration-amber-600">FAQ</Link></li>
-              <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Contact</Link></li>
-            </ul>
-            <ul className="flex flex-col gap-1">
-              <li><Link href={'/web-development'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
-              <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
-              <li><Link href={'/spades/pricing'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
-              <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
-              <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Docs</Link></li>
-              <li>
-                <blockquote className="flex flex-row gap-5 mt-1 sm:items-center sm:justify-center">
-                  <Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaXTwitter className="text-2xl text-amber-600 rounded-full text-center" /></Link>
-                  <Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link>
-                  <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><SiGmail className="text-amber-600 text-2xl text-center" /></Link>
-                  <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
-                </blockquote>
-              </li>
-            </ul>
-            <ul className="flex flex-col gap-1">
-              <li><Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
-              <li><Link href={'/spades/terms'} className="hover:underline underline-offset-2 decoration-amber-600">T & C</Link></li>
-              <li><Link href={'/spades/policy'} className="hover:underline underline-offset-2 decoration-amber-600">Privacy</Link></li>
-              <li>2023 © spadeshub</li>
-            </ul>
-          </div>
+            <SubscribeBox />
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
+                <ul className="flex flex-col space-y-2">
+                <li><Link href={'/'} className="hover:underline underline-offset-2 decoration-amber-600">Home</Link></li>
+                <li><Link href={'/#about'} className="hover:underline underline-offset-2 decoration-amber-600">About us</Link></li>
+                <li><Link href={'/about#services'} className="hover:underline underline-offset-2 decoration-amber-600">Services</Link></li>
+                <li><Link href={'/projects#portfolio'} className="hover:underline underline-offset-2 decoration-amber-600">Products</Link></li>
+                <li><Link href={'/gift-purchase'} className="hover:underline underline-offset-2 decoration-amber-600">Giftcards</Link></li>
+                <li><Link href={'/about#reviews'} className="hover:underline underline-offset-2 decoration-amber-600">Reviews</Link></li>
+                <li><Link href={'/about#faq'} className="hover:underline underline-offset-2 decoration-amber-600">FAQ</Link></li>
+                <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Contact</Link></li>
+                </ul>
+                <ul className="flex flex-col gap-1">
+                <li><Link href={'/web-development'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
+                <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
+                {/* <li><Link href={'/spades/pricing'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li> */}
+                <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
+                <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Docs</Link></li>
+                <li>
+                    <blockquote className="flex flex-row gap-5 mt-1 sm:items-center sm:justify-center">
+                    <Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaXTwitter className="text-2xl text-amber-600 rounded-full text-center" /></Link>
+                    <Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link>
+                    <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><SiGmail className="text-amber-600 text-2xl text-center" /></Link>
+                    <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
+                    <Link href={'https://instagram.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaInstagram className="text-2xl text-amber-600 rounded-full text-center" /></Link>
+                    </blockquote>
+                </li>
+                </ul>
+                <ul className="flex flex-col gap-1">
+                <li><Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
+                <li><Link href={'/spades/terms'} className="hover:underline underline-offset-2 decoration-amber-600">T & C</Link></li>
+                <li><Link href={'/spades/policy'} className="hover:underline underline-offset-2 decoration-amber-600">Privacy</Link></li>
+                <li>2023 © spadeshub</li>
+                </ul>
+            </div>
         </footer>
     )
 }
@@ -719,7 +788,7 @@ export function RowCta() {
     return (
         <section id="cta" ref={ref} className={`my-10 flex flex-col gap-3 items-center justify-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
           <div className="bg-[url('/img/cta.png')] h-56 w-[90%] sm:max-w-md bg-center bg-cover shadow-md dark:shadow-amber-600 shadow-black rounded-md flex justify-center items-end py-1">
-            <article className="flex flex-row gap-5">
+            <article className="flex flex-row gap-4">
               <Link href={'mailto:spadesinstitute.empire@gmail.com'}>
                 <SiGmail
               className="rounded-full border-2 text-[wheat] font-bold border-amber-600 animate-bounce text-3xl p-1"
@@ -740,6 +809,11 @@ export function RowCta() {
               />
               </Link>
               <Link href={'https://nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
+              <Link href={'https://instagram.com/@spadeshub'}>
+                <FaInstagram
+              className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1"
+              />
+              </Link>
             </article>
           </div>
           <ContactUs />
@@ -766,7 +840,6 @@ export function HomeNav() {
             <li><Link href={'/about'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>About Us</Link></li>
             <li><Link href={'/contact'} className='hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300'>Contact</Link></li>
           </ul>
-          <ChatComponent />
         </nav>
     )
 }
@@ -802,8 +875,8 @@ export function SubNav() {
 
     return (
         <div className='flex items-center justify-center'>
-            <nav className={`${isNavbarVisible || window.scrollY === 0 ? 'translate-y-0 top-2' : '-translate-y-full top-0'} transform transition-transform duration-300 ease-in-out fixed z-40 text-amber-600 bg-black/80 py-2 px-5 rounded-md`}>
-                <ul className='flex items-center justify-between gap-3 sm:gap-5 font-semibold'>
+            <nav className={`${isNavbarVisible || window.scrollY === 0 ? 'translate-y-0 top-2' : '-translate-y-full top-0'} transform transition-transform duration-300 ease-in-out fixed z-40 text-amber-600 bg-black/80 py-2 px-4 rounded-md`}>
+                <ul className='flex items-center justify-between gap-2.5 sm:gap-5 font-semibold'>
                     <li><Link href={'/projects'} className={pathName === '/projects' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Products</Link></li>
                     <li><Link href={'/about'} className={pathName === '/about' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link></li>
                     <li><Link href={'/contact'} className={pathName === '/contact' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link></li>
@@ -823,6 +896,7 @@ export function BaseLayout({ children }) {
           {children}
         </main>
         <RowCta />
+        <ChatComponent />
         <SpadesSubFooter />
       </>
     )

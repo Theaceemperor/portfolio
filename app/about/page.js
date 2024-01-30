@@ -1,10 +1,7 @@
 'use client'
 import Link from "next/link";
 import React from "react";
-import { CgLink } from "react-icons/cg";
-import { redirect } from "next/navigation";
-import { FAQ, LoginQuest, SectionHeader, ServiceCard, ServiceRow, SpadesStats, TeamMemberCard, VisitHomePage, WriteReview } from "../components/client/ReusableComponents";
-import Image from "next/image";
+import { FAQ, LoginQuest, ReviewsSection, SectionHeader, ServiceCard, SpadesStats, TeamMemberCard, VisitHomePage, WriteReview } from "../components/client/ReusableComponents";
 import { ReviewSwiper } from "../components/swiper";
 
 
@@ -118,8 +115,9 @@ export default function Page() {
                 <VisitHomePage />
             </blockquote>
 
-            <div className="flex items-center justify-center mt-8">
-                <ReviewSwiper />
+            <div className="container mx-auto mt-8">
+                <h2 className="text-center mb-4 text-xl font-semibold">Our Reviews</h2>
+                <ReviewsSection />
             </div>
 
             <WriteReview />

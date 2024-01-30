@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
 import Image from 'next/image';
 import { AffiliateLink, HeaderText, HomeNav, LoginQuest } from './components/client/ReusableComponents';
@@ -19,6 +19,7 @@ export default function Home() {
         <Link href={'https://twitter.com/@spadeshub'}><FaXTwitter /></Link>
         <Link href={'mailto:spadesinstitute.empire@gmail.com'}><SiGmail /></Link>
         <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 bg-amber-600 rounded-full' /></Link>
+        <Link href={'https://nexvault.vercel.app'}><FaInstagram /></Link>
       </div>
     </main>
   )
