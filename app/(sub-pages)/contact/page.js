@@ -74,7 +74,7 @@ export default function Page() {
                                     <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 animate-bounce dark:bg-wheat rounded-full dark:border-2 dark:border-amber-600' /></Link>
                                 </li>
                                 <li>
-                                    <Link href={'https://instagram.com/@spadeshub'}>
+                                    <Link href={'https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3'}>
                                         <FaInstagram
                                         className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1 bg-black" 
                                         />
@@ -148,9 +148,9 @@ export default function Page() {
                     <LoginButton2 />
                     <VisitHomePage />
                 </div>
-                <div className="flex items-center justify-center mb-8">
+                {/* <div className="flex items-center justify-center mb-8">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126093.78244303439!2d7.367465296507847!3d9.024416367940095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e745f4cd62fd9%3A0x53bd17b4a20ea12b!2sAbuja%2C%20Federal%20Capital%20Territory!5e0!3m2!1sen!2sng!4v1697757271444!5m2!1sen!2sng" width="640" height="480" className="max-w-[95%] md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[500px] h-auto rounded-lg shadow-md shadow-amber-600"></iframe>
-                </div>
+                </div> */}
             </main>
             {
                 showAlertDialog

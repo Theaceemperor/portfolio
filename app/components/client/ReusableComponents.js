@@ -784,12 +784,12 @@ export function SpadesSubFooter() {
                     <Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link>
                     <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><SiGmail className="text-amber-600 text-2xl text-center" /></Link>
                     <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
-                    <Link href={'https://instagram.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaInstagram className="text-2xl text-amber-600 rounded-full text-center" /></Link>
+                    <Link href={'https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaInstagram className="text-2xl text-amber-600 rounded-full text-center" /></Link>
                     </blockquote>
                 </li>
                 </ul>
                 <ul className="flex flex-col gap-1">
-                <li><Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
+                <li><Link href={'tel:+2349023236306'} className="hover:underline underline-offset-2 decoration-amber-600">Dev support</Link></li>
                 <li><Link href={'/spades/terms'} className="hover:underline underline-offset-2 decoration-amber-600">T & C</Link></li>
                 <li><Link href={'/spades/policy'} className="hover:underline underline-offset-2 decoration-amber-600">Privacy</Link></li>
                 <li>2023 © spadeshub</li>
@@ -827,7 +827,7 @@ export function RowCta() {
               />
               </Link>
               <Link href={'https://nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
-              <Link href={'https://instagram.com/@spadeshub'}>
+              <Link href={"https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3"}>
                 <FaInstagram
               className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1 bg-black"
               />
@@ -923,7 +923,7 @@ export function SubNav() {
                     }
                     <Link href="/gift-purchase" className={pathName === '/gift-purchase' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Store</Link>
                     <Link href="#subscription" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
-                    <Link href="/spades/pricing" className={pathName === '/spades/pricing' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Pricing</Link>
+                    <Link href="#" className={pathName === '/spades/pricing' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Pricing</Link>
                     <Link href="/projects#our-clients" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                     <Link href="/about#faq" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                     <Link href="/reviews" className={pathName === '/reviews' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Reviews</Link>
@@ -961,7 +961,7 @@ export function SubNav() {
                                 <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
                                 }
                                 <Link href="#subscription" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
-                                <Link href="/spades/pricing" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
+                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
                                 <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                                 <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                                 <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>

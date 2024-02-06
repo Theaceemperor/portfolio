@@ -19,7 +19,7 @@ export default function Home() {
         <Link href={'https://twitter.com/@spadeshub'}><FaXTwitter /></Link>
         <Link href={'mailto:spadesinstitute.empire@gmail.com'}><SiGmail /></Link>
         <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 bg-amber-600 rounded-full' /></Link>
-        <Link href={'https://nexvault.vercel.app'}><FaInstagram /></Link>
+        <Link href={'https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3'}><FaInstagram /></Link>
       </div>
     </main>
   )
