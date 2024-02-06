@@ -44,11 +44,11 @@ export default function LoginPage() {
         <ActivityIndicator />
         :
         <>
-            <h1 className="flex items-center gap-1 px-2 justify-center text-amber-600 text-center my-5 text-2xl">LOGIN<GiSpades /></h1>
-            <div className="w-full flex flex-col items-center justify-center gap-5 my-5 px-1">
+            <h1 className="flex items-center gap-1 px-2 justify-center text-amber-600 text-center mt-8 text-2xl">LOGIN<GiSpades /></h1>
+            <div className="w-full flex flex-col items-center justify-center gap-5 mt-4 px-1">
                 <form 
                 onSubmit={handleSubmit}
-                className="bg-[wheat] flex flex-col items-center shadow-lg shadow-gray-800 gap-3 p-3 rounded-lg">
+                className="bg-wheat flex flex-col items-center shadow-lg shadow-gray-800 gap-3 p-3 rounded-lg">
                 <div className="lg:grid md:grid md:grid-cols-2 flex flex-col gap-3">
                     <TextField 
                     id="email" 
@@ -88,7 +88,7 @@ export default function LoginPage() {
                 <LoginButton
                 />
                 </form>
-                <p className="text-center">Don't have a development? Create <Link href={'web-development/application'}><i className="underline text-amber-600">here</i></Link></p>
+                <p className="text-center">Don't have a development? Create <Link href={'web-development/application'}><i className="underline text-amber-600 mt-4">here</i></Link></p>
                 
                 <VisitHomePage />
                 

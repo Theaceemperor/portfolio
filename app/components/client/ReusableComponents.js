@@ -1,6 +1,8 @@
 'use client'
 import React, { Suspense, useRef } from 'react';
 import Link from "next/link";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { db } from "@/settings/firebase.settings";
 import { ImCart } from 'react-icons/im';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -13,7 +15,7 @@ import { useIsVisible } from '../useIsVisible';
 import { GiSpades } from 'react-icons/gi';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { FaBlog, FaInstagram, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
+import { FaArrowUp, FaBars, FaBlog, FaInstagram, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail, SiWebpack } from 'react-icons/si';
 import { BsGithub, BsPersonCheck } from 'react-icons/bs';
 import { IoMdContacts, IoMdStats } from 'react-icons/io';
@@ -21,15 +23,13 @@ import { TbGiftCardFilled } from 'react-icons/tb';
 import { PopperPopupState } from '../modals';
 import { GoCodeReview } from 'react-icons/go';
 import { PiWebhooksLogoFill } from 'react-icons/pi';
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider, signOut, useSession } from 'next-auth/react';
 import styled from '@emotion/styled';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa';
 import { Alert, AlertTitle, Autocomplete, Collapse, Rating, TextField, Typography } from '@mui/material';
 import { CgLink } from 'react-icons/cg';
 import ChatComponent from './ChatComponent';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { db } from '@/settings/firebase.settings';
 import { ActivityIndicator2 } from '../activity-indicator';
 import { timeAgo } from '../time-ago';
 
@@ -51,21 +51,38 @@ const VisuallyHiddenInput = styled('input')({
 
 
 export function SubscribeBox() {
+    
+  const [formInput,setFormInput] = React.useState([]);
+      
+  const handlePostmail = async () => {
+    await addDoc(collection(db,'mailing_list'), {
+        body:formInput,
+        joinedAt:new Date().getTime()
+    }).then(() => {
+        setFormInput('');
+        alert('Thank you for Subscribing.');
+    }).catch((error) => {
+        console.error(error);
+    })
+};
 
     return (
         <div id='subscription' className='mb-4 container mx-auto'>
-            <p className='mb-2 p-1 text-sm text-gray-500 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
-            <form className='flex flex-col space-y-2 p-2 items-center'>
-                <label htmlFor='subscription-email font-medium'>Email</label>
-                <div className='flex flex-col sm:flex-row space-x-2 space-y-2'>
-                    <input
-                    id='subscribeEmail'
-                    name='subscribeEmail'
-                    placeholder='Subscribe to our newsletter'
-                    className='min-w-full sm:w-1/2 lg:w-1/3 rounded bg-transparent px-2 py-1 text-amber-600 focus:outline-none outline-none border border-gray-400 placeholder:italic'  
-                    />
-                    <button className='px-4 py-2 rounded hover:bg-amber-600 hover:text-black transition duration-300 ease-in-out' type='submit'>Subsribe</button>
-                </div>
+            <p className='mb-2 p-1 text-sm text-gray-600 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
+            <form className='flex flex-col sm:flex-row space-x-2 space-y-2 items-center justify-center'>
+                <input
+                id='subscribeEmail'
+                name='subscribeEmail'
+                placeholder='Email address'
+                className='max-w-lg rounded bg-transparent px-2 py-1 text-amber-600 focus:outline-none outline-none border border-amber-600 placeholder:italic'  
+                onChange={
+                    (e) => setFormInput(e.target.value)
+                }
+                value={formInput}
+                required
+                />
+                <button className='px-4 py-1 rounded hover:bg-amber-600 hover:text-black transition duration-300 ease-in-out' type='submit'
+                onClick={() => handlePostmail}>Subsribe</button>
             </form>
         </div>
     )
@@ -265,7 +282,7 @@ export function FAQ({ question, answer }) {
 
     return (
         <div ref={ref} className={`px-4 py-2 shadow shadow-shadow-color rounded min-w-full max-w-md transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-            <span className="flex flex-row gap-4 font-bold text-lg"> 
+            <span className="flex flex-row gap-4 font-semibold text-lg"> 
                 {question}
                 {
                     open
@@ -292,7 +309,7 @@ export function FAQ({ question, answer }) {
 export function SectionHeader({ headerText,headerLink,style }) {
 
     return (
-        <h3 className={`text-3xl font-bold mb-8 text-center`}><Link href={headerLink} className={`flex items-center hover:text-amber-600 ${style}`}>{headerText}<CgLink /></Link></h3>
+        <h3 className={`text-xl sm:text-2xl font-bold mb-4 text-center`}><Link href={headerLink} className={`flex items-center hover:text-amber-600 ${style}`}>{headerText}<CgLink /></Link></h3>
     )
 }
 
@@ -324,7 +341,7 @@ export function Project({ title, description, imageUrl, link }) {
 
     return (
         <div ref={ref} className={`bg-white rounded-md p-2 shadow-lg dark:shadow-amber-600 dark:shadow overflow-hidden transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-            <Image src={imageUrl} alt={`${title} Image`} width={500} height={500} quality={100} className='rounded-md mb-4 object-cover w-full h-auto' />
+            <Image src={imageUrl} alt={`${title} Image`} width={500} height={500} quality={100} priority className='rounded-md mb-4 object-cover w-full h-auto' />
             <div>
                 <h3 className='text-xl font-bold mb-2 text-amber-600'>{title}</h3>
                 <p className='text-gray-600 mb-4 dark:text-gray-500'><b>Purpose/Objective:</b> {description}</p>
@@ -629,10 +646,10 @@ export function AffiliateLink() {
 export function LoginQuest({color}) {
 
     return (
-        <div className="flex my-5 items-center justify-center">
+        <div className="flex items-center justify-center">
             <Link 
             href={"/web-development/dashboard"}
-            className={`text-md flex items-center gap-1 px-2 text-amber-600 text-center ${color}`}>
+            className={`text-md flex items-center gap-1 text-amber-600 text-center ${color}`}>
                 <i>login to dashboard</i><GiSpades />
             </Link>
         </div>
@@ -740,7 +757,8 @@ export function SpadesSubFooter() {
     const isVisible1 = useIsVisible(ref);
 
     return (
-        <footer ref={ref} id="footer" className={`mx-1 my-5 rounded shadow transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+        <footer ref={ref} id="footer" className={`mx-1 mt-8 rounded shadow transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+
             <SubscribeBox />
             
             <div className="grid grid-cols-1 sm:grid-cols-3 sm:text-center gap-5 p-5 text-xs">
@@ -786,15 +804,15 @@ export function RowCta() {
     const isVisible1 = useIsVisible(ref);
 
     return (
-        <section id="cta" ref={ref} className={`my-10 flex flex-col gap-3 items-center justify-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-          <div className="bg-[url('/img/cta.png')] h-56 w-[90%] sm:max-w-md bg-center bg-cover shadow-md dark:shadow-amber-600 shadow-black rounded-md flex justify-center items-end py-1">
+        <section id="cta" ref={ref} className={`mt-8 flex flex-col gap-3 items-center justify-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+          <div className="bg-[url('/img/cta.png')] h-52 sm:h-64 w-[90%] sm:max-w-md bg-center bg-cover shadow-md dark:shadow-amber-600 shadow-black rounded-md flex justify-center items-end py-1">
             <article className="flex flex-row gap-4">
               <Link href={'mailto:spadesinstitute.empire@gmail.com'}>
                 <SiGmail
               className="rounded-full border-2 text-[wheat] font-bold border-amber-600 animate-bounce text-3xl p-1"
               />
               </Link>
-              <Link href={'https://wa.me/message/LLABQR53DPNME1'}>
+              <Link href={'tel:+2349023236306'}>
                 <Image 
                 src={'/img/SPADES3.png'}
                 alt="logo"
@@ -811,7 +829,7 @@ export function RowCta() {
               <Link href={'https://nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
               <Link href={'https://instagram.com/@spadeshub'}>
                 <FaInstagram
-              className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1"
+              className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1 bg-black"
               />
               </Link>
             </article>
@@ -845,11 +863,17 @@ export function HomeNav() {
 }
 
 export function SubNav() {
+    const { data:session } = useSession();
     const pathName = usePathname();
     // state for scroll direction
     const [prevScrollPosition,setPrevScrollPosition] = React.useState(0);
     //state for overall navbar visibility on scroll
     const [isNavbarVisible, setNavbarVisible] = React.useState(true);
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  
+    const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+    };
 
     //function to handle scroll events
     const handleScroll = () => {
@@ -874,43 +898,128 @@ export function SubNav() {
     }, [prevScrollPosition]);
 
     return (
-        <div className='flex items-center justify-center'>
-            <nav className={`${isNavbarVisible || window.scrollY === 0 ? 'translate-y-0 top-2' : '-translate-y-full top-0'} transform transition-transform duration-300 ease-in-out fixed z-40 text-amber-600 bg-black/80 py-2 px-4 rounded-md`}>
-                <ul className='flex items-center justify-between gap-2.5 sm:gap-5 font-semibold'>
-                    <li><Link href={'/projects'} className={pathName === '/projects' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Products</Link></li>
-                    <li><Link href={'/about'} className={pathName === '/about' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link></li>
-                    <li><Link href={'/contact'} className={pathName === '/contact' ? 'text-wheat font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link></li>
-                    <li><Link href={'/web-development'} className={pathName === '/web-development' ? 'text-wheat font-bold flex items-center' : 'flex items-center'}><GiSpades /></Link></li>
-                </ul>
-            </nav>
-        </div>
+        <>
+            <div className='hidden lg:block border-none bg-black text-wheat dark:bg-wheat dark:text-black z-30 fixed top-0 bottom-0 left-0 w-64 py-8'>
+                <div className='mb-4 py-2 px-4 bg-wheat dark:bg-black'><span className='flex items-center justify-center font-bold text-2xl animate-pulse text-amber-600'>SP<GiSpades className='text-3xl' />DES</span></div>
+                <div className='flex flex-col space-y-2 px-4'>
+                    <Link href={'/'} className={`hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Home</Link>
+                    <Link href={'/projects'} className={pathName === '/projects' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Solutions/Products</Link>
+                    <Link href={'/about'} className={pathName === '/about' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link>
+                    {session
+                    ?
+                    <Link href="/web-development/dashboard" className={pathName === '/web-development/dashboard' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Dashboard</Link>
+                    :
+                    <Link href="/web-development" className={pathName === '/web-development' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Login</Link>
+                    }
+                    {session
+                    ?
+                    <button onClick={signOut()} className={"block mb-2"}>Logout</button>
+                    :
+                    <Link href="/web-development/application" className={pathName === '/web-development/application' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Sign Up</Link>
+                    }
+                    <Link href="/gift-purchase" className={pathName === '/gift-purchase' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Store</Link>
+                    <Link href="#subscription" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
+                    <Link href="/spades/pricing" className={pathName === '/spades/pricing' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Pricing</Link>
+                    <Link href="/projects#our-clients" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
+                    <Link href="/about#faq" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
+                    <Link href="/reviews" className={pathName === '/reviews' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Reviews</Link>
+                    <Link href="#" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
+                    <Link href={'/contact'} className={pathName === '/contact' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link>
+                    <Link href="/spades/policy" className={pathName === '/spades/policy' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Privacy</Link>
+                </div>
+                <p className='mt-4 p-2 text-sm absolute bottom-0'>&copy; 2024 Spades. All rights reserved.</p>
+            </div>
+            <div className='lg:hidden flex items-center justify-center'>
+                <nav className={`${isNavbarVisible || window.scrollY === 0 ? 'translate-y-0 top-2' : '-translate-y-full top-0'} transform transition-transform duration-300 ease-in-out fixed z-30 text-amber-600 bg-black/80 py-1 px-6 sm:px-12 rounded-md`}>
+                    <div className="container mx-auto flex lg:hidden justify-between items-center">
+                        <Link href="/" onClick={() => setIsMenuOpen(false)}  className={"text-xl font-bold flex items-center justify-center animate-pulse"}>SP<GiSpades className='text-2xl' />DES</Link>
+                        <div className="ml-8 mt-1">
+                            <button onClick={toggleMenu} className="">
+                                {isMenuOpen ? <FaTimes size={24} className="font-bold" /> : <FaBars size={24} className="font-bold" />}
+                            </button>
+                        </div>
+                        {isMenuOpen && (
+                            <div className="absolute top-12 left-0 right-0 p-4 bg-black/80 rounded transition duration-300 ease-linear">
+                                <Link href="/" className={pathName === '/' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                                <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/blog' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
+                                <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={pathName === '/projects' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Solutions/Products</Link>
+                                <Link href="/gift-purchase" onClick={() => setIsMenuOpen(false)} className={pathName === '/gift-purchase' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Store</Link>
+                                {session
+                                ?
+                                <Link href="/web-development/dashboard" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/dashboard' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Dashboard</Link>
+                                :
+                                <Link href="/web-development" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Login</Link>
+                                }
+                                {session
+                                ?
+                                <button onClick={() => setIsMenuOpen(false) && signOut()} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
+                                :
+                                <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
+                                }
+                                <Link href="#subscription" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
+                                <Link href="/spades/pricing" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
+                                <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
+                                <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
+                                <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>
+                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
+                                <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={pathName === '/contact' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Contact</Link>
+                                <Link href="/spades/policy" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/policy' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Privacy</Link>
+                            </div>
+                        )}
+                    </div>
+                </nav>
+            </div>
+        </>
     )
 }
 
 export function BaseLayout({ children }) {
+    const [showScrollToTop, setShowScrollToTop] = React.useState(false);
+  
+    const handleScroll = () => {
+      // Show/hide scroll-to-top button based on scroll position
+      setShowScrollToTop(window.scrollY > 100);
+    };
+  
+    const scrollToTop = () => {
+      // Scroll to the top of the page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  
+    React.useEffect(() => {
+      // Add scroll event listener
+      window.addEventListener('scroll', handleScroll);
+  
+      // Remove event listener on component unmount
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+
     return (
-      <>
-        <SubNav />
-        <SubHeader />
-        <main>
-          {children}
-        </main>
-        <RowCta />
-        <ChatComponent />
-        <SpadesSubFooter />
-      </>
+        <SessionProvider>
+            <SubNav />
+            <main className='lg:absolute left-64 right-0 bottom-0 top-0 z-0'>
+                {showScrollToTop
+                ?
+                <button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-black/80 p-2 rounded-full text-amber-600 hover:bg-black/50 focus:outline-none z-20"
+                >
+                    <FaArrowUp />
+                </button>
+                :
+                null
+                }
+                <SubHeader />
+                {children}
+                <RowCta />
+                <SpadesSubFooter />
+            </main>
+            <ChatComponent />
+        </SessionProvider>
     )
 }
-
-export function WebDevLayout({ children }) {
-    return (
-      <SessionProvider >
-        <BaseLayout>
-            {children}
-        </BaseLayout>
-      </SessionProvider>
-    )
-  }
 
 export function HeaderText({customBorder}) {
     const ref = React.useRef();
@@ -918,7 +1027,7 @@ export function HeaderText({customBorder}) {
 
     return (
         <header className={`border-y-2 border-[#252324] dark:border-amber-600 p-2 ${customBorder} font-serif`}>
-          <h1 ref={ref} className={`text-4xl sm:text-9xl text-amber-600 flex items-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>SP<GiSpades />DES</h1>
+          <div ref={ref} className={`text-4xl sm:text-9xl text-amber-600 flex items-center transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>SP<GiSpades />DES</div>
         </header>
     )
 }

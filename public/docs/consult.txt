@@ -1,0 +1,22 @@
+<div>
+    <b>Technologies Used :</b>
+    Harnessing the expertise of Spadeshub, Spades Consult utilizes cutting-edge technologies such as React, Next.js, Node.js, and Tailwind CSS. The entire stack, powered by JavaScript, ensures a dynamic and interactive user interface, delivering a sophisticated web experience.
+</div>
+
+<div>
+    <b>Key Features :</b>
+    - Call to Action : Empowering users to take immediate steps, the platform features a prominent call-to-action, enhancing user engagement.
+    - Careers Page : Providing insights into opportunities, the careers page invites individuals to explore and join the Spades Consult community.
+    - Warm and Welcoming Palette : The design embraces a warm and inviting color palette, creating a comfortable environment for users navigating the site.
+    - Exceptional User Experience : From intuitive navigation to swift responsiveness, Spades Consult, developed by Spadeshub, prioritizes an exceptional user experience, ensuring satisfaction at every interaction.
+</div>
+
+<div>
+    <b>Company's Role :</b>
+    As the creative force behind Spades Consult, Spadeshub led the full-stack development of this innovative consultation platform. From initial prototyping to seamless deployment, Spadeshub orchestrated a cohesive and functional solution that reflects the company's commitment to excellence in software development.
+</div>
+
+<div>
+    <b>Ongoing Improvement :</b>
+    Spadeshub is actively exploring avenues to enhance the website module, showcasing our dedication to continuous improvement and staying at the forefront of user experience innovation. 
+</div>

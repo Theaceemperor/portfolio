@@ -54,9 +54,11 @@ export function AdsNotification({children,alertTitle}) {
 export function AdsBadge({children,alertTitle}) {
     const [open, setOpen] = React.useState(false);
 
+    React.useEffect(() => {
       setInterval(() => {
         setOpen(true);
       }, 20000);
+    }, [open])
     
     const handleClose = () => {
       setOpen(false);

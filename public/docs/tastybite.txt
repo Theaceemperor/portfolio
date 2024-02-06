@@ -1,0 +1,32 @@
+<b>Key Features:</b>
+<div>
+    <b>1. Exclusive Menus:</b>
+    <p>Indulge in a curated collection of exclusive menus, each dish thoughtfully crafted to delight your taste buds.</p>
+</div>
+<div>
+    <b>2. Easy Navigation:</b>
+    <p>Navigate the TastyBites universe effortlessly with an intuitively designed interface, ensuring a smooth and enjoyable exploration of culinary offerings.</p>
+</div>
+<div>
+    <b>3. Integration with Social Media:</b>
+    <p>Share your gastronomic adventures with friends and followers through seamless integration with popular social media platforms. Spread the joy of TastyBites far and wide.</p>
+</div>
+<div>
+    <b>4. Visual Delight:</b>
+    <p>Immerse yourself in a visual feast as TastyBites showcases enticing images of dishes, creating an appetizing anticipation before each culinary exploration.</p>
+</div>
+<br/>
+<div>
+    <b>Your Culinary Experience:</b>
+    <p>TastyBites transcends the ordinary, providing a digital haven for those who savor the artistry of food. Whether you're a seasoned gourmet or a culinary explorer, this platform invites you to discover, savor, and share the richness of flavors that define each menu.</p>
+</div>
+<br/>
+<div>
+    <b>Ongoing Culinary Exploration:</b>
+    <p>TastyBites is a living project, continually evolving to bring you the latest in gastronomic delights. Our commitment to ongoing development ensures that your culinary journey remains fresh, exciting, and always ready to surprise your palate.</p>
+</div>
+<br/>
+<div>
+    <b>Technology Stack:</b>
+    Built on a foundation of cutting-edge technologies, TastyBites seamlessly integrates React, Next.js, Node.js, Tailwind CSS, and Firebase for a dynamic and secure user experience. The use of JavaScript ensures an interactive interface that mirrors the vibrancy of the culinary world.
+</div>

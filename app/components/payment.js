@@ -29,7 +29,7 @@ export default function Payment ({ email, amount, name, phone, orderDetails, onC
 
 
   return (
-    <PaystackButton label='Spades Gift Card' className="bg-wheat text-amber-600 rounded px-4 py-1 mt-4" {...componentProps} />
+    <PaystackButton label='Spades Gift Card' className="bg-black text-amber-600 rounded px-4 py-1 mt-4" {...componentProps} />
   );
 };
 // import { PaystackButton } from 'react-paystack';
