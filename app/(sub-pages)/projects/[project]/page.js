@@ -4,6 +4,8 @@ import FetchDoc from "@/app/components/fetchDoc";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { BsArrowLeft } from "react-icons/bs";
+import { CgLink } from "react-icons/cg";
     
 export const projectsData = [
     { id: 1, title: 'Catalyst Canvas', description: "Catalyst Canvas is a dynamic and engaging website module designed to showcase the impactful work of a charitable organization or non-profit entity. Seamlessly blending modern design with user-friendly functionality, Catalyst Canvas aims to provide visitors with a rich and interactive experience.", imageUrl: '/portfolio/catalyst_canvas.PNG', link: 'https://catalystcanvas.vercel.app', detailedDesc: 
@@ -39,41 +41,42 @@ export default function Page() {
     const searchParams = useSearchParams();
 
     // extract the projectId from the url
-    const search = searchParams.getAll('project');
+    const search = searchParams.getAll('solution');
 
     // Find the project with the matyching ID
-    const project = projectsData.find((p) => String(p.id) === String(search));
+    const project = projectsData.find((p) => String(p.title.toLowerCase().split(' ').join('-').toString()) === String(search));
 
     //check if the project is found 
     if (!project) {
-        return <div>Project not found!{router.push('/projects')}</div>
+        return <div className="text-lg ml-2">Project not found!{router.push('/projects')}</div>
     }
 
-    const searchId = parseInt(search);
+    // const searchId = parseInt(projectsData.find((p) => String(p.id) === [].i));
 
-    const handlePrevious = () => {
-        if (searchId > 1) {
-            router.replace(`/projects/[project]?project=${searchId - 1}`);
-        } else if (searchId <= 1) {
-            router.replace('/projects')
-        }
-    }
+    // const handlePrevious = () => {
+    //     if (searchId > 1) {
+    //         router.replace(`/projects/[project]?project=${searchId - 1}`);
+    //     } else if (searchId <= 1) {
+    //         router.replace('/projects')
+    //     }
+    // }
 
-    const handleNext = () => {
-        if (projectsData.find((p) => String(p.id) <= String(search))) {
-            router.push(`/projects/[project]?project=${searchId + 1}`);
-        } else {
-            null
-        }
-    }
+    // const handleNext = () => {
+    //     if (projectsData.find((p) => String(p.id) <= String(search))) {
+    //         router.push(`/projects/[project]?project=${searchId + 1}`);
+    //     } else {
+    //         null
+    //     }
+    // }
 
     return (
         <main>
+            <Link href={'/projects'} className="mt-4 ml-2 flex items-center gap-1 text-amber-600 hover:underline underline-offset-2"><BsArrowLeft /> Back to products</Link>
             <h2 className="text-3xl font-bold text-center mt-8">{project.title}</h2>
-            <nav className="flex items-center justify-between px-2 mt-8">
+            {/* <nav className="flex items-center justify-between px-2 mt-8">
                 <button className="bg-amber-600 text-black py-2 px-4 rounded-md hover:bg-transparent hover:text-amber-600 focus:outline-none" onClick={handlePrevious}>Previous</button>
                 <button className="bg-amber-600 text-black py-2 px-4 rounded-md hover:bg-transparent hover:text-amber-600 focus:outline-none" onClick={handleNext}>Next</button>
-            </nav>
+            </nav> */}
 
             <section className="container px-2 mx-auto mt-8">
                 <div className="max-w-2xl mx-auto">
@@ -83,7 +86,7 @@ export default function Page() {
                     )}
 
                     {/* Project Title */}
-                    <SectionHeader headerLink={project.link} headerText={project.title} />
+                    <h3 className={`text-xl sm:text-2xl font-bold mb-4 text-center`}><Link href={project.link} className={`flex items-center hover:text-amber-600 gap-1`}  target="_blank" rel="noopener noreferrer">{project.title}<CgLink /></Link></h3>
                     <div className="mb-4">
                         <p className="text-base md:text-lg mb-2 text-gray-800">Value - ${project.price} License fee included</p>
                         <ContactUs />
@@ -103,6 +106,7 @@ export default function Page() {
                     </div>
                 </div>
             </section>
+            <Link href={'/projects'} className="mt-4 ml-2 flex items-center gap-1 text-amber-600 hover:underline underline-offset-2"><BsArrowLeft /> Back to products</Link>
         </main>
     )
 }

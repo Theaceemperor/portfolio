@@ -3,31 +3,42 @@
 @tailwind utilities;
 
 @layer utilities {
-    body {
-        font-family: serif;
-    }
+  body {
+      font-family: serif;
+  }
 
-    .countdown {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-      }
-      .day,
-      .hour,
-      .minute,
-      .second {
-        font-size: 2rem;
-      }
-      
-      .waiting{
-        height: 80vh;
-      }
-      .coming-soon {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-      }
+  .countdown {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  .day,
+  .hour,
+  .minute,
+  .second {
+    font-size: 2rem;
+  }
+  
+  .waiting{
+    height: 80vh;
+  }
+
+  .coming-soon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+   /* Chrome, Safari and Opera */
+   .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  } 
 }
 
 .chat-container {

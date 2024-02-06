@@ -50,6 +50,42 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
+export function Pagination ({ currentPage, totalPages, onPageChange }) {
+    const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  
+    return (
+        <div className="flex justify-center my-8">
+            {currentPage > 1 && (
+                <button
+                onClick={() => onPageChange(currentPage - 1)}
+                className="mr-2 bg-black text-wheat px-4 py-2 rounded hover:bg-amber-600 hover:text-black transition duration-300"
+                >
+                Previous
+                </button>
+            )}
+            {pages.map((page) => (
+                <button
+                key={page}
+                onClick={() => onPageChange(page)}
+                className={`mx-2 ${
+                    currentPage === page ? 'bg-wheat text-black' : 'bg-black text-amber-600'
+                } px-4 py-2 rounded hover:bg-amber-600 hover:text-black transition duration-300`}
+                >
+                {page}
+                </button>
+            ))}
+            {currentPage < totalPages && (
+                <button
+                onClick={() => onPageChange(currentPage + 1)}
+                className="ml-2 bg-black text-wheat px-4 py-2 rounded hover:bg-amber-600 hover:text-black transition duration-300"
+                >
+                Next
+                </button>
+            )}
+        </div>
+    );
+};
+
 export function SubscribeBox() {
     
   const [formInput,setFormInput] = React.useState([]);
@@ -68,8 +104,8 @@ export function SubscribeBox() {
 
     return (
         <div id='subscription' className='mb-4 container mx-auto'>
-            <p className='mb-2 p-1 text-sm text-gray-600 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
-            <form className='flex flex-col sm:flex-row space-x-2 space-y-2 items-center justify-center'>
+            <p className='mb-2 p-1 text-sm md:text-base text-gray-600 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
+            <form className='flex flex-col sm:flex-row space-x-2 items-center justify-center'>
                 <input
                 id='subscribeEmail'
                 name='subscribeEmail'
@@ -92,6 +128,18 @@ export function ReviewsSection() {
     const ref = React.useRef();
     const isVisible1 = useIsVisible(ref);
     const [reviews,setReviews] = React.useState([]);
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const postsPerPage = 6;
+    const totalPages = Math.ceil(reviews.length / postsPerPage);
+  
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = reviews.slice(indexOfFirstPost, indexOfLastPost);
+  
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+    };
+  
   
     const handleGetReviews = async () => {
         const docRes = await getDocs(collection(db,'spades-reviews'));
@@ -108,7 +156,7 @@ export function ReviewsSection() {
 
     return (
         <section ref={ref} id="reviews" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 px-4 2xl:px-0 transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-            {reviews.map((item) => (
+            {currentPosts.map((item) => (
                 <div key={item.id} className="">
                 <Suspense fallback={
                     <div className="flex items-center text-amber-600 animate-pulse">
@@ -128,6 +176,7 @@ export function ReviewsSection() {
                 </Suspense>
                 </div>
             ))}
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </section>
     )
 }
@@ -722,7 +771,7 @@ export function LoginButton2() {
 export function VisitHomePage() {
 
     return (
-        <Link href="/"><i className="text-amber-600 flex items-center gap-0.5">
+        <Link href="/"><i className="text-amber-600 flex items-center justify-center gap-0.5">
             H<Image 
             className="w-[32px] h-auto rounded-full border-2 border-amber-600" 
             width={50} 
@@ -905,7 +954,7 @@ export function SubNav() {
         <>
             <div className='hidden lg:block border-none bg-black text-wheat dark:bg-wheat dark:text-black z-30 fixed top-0 bottom-0 left-0 w-64 py-8'>
                 <div className='mb-4 py-2 px-4 bg-wheat dark:bg-black'><span className='flex items-center justify-center font-bold text-2xl animate-pulse text-amber-600'>SP<GiSpades className='text-3xl' />DES</span></div>
-                <div className='flex flex-col space-y-2 px-4'>
+                <div className='flex flex-col space-y-2 px-4 overflow-y-scroll no-scrollbar'>
                     <Link href={'/'} className={`hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Home</Link>
                     <Link href={'/projects'} className={pathName === '/projects' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Solutions/Products</Link>
                     <Link href={'/about'} className={pathName === '/about' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link>
@@ -943,30 +992,30 @@ export function SubNav() {
                             </button>
                         </div>
                         {isMenuOpen && (
-                            <div className="absolute top-12 left-0 right-0 p-4 bg-black/80 rounded transition duration-300 ease-linear">
-                                <Link href="/" className={pathName === '/' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"} onClick={() => setIsMenuOpen(false)}>Home</Link>
-                                <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/about' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
-                                <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={pathName === '/projects' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Solutions/Products</Link>
-                                <Link href="/gift-purchase" onClick={() => setIsMenuOpen(false)} className={pathName === '/gift-purchase' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Store</Link>
+                            <div className="absolute top-12 left-0 right-0 flex flex-col space-y-2 max-h-screen overflow-y-scroll p-4 bg-black/80 rounded transition duration-300 ease-linear">
+                                <Link href="/" className={pathName === '/' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"} onClick={() => setIsMenuOpen(false)}>Home</Link>
+                                <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/about' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
+                                <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={pathName === '/projects' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Solutions/Products</Link>
+                                <Link href="/gift-purchase" onClick={() => setIsMenuOpen(false)} className={pathName === '/gift-purchase' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Store</Link>
                                 {session
                                 ?
-                                <Link href="/web-development/dashboard" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/dashboard' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Dashboard</Link>
+                                <Link href="/web-development/dashboard" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/dashboard' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Dashboard</Link>
                                 :
-                                <Link href="/web-development" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Login</Link>
+                                <Link href="/web-development" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Login</Link>
                                 }
                                 {session
                                 ?
-                                <button onClick={handleLogout} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
+                                <button onClick={handleLogout} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
                                 :
-                                <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
+                                <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
                                 }
-                                <Link href="#subscription" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
-                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
-                                <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
-                                <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
-                                <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>
-                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
-                                <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={pathName === '/contact' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Contact</Link>
+                                <Link href="#subscription" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
+                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
+                                <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
+                                <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
+                                <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>
+                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
+                                <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={pathName === '/contact' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Contact</Link>
                                 <Link href="/spades/policy" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/policy' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Privacy</Link>
                             </div>
                         )}

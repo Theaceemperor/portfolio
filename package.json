@@ -12,6 +12,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.14",
+    "@vercel/speed-insights": "^1.0.9",
     "firebase": "^10.5.0",
     "formik": "^2.4.5",
     "material-ui-popup-state": "^5.0.9",
