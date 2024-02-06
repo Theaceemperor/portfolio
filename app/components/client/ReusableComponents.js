@@ -870,6 +870,10 @@ export function SubNav() {
     //state for overall navbar visibility on scroll
     const [isNavbarVisible, setNavbarVisible] = React.useState(true);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+    const handleLogout = async () => {
+        await signOut().then(() => setIsMenuOpen(false)).catch((e) => console.error(e));
+    }
   
     const toggleMenu = () => {
       setIsMenuOpen(!isMenuOpen);
@@ -913,7 +917,7 @@ export function SubNav() {
                     }
                     {session
                     ?
-                    <button onClick={signOut()} className={"block mb-2"}>Logout</button>
+                    <button onClick={() => signOut()} className={"block mb-2"}>Logout</button>
                     :
                     <Link href="/web-development/application" className={pathName === '/web-development/application' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Sign Up</Link>
                     }
@@ -941,7 +945,7 @@ export function SubNav() {
                         {isMenuOpen && (
                             <div className="absolute top-12 left-0 right-0 p-4 bg-black/80 rounded transition duration-300 ease-linear">
                                 <Link href="/" className={pathName === '/' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"} onClick={() => setIsMenuOpen(false)}>Home</Link>
-                                <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/blog' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
+                                <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/about' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
                                 <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={pathName === '/projects' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Solutions/Products</Link>
                                 <Link href="/gift-purchase" onClick={() => setIsMenuOpen(false)} className={pathName === '/gift-purchase' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Store</Link>
                                 {session
@@ -952,7 +956,7 @@ export function SubNav() {
                                 }
                                 {session
                                 ?
-                                <button onClick={() => setIsMenuOpen(false) && signOut()} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
+                                <button onClick={handleLogout} className={"block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
                                 :
                                 <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block mb-2" : "block mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
                                 }

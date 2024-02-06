@@ -65,7 +65,7 @@ export default function GiftCard() {
                     <MyGiftProducts />
                 </blockquote> */}
                 <div className="flex items-center justify-center">
-                    <form className="bg-wheat flex flex-col space-y-4 items-center rounded-lg" onSubmit={handleSubmit}>
+                    <form className="bg-wheat flex flex-col space-y-4 items-center rounded-lg p-4" onSubmit={handleSubmit}>
                         <div className="gap-4 grid grid-cols-2">
                             <div className="text-gray-800 flex flex-col space-y-2 items-center">
                                 <small className="font-bold">Currency</small>
