@@ -6,8 +6,8 @@ import { Button } from "@mui/material";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/settings/firebase.settings";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { OnLoginNotification } from "../components/alert";
-import { LoginButton, LoginButton2, VisitHomePage } from "../components/client/ReusableComponents";
+import { LoginButton2, VisitHomePage } from "@/app/components/client/ReusableComponents";
+import { OnLoginNotification } from "@/app/components/alert";
 
 
 export default function Page() {
