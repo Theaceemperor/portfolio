@@ -37,3 +37,12 @@ export function ActivityIndicator3() {
         </div>
     )
 }
+
+export function ActivityIndicator4() {
+
+    return (
+        <div className='h-auto w-auto flex justify-center items-center'>
+            <CircularProgress color='inherit' size={16} />
+        </div>
+    )
+}

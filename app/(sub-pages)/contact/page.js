@@ -93,7 +93,7 @@ export default function Page() {
                             <p className="font-medium mb-4">Write a message or give us some feedback/review</p>
                         </div>
                         <form className="flex flex-col gap-4">
-                            <div className="flex flex-col md:grid md:grid-cols-2 lg:grid lg:grid-cols-2 gap-5 md:gap-3 lg:gap-3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                 required 
                                 placeholder="First Name"

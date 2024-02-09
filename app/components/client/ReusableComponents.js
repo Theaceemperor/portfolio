@@ -30,8 +30,9 @@ import { Alert, AlertTitle, Autocomplete, Collapse, Rating, TextField, Typograph
 import { CgLink } from 'react-icons/cg';
 import ChatComponent from './ChatComponent';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { ActivityIndicator2 } from '../activity-indicator';
+import { ActivityIndicator2, ActivityIndicator4 } from '../activity-indicator';
 import { timeAgo } from '../time-ago';
+import Customdialog from './CustomDialog';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -89,17 +90,39 @@ export function Pagination ({ currentPage, totalPages, onPageChange }) {
 export function SubscribeBox() {
     
   const [formInput,setFormInput] = React.useState([]);
+  const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleCloseDialog = () => setOpenDialog(false);
+  const [openFailDialog, setOpenFailDialog] = React.useState(false);
+  const handleCloseFailDialog = () => setOpenFailDialog(false);
       
   const handlePostmail = async () => {
+    setShowActivityIndicator(true);
     await addDoc(collection(db,'mailing_list'), {
         body:formInput,
         joinedAt:new Date().getTime()
-    }).then(() => {
-        setFormInput('');
-        alert('Thank you for Subscribing.');
+    }).then(async () => {
+        const response = await fetch('/api/sendSubscribeEmail', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body:JSON.stringify({
+              subject,
+              message,
+              email
+            })
+          }).then(() => {
+            setShowActivityIndicator(false);
+            setOpenDialog(true);
+    
+          }).catch((e) => setOpenFailDialog(false));
     }).catch((error) => {
-        console.error(error);
+        return 0;
     })
+
+    setFormInput('');
 };
 
     return (
@@ -118,8 +141,22 @@ export function SubscribeBox() {
                 required
                 />
                 <button className='px-4 py-1 rounded hover:bg-amber-600 hover:text-black transition duration-300 ease-in-out' type='submit'
-                onClick={() => handlePostmail}>Subsribe</button>
+                onClick={() => handlePostmail}>
+                    { showActivityIndicator ? <ActivityIndicator4 /> : "Subsribe" }
+                </button>
             </form>
+            <Customdialog
+                openProp={openDialog} 
+                handleCloseProp={handleCloseDialog} 
+                title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
+                    Thank you for subscribing!
+            </Customdialog>
+            <Customdialog
+                openProp={openFailDialog} 
+                handleCloseProp={handleCloseFailDialog} 
+                title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
+                    Newsletter subscription Failed, please try again later
+            </Customdialog>
         </div>
     )
 }
@@ -155,29 +192,33 @@ export function ReviewsSection() {
     handleGetReviews();
 
     return (
-        <section ref={ref} id="reviews" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 px-4 2xl:px-0 transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
-            {currentPosts.map((item) => (
-                <div key={item.id} className="">
-                <Suspense fallback={
-                    <div className="flex items-center text-amber-600 animate-pulse">
-                    Sp<GiSpades/>des
-                    </div>
-                }>
-                    <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color overflow-hidden">
-                        <h4 className="text-lg font-bold mb-2 text-amber-600">{item.data.name}</h4>
-
-                        {/* Service/Feature Description */}
-                        <p className="text-sm text-gray-600">{item.data.review}</p>
-                        <small className="text-gray-600">{timeAgo(item.data.sentAt)}</small>
-                        <div>
-                        <Rating name="simple-controlled" value={item.data.rating} />
+        <>
+            <section ref={ref} id="reviews" className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 px-4 2xl:px-0 transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
+                {currentPosts.map((item) => (
+                    <div key={item.id} className="">
+                    <Suspense fallback={
+                        <div className="flex items-center text-amber-600 animate-pulse">
+                        Sp<GiSpades/>des
                         </div>
+                    }>
+                        <div className="bg-white p-4 rounded-md shadow-md shadow-shadow-color overflow-hidden">
+                            <h4 className="text-lg font-bold mb-2 text-amber-600">{item.data.name}</h4>
+
+                            {/* Service/Feature Description */}
+                            <p className="text-sm text-gray-600">{item.data.review}</p>
+                            <small className="text-gray-600">{timeAgo(item.data.sentAt)}</small>
+                            <div>
+                            <Rating name="simple-controlled" value={item.data.rating} />
+                            </div>
+                        </div>
+                    </Suspense>
                     </div>
-                </Suspense>
-                </div>
-            ))}
-            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-        </section>
+                ))}
+            </section>
+            <div className='flex items-center justify-center'>
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+            </div>
+        </>
     )
 }
 

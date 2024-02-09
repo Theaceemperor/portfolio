@@ -14,9 +14,12 @@ export default function Customdialog({openProp,handleCloseProp,title,children}) 
         onClose={handleCloseProp}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        style={{
+            backgroundColor: 'wheat',
+        }}
         >
             <DialogTitle id="alert-dialog-title">
-            {title}
+                {title}
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
