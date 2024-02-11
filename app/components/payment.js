@@ -3,8 +3,10 @@ import { PaystackButton } from 'react-paystack';
 import { db } from '@/settings/firebase.settings';
 import { addDoc, collection } from 'firebase/firestore';
 
+require('dotenv').config();
+
 export default function Payment ({ email, amount, name, phone, orderDetails, onCloseFunction, successFunction }) {
-  const publicKey = 'pk_live_1fdcb84e34588af9002bb01e1a7312404666d386';
+  const publicKey = process.env.PAYSTACK_LIVE_PUBLICKEY;
 
   const componentProps = {
     email,

@@ -101,26 +101,27 @@ export function SubscribeBox() {
     await addDoc(collection(db,'mailing_list'), {
         body:formInput,
         joinedAt:new Date().getTime()
-    }).then(async () => {
+    }).then().catch((error) => {
+        return 0;
+    })
+
+    const sendEmail = async () => {
         const response = await fetch('/api/sendSubscribeEmail', {
             method: 'POST',
             headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json"
+                "Content-Type": "application/json",
+                Accept: "application/json"
             },
             body:JSON.stringify({
-              subject,
-              message,
-              email
+                formInput,
             })
-          }).then(() => {
-            setShowActivityIndicator(false);
-            setOpenDialog(true);
-    
-          }).catch((e) => setOpenFailDialog(false));
-    }).catch((error) => {
-        return 0;
-    })
+        }).then(() => {
+        setShowActivityIndicator(false);
+        setOpenDialog(true);
+
+        }).catch((e) => setOpenFailDialog(false));
+    };
+    sendEmail();
 
     setFormInput('');
 };
@@ -128,7 +129,7 @@ export function SubscribeBox() {
     return (
         <div id='subscription' className='mb-4 container mx-auto'>
             <p className='mb-2 p-1 text-sm md:text-base text-gray-600 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
-            <form className='flex flex-col sm:flex-row space-x-2 items-center justify-center'>
+            <form className='flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 items-center justify-center'>
                 <input
                 id='subscribeEmail'
                 name='subscribeEmail'
