@@ -96,7 +96,8 @@ export function SubscribeBox() {
   const [openFailDialog, setOpenFailDialog] = React.useState(false);
   const handleCloseFailDialog = () => setOpenFailDialog(false);
       
-  const handlePostmail = async () => {
+  const handlePostmail = async (e) => {
+    e.preventDefault();
     setShowActivityIndicator(true);
     await addDoc(collection(db,'mailing_list'), {
         body:formInput,
