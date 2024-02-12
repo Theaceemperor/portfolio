@@ -34,7 +34,7 @@ export async function POST(request) {
             to: "spadesinstitute.empire@gmail.com",
             subject: "NEW EMAIL SUBSCRIPTION FOR SPADES",
             text: "This is a test string",
-            html: `<h3>THERE IS A NEW EMAIL NEWSLETTER SUBSCRIPTION FOR SPADES ON YOUR WEBSITE</h3><p>Subscribed email: ${formInput}</p>`
+            html: `<h3>THERE IS A NEW EMAIL NEWSLETTER SUBSCRIPTION FOR SPADES ON YOUR WEBSITE</h3><p>Website: spadeshub.com </p><p>Subscribed email: ${formInput}</p>`
         })
     } catch (error) {
         console.log(error);

@@ -88,44 +88,47 @@ export function Pagination ({ currentPage, totalPages, onPageChange }) {
 };
 
 export function SubscribeBox() {
-    
-  const [formInput,setFormInput] = React.useState([]);
-  const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const handleCloseDialog = () => setOpenDialog(false);
-  const [openFailDialog, setOpenFailDialog] = React.useState(false);
-  const handleCloseFailDialog = () => setOpenFailDialog(false);
-      
-  const handlePostmail = async (e) => {
-    e.preventDefault();
-    setShowActivityIndicator(true);
-    await addDoc(collection(db,'mailing_list'), {
-        body:formInput,
-        joinedAt:new Date().getTime()
-    }).then().catch((error) => {
-        return 0;
-    })
 
-    const sendEmail = async () => {
+    const [formInput,setFormInput] = React.useState('');
+    const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
+    const [openDialog, setOpenDialog] = React.useState(false);
+    const handleCloseDialog = () => setOpenDialog(false);
+    const [openFailDialog, setOpenFailDialog] = React.useState(false);
+    const handleCloseFailDialog = () => setOpenFailDialog(false);
+        
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setShowActivityIndicator(true);
+
+        // Basic form validation, you can add more validation as needed
+        if (!formInput) {
+        alert('Please fill in all fields.');
+        return;
+        }
+
         const response = await fetch('/api/sendSubscribeEmail', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
+            "Content-Type": "application/json",
+            Accept: "application/json"
             },
             body:JSON.stringify({
-                formInput,
+            formInput
             })
-        }).then(() => {
-        setShowActivityIndicator(false);
-        setOpenDialog(true);
+        }).then(async () => {
+            await addDoc(collection(db,'mailing_list'), {
+                body:formInput,
+                joinedAt:new Date().getTime()
+            }).then(() => {
+                setShowActivityIndicator(false);
+                setOpenDialog(true);
+            });
+        }).catch((e) => {setOpenFailDialog(true)});
 
-        }).catch((e) => setOpenFailDialog(false));
+        // Clear the form fields
+        setFormInput('');
     };
-    sendEmail();
-
-    setFormInput('');
-};
+  
 
     return (
         <div id='subscription' className='mb-4 container mx-auto'>
@@ -143,7 +146,7 @@ export function SubscribeBox() {
                 required
                 />
                 <button className='px-4 py-1 rounded hover:bg-amber-600 hover:text-black transition duration-300 ease-in-out' type='submit'
-                onClick={() => handlePostmail}>
+                onClick={handleSubmit}>
                     { showActivityIndicator ? <ActivityIndicator4 /> : "Subsribe" }
                 </button>
             </form>
@@ -157,7 +160,7 @@ export function SubscribeBox() {
                 openProp={openFailDialog} 
                 handleCloseProp={handleCloseFailDialog} 
                 title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
-                    Newsletter subscription Failed, please try again later
+                    Newsletter subscription Failed, please try again later!
             </Customdialog>
         </div>
     )
@@ -1019,7 +1022,7 @@ export function SubNav() {
                     <Link href="/projects#our-clients" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                     <Link href="/about#faq" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                     <Link href="/reviews" className={pathName === '/reviews' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Reviews</Link>
-                    <Link href="#" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
+                    <Link href="https://spadesblog.vercel.app" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
                     <Link href={'/contact'} className={pathName === '/contact' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Contact</Link>
                     <Link href="/spades/policy" className={pathName === '/spades/policy' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Privacy</Link>
                 </div>
@@ -1057,7 +1060,7 @@ export function SubNav() {
                                 <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                                 <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                                 <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>
-                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
+                                <Link href="https://spadesblog.vercel.app" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Blog</Link>
                                 <Link href="/contact" onClick={() => setIsMenuOpen(false)} className={pathName === '/contact' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Contact</Link>
                                 <Link href="/spades/policy" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/policy' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Privacy</Link>
                             </div>

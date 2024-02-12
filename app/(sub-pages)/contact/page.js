@@ -8,36 +8,84 @@ import { db } from "@/settings/firebase.settings";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { LoginButton2, VisitHomePage } from "@/app/components/client/ReusableComponents";
 import { OnLoginNotification } from "@/app/components/alert";
+import { ActivityIndicator4 } from "@/app/components/activity-indicator";
+import Customdialog from "@/app/components/client/CustomDialog";
+import { GiSpades } from "react-icons/gi";
 
 
 export default function Page() {
-    const [email,setEmail] = React.useState([]);
-    const [firstName,setFirstName] = React.useState([]);
-    const [lastName,setLastName] = React.useState([]);
-    const [message,setMessage] = React.useState([]);
+    const [email,setEmail] = React.useState('');
+    const [firstName,setFirstName] = React.useState('');
+    const [lastName,setLastName] = React.useState('');
+    const [subject,setSubject] = React.useState('');
+    const [message,setMessage] = React.useState('');
     const [ showAlertDialog, setShowAlertDialog ] = React.useState(false);
+    const [showActivityIndicator,setShowActivityIndicator] = React.useState(false);
+    const [openDialog, setOpenDialog] = React.useState(false);
+    const handleCloseDialog = () => setOpenDialog(false);
+    const [openFailDialog, setOpenFailDialog] = React.useState(false);
+    const handleCloseFailDialog = () => setOpenFailDialog(false);
+    // const handlePostMessage = async () => {
+    //     await addDoc(collection(db,'messages'), {
+    //         owner:email,
+    //         first_name:firstName,
+    //         last_name:lastName,
+    //         body:message,
+    //         sentAt:new Date().getTime(),
+    //     }).then(async () => {
+    //         setShowAlertDialog(true);
+    //         setEmail('');
+    //         setFirstName('');
+    //         setLastName('');
+    //         setMessage('');
+    //         setTimeout(() => {
+    //             setShowAlertDialog(false);
+    //         }, 5000);
+    //     })
+    //     .catch(() => {
+    //         alert('Please try again in 3 minutes.')
+    //     })
+    // }
 
-    const handlePostMessage = async () => {
-        await addDoc(collection(db,'messages'), {
-            owner:email,
-            first_name:firstName,
-            last_name:lastName,
-            body:message,
-            sentAt:new Date().getTime(),
-        }).then(async () => {
+    const name = firstName + ' ' + lastName;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setShowActivityIndicator(true);
+
+        // Basic form validation, you can add more validation as needed
+        if (!firstName || !lastName || !subject || !email || !message) {
+            alert('Please fill in all fields.');
+            setShowActivityIndicator(false);
+            return;
+        }
+
+        const response = await fetch('/api/sendContactEmail', {
+            method: 'POST',
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+            },
+            body:JSON.stringify({
+            name,
+            subject,
+            message,
+            email
+            })
+        }).then(() => {
+            setOpenDialog(true);
             setShowAlertDialog(true);
-            setEmail('');
-            setFirstName('');
-            setLastName('');
-            setMessage('');
-            setTimeout(() => {
-                setShowAlertDialog(false);
-            }, 5000);
-        })
-        .catch(() => {
-            alert('Please try again in 3 minutes.')
-        })
-    }
+        }).catch((e) => {setOpenFailDialog(true)});
+
+        setShowActivityIndicator(false);
+
+        // Clear the form fields
+        setSubject('')
+        setEmail('');
+        setFirstName('');
+        setLastName('');
+        setMessage('');
+    };
 
     return (
         <>
@@ -92,7 +140,7 @@ export default function Page() {
                             <h1 className="text-2xl w-[fit-content] px-2 border-y border-amber-600 rounded-md mb-2 py-1">CONTACT US</h1>
                             <p className="font-medium mb-4">Write a message or give us some feedback/review</p>
                         </div>
-                        <form className="flex flex-col gap-4">
+                        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <input
                                 required 
@@ -114,6 +162,14 @@ export default function Page() {
                             <input 
                             required
                             className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                            placeholder="Subject"
+                            type="text"
+                            onChange={(text) => setSubject(text.target.value)}
+                            value={subject}/>
+                            
+                            <input 
+                            required
+                            className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                             placeholder="Email Address"
                             type="Email"
                             onChange={(text) => setEmail(text.target.value)}
@@ -127,19 +183,15 @@ export default function Page() {
                             value={message}
                             />
 
-                            {
-                                message.length && email.length > 0
-                                ?
-                                <Button 
+                        
+                            <Button 
                                 variant="outlined"
-                                onClick={() => handlePostMessage()}
+                                type="submit"
                                 color="warning"
+                                onClick={handleSubmit}
                                 >
-                                Submit
+                                {showActivityIndicator ? <ActivityIndicator4 /> : "Submit"}
                             </Button>
-                            :
-                            null
-                            }
                         </form>
                     </div>
                 </div>
@@ -161,6 +213,18 @@ export default function Page() {
                 :
                 null
             }
+            <Customdialog
+                openProp={openDialog} 
+                handleCloseProp={handleCloseDialog} 
+                title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
+                    Thank you for contacting us, we'll respond via email soon!
+            </Customdialog>
+            <Customdialog
+                openProp={openFailDialog} 
+                handleCloseProp={handleCloseFailDialog} 
+                title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
+                    Contact action failed, please try again later!
+            </Customdialog>
         </>
     )
 }

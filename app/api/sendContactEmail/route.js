@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
-//import nodemailer from 'nodemailer';
 
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-const orgEmail = process.env.EMAIL;
-
 export async function POST(request) {
-    const {subject, message, email} = await request.json();
+    const {name, subject, message, email} = await request.json();
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -24,16 +21,12 @@ export async function POST(request) {
         },
     });
 
-    const mailOptions = {
-        from: 'contact@tastybites.com',
-        to: orgEmail,
-    }
-
     try {
         await transporter.sendMail({
+            to: process.env.EMAIL,
             subject: subject,
             text: "This is a test string",
-            html: `<h3>TASTY BITE CONTACT/FEEDBACK FORM</h3><p>Sender: ${email}</p><p>${message}</p>`
+            html: `<h3>NEW ENTRY FROM SPADES CONTACT/FEEDBACK FORM</h3><p>Sender: ${name}</p><p>Email: ${email}</p><p>Subject: ${subject}</p><p>Message: ${message}</p>`
         })
     } catch (error) {
         console.log(error);
