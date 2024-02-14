@@ -1,6 +1,6 @@
 
 export const metadata = {
-title: 'Spadeshub | Policy',
+title: 'Spadeshub | Spades',
 }
 
 export default function Layout({ children }) {

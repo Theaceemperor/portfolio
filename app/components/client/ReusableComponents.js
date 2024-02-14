@@ -17,7 +17,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FaArrowUp, FaBars, FaBlog, FaInstagram, FaMinus, FaPlus, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail, SiWebpack } from 'react-icons/si';
-import { BsGithub, BsPersonCheck } from 'react-icons/bs';
+import { BsArrowRight, BsGithub, BsPersonCheck } from 'react-icons/bs';
 import { IoMdContacts, IoMdStats } from 'react-icons/io';
 import { TbGiftCardFilled } from 'react-icons/tb';
 import { PopperPopupState } from '../modals';
@@ -50,6 +50,20 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
+
+export function PricingCard({ title, discount, children }) {
+
+    return (
+        <div className="bg-black dark:bg-wheat text-wheat dark:text-black p-4 rounded shadow shadow-black dark:shadow-amber-600">
+            <h2 className="font-bold text-lg text-amber-600">{title}</h2>
+            <p className="line-through decoration-amber-600">{discount}</p>
+            <ul className="list-inside list-disc space-y-2 mt-4">
+                {children}
+            </ul>
+            <Link href={"/web-development/application"} className='text-amber-600 font-medium flex items-center justify-center mt-4 hover:bg-wheat dark:hover:bg-black px-2 py-1 rounded gap-2'>Get Started <BsArrowRight /></Link>
+        </div>
+    )
+}
 
 export function Pagination ({ currentPage, totalPages, onPageChange }) {
     const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -870,7 +884,7 @@ export function SpadesSubFooter() {
                 <ul className="flex flex-col gap-1">
                 <li><Link href={'/web-development'} className="hover:underline underline-offset-2 decoration-amber-600">Track your development</Link></li>
                 <li><Link href={'/web-development/application'} className="hover:underline underline-offset-2 decoration-amber-600">Build a website</Link></li>
-                {/* <li><Link href={'/spades/pricing'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li> */}
+                <li><Link href={'/spades/pricing'} className="hover:underline underline-offset-2 decoration-amber-600">How our pricing works</Link></li>
                 <li><Link href={'/contact'} className="hover:underline underline-offset-2 decoration-amber-600">Get a template</Link></li>
                 <li><Link href={'#'} className="hover:underline underline-offset-2 decoration-amber-600">Docs</Link></li>
                 <li>
@@ -1018,7 +1032,7 @@ export function SubNav() {
                     }
                     <Link href="/gift-purchase" className={pathName === '/gift-purchase' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Store</Link>
                     <Link href="#subscription" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
-                    <Link href="#" className={pathName === '/spades/pricing' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Pricing</Link>
+                    <Link href="/spades/pricing" className={pathName === '/spades/pricing' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Pricing</Link>
                     <Link href="/projects#our-clients" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                     <Link href="/about#faq" className={"hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                     <Link href="/reviews" className={pathName === '/reviews' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Reviews</Link>
@@ -1056,7 +1070,7 @@ export function SubNav() {
                                 <Link href="/web-development/application" onClick={() => setIsMenuOpen(false)} className={pathName === '/web-development/application' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Sign Up</Link>
                                 }
                                 <Link href="#subscription" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Subscribe</Link>
-                                <Link href="#" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
+                                <Link href="/spades/pricing" onClick={() => setIsMenuOpen(false)} className={pathName === '/spades/pricing' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Pricing</Link>
                                 <Link href="/projects#our-clients" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Our Clients</Link>
                                 <Link href="/about#faq" onClick={() => setIsMenuOpen(false)} className={"block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>FAQ</Link>
                                 <Link href="/reviews" onClick={() => setIsMenuOpen(false)} className={pathName === '/reviews' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Reviews</Link>
