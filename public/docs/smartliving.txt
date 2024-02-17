@@ -1,0 +1,103 @@
+<b>SmartLiving Estate - Project Description</b>
+
+<b>Overview</b>
+
+SmartLiving Estate is a sophisticated real estate management website designed to streamline home and estate management processes. Tailored for both residents and administrators, the platform offers a suite of features encompassing property management, user authentication, financial reporting, and more.
+
+<b>Key Features</b>
+
+<b>Resident Features:</b>
+
+<b>1. Home Management:</b>
+   <p>- Access to personalized dashboards. </p>
+   <p>- View and manage property details. </p>
+   <p>- Submit and track maintenance requests. </p>
+   <p>- Access and pay bills. </p>
+
+<b>2. Service Hiring:</b>
+   <p>- Residents can hire relevant home services. </p>
+   <p>- Track service requests and their status. </p>
+
+<b>3. Interactive Calendar:</b>
+   - Schedule and manage events and tasks.
+
+<b>4. Community Forum:</b>
+   - Engage with other residents in a community forum.
+
+<b>5. Personalized Dashboard:</b>
+   <p>- Customize and arrange sections based on preferences. </p>
+   <p>- Toggle the visibility of specific sections. </p>
+
+<b>6. Upcoming Bills and Maintenance Requests:</b>
+   - View upcoming bills and scheduled maintenance requests.
+
+<b>Admin Features:</b>
+
+<b>1. Property Management:</b>
+   <p>- Add, edit, and deactivate properties. </p>
+   <p>- Monitor and manage property details. </p>
+
+<b>2. Resident Management:</b>
+   <p>- View and manage resident profiles. </p>
+   <p>- Handle maintenance requests and bills. </p>
+
+<b>3. User Authentication:</b>
+   - Secure authentication for administrators.
+
+<b>4. Financial Reports:</b>
+   - Access detailed financial reports.
+
+<b>5. Announcements:</b>
+   - Post announcements visible to all residents.
+
+<b>6. Manage Maintenance Requests:</b>
+   - Monitor and resolve maintenance requests.
+
+<b>7. Manage Users:</b>
+   - Administer user accounts and roles.
+
+<b>8. Edit User Profile:</b>
+   - Administrators can edit their own profiles.
+
+<b>Technologies Used</b>
+
+<b>Frontend:</b>
+  <p> React </p>
+  <p> Next.js </p>
+  <p> Tailwind CSS </p>
+
+<b>Backend (Database):</b>
+  - Firebase
+
+<b>Authentication:</b>
+  - NextAuth
+
+<b>Design Philosophy</b>
+
+The design of SmartLiving Estate prioritizes simplicity, modern aesthetics, and user-friendliness. Tailwind CSS ensures a consistent and responsive user interface across various devices.
+
+<b>Installation and Usage</b>
+
+<p>1. Clone the repository.
+<p>2. Install dependencies using `npm install`. </p>
+<p>3. Run the development server: `npm run dev`. </p>
+<p>4. Open the application in your browser: `http://localhost:3000`. </p>
+
+<b>Color Palette</b>
+
+<b>- Primary:</b> #3490dc
+<b>- Secondary:</b> #38a169
+<b>- Accent:</b> #ffed4a
+<b>- Background:</b> #f7fafc
+<b>- Text:</b> #1a202c
+
+<div>
+    <b>Acknowledgments</b>
+    <p>
+        SmartLiving Estate leverages third-party libraries, frameworks, and services to enhance functionality and user experience. Acknowledgments and credits are provided within the project documentation.
+    </p>
+</div>
+
+<div>
+    SmartLiving Estate aims to revolutionize real estate management by providing an intuitive and feature-rich platform for residents and administrators alike. With its modern design, extensive features, and robust technology stack, SmartLiving Estate sets the standard for efficient and user-centric estate management solutions.
+</div>

@@ -5,6 +5,16 @@ import React from "react";
 import { BiLink } from "react-icons/bi";
 import Swiper from "swiper";
 import { Pagination,Navigation,Autoplay } from 'swiper/modules';
+import { ClientsCard } from "./client/ReusableComponents";
+
+const clientsData = [
+  { name: "Royal ACumen Consult", link: 'https://royalacumenconsult.com' },
+  { name: "Tym Cuisine", link: 'https://tymcuisine.shop' },
+  { name: "Linted", link: 'https://linted.vercel.app' },
+  { name: "Clem Insights", link: 'https://cleminsights.com' },
+  { name: "NexVault", link: 'https://nexvault.space' },
+  { name: "Spades Blog", link: 'https://spadesblog.vercel.app' },
+]
 
 export default function MySwiper() {
   React.useEffect(() => {
@@ -40,31 +50,11 @@ export default function MySwiper() {
             <div className="container bg-black rounded-md text-amber-600"> 
               <div className="swiper">
                   <div className="swiper-wrapper">
-                    <div className="swiper-slide">
-                      <span className="p-4 flex items-center justify-center">
-                        <h3><Link href={'https://royalacumenconsult.com'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">Royal Acumen Consult <BiLink /></Link></h3>
-                      </span>
-                    </div>
-                    <div className="swiper-slide">
-                      <span className="p-4 flex items-center justify-center">
-                        <h3><Link href={'https://tymcuisine.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">Tym Cuisine <BiLink /></Link></h3>
-                      </span>
-                    </div>
-                    <div className="swiper-slide">
-                      <span className="p-4 flex items-center justify-center">
-                      <h3><Link href={'https://linted.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">Linted<BiLink /></Link></h3>
-                      </span>
-                    </div>
-                    <div className="swiper-slide">
-                      <span className="p-4 flex items-center justify-center">
-                        <h3><Link href={'https://cleminsights.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">Clem Insights<BiLink /></Link></h3>
-                      </span>
-                    </div>
-                    <div className="swiper-slide">
-                      <span className="p-4 flex items-center justify-center">
-                        <h3><Link href={'https://nexvault.vercel.app'} className="flex items-center hover:underline hover:underline-offset-8 decoration-amber-600 gap-2">NexVault<BiLink /></Link></h3>
-                      </span>
-                    </div>
+                    {clientsData.map((client, index) => (
+                      <div key={index} className="swiper-slide">
+                        <ClientsCard client={client} />
+                      </div>
+                    ))}
                   </div>
                   <div className="swiper-pagination"></div>
               </div>

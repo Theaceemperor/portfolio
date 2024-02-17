@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense } from "react";
+import React from "react";
 
 export default function FetchDoc({ doc }) {
     const [ codeContent, setCodeContent ] = React.useState('');
@@ -21,12 +21,6 @@ export default function FetchDoc({ doc }) {
     }, []);
 
     return (
-        <Suspense fallback={
-            <div className="flex items-center justify-center p-4">
-                <p className="text-lg animate-pulse">Please wait, loading content...</p>
-            </div>
-        }>
-            <div dangerouslySetInnerHTML={{ __html: codeContent }} className="flex flex-col space-y-4" />
-        </Suspense>
+        <div dangerouslySetInnerHTML={{ __html: codeContent }} className="flex flex-col space-y-4 leading-7" />
     )
 }

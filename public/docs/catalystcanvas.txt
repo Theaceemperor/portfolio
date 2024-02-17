@@ -46,6 +46,7 @@
         <b>10. User Interaction:</b>
         <li>- Live Chat Feature: Enhance user experience with a convenient live chat option for direct interaction.</li>
     </ul>
+    <br/>
     <ul>
         <b>Technology Stack:</b>
         <li>- <b>Frontend:</b> React.js for a dynamic and responsive user interface.</li>
