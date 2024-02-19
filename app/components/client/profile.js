@@ -53,7 +53,7 @@ export function ShortProfile() {
                     l5={'Web Category: '}
                     r5={ item.data.category }
                     l6={'Company Address: '}
-                    r6={ session?.user.compaddress }
+                    r6={ item.data.compaddress }
                     l7={'Phone Number: '}
                     r7={ item.data.phone }
                     l8={'Custom Email: '}

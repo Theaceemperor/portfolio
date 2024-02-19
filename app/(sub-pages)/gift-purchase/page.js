@@ -47,7 +47,7 @@ export default function GiftCard() {
     };
 
     const changedAmount = amount*100;
-    const convertedAmount = changedAmount*1100;
+    const convertedAmount = changedAmount*1550;
 
     return (
         <>

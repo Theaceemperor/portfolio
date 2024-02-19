@@ -7,31 +7,28 @@ require('dotenv').config();
 
 export default function Payment ({ email, amount, name, phone, orderDetails, onCloseFunction, successFunction }) {
   const publicKey = process.env.PAYSTACK_LIVE_PUBLICKEY;
-
-  const componentProps = {
-    email,
-    amount,
-    metadata: {
-      name,
-      phone,
-    },
-    publicKey,
-    text: "Pay Now",
-    onSuccess: () =>
-      {
-        const handleSendOrder = async () => {
-          await addDoc(collection(db,'gift-orders'),{
-            ...orderDetails
-          }).then(successFunction).catch((e) => console.error(e))
-        }; 
-        handleSendOrder();
-      },
-    onClose: onCloseFunction,
+  const reference = new Date().getTime();
+  const onSuccess = () =>
+  {
+    const handleSendOrder = async () => {
+      await addDoc(collection(db,'gift-orders'),{
+        ...orderDetails
+      }).then(successFunction).catch((e) => console.error(e))
+    }; 
+    handleSendOrder();
   };
 
-
   return (
-    <PaystackButton label='Spades Gift Card' className="bg-black text-amber-600 rounded px-4 py-1 mt-4" {...componentProps} />
+    <PaystackButton label='Spades Gift Card' className="bg-black text-amber-600 rounded px-4 py-1 mt-4"
+    amount={amount}
+    email={email}
+    publicKey={'pk_live_1fdcb84e34588af9002bb01e1a7312404666d386'}
+    firstname={name}
+    onClose={onCloseFunction}
+    onSuccess={onSuccess}
+    reference={reference}
+    text='Pay Now'
+    />
   );
 };
 // import { PaystackButton } from 'react-paystack';

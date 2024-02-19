@@ -17,29 +17,48 @@ export function EditAbout() {
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
     // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                compdesc:values.compdesc,
-            }).then(() => {
-                handleChange('');
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             compdesc:values.compdesc,
+    //         }).then(() => {
+    //             handleChange('');
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { compdesc:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        compdesc:values.compdesc,
+                    }).then(() => {
+                        handleChange('');
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            };
             handleCreatePost();
         }
     })
@@ -98,29 +117,48 @@ export function EditAddress() {
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
     // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                compaddress:values.compaddress,
-            }).then(() => {
-                handleChange('');
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             compaddress:values.compaddress,
+    //         }).then(() => {
+    //             handleChange('');
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { compaddress:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        compaddress:values.compaddress,
+                    }).then(() => {
+                        handleChange('');
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            };
             handleCreatePost();
         }
     })
@@ -179,29 +217,48 @@ export function EditPhone() {
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
     // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                phone:values.phone,
-            }).then(() => {
-                handleChange('');
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             phone:values.phone,
+    //         }).then(() => {
+    //             handleChange('');
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { phone:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        phone:values.phone,
+                    }).then(() => {
+                        handleChange('');
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            };
             handleCreatePost();
         }
     })
@@ -260,29 +317,48 @@ export function EditName() {
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
     // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                name:values.name,
-            }).then(() => {
-                handleChange('');
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             name:values.name,
+    //         }).then(() => {
+    //             handleChange('');
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
-        initialValues: { name:'' },
+        initialValues: { name: '' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        name:values.name,
+                    }).then(() => {
+                        handleChange('');
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            };
             handleCreatePost();
         }
     })
@@ -340,30 +416,48 @@ export function EditPassword() {
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
     // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                password:values.password,
-            }).then(() => {
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             password:values.password,
+    //         }).then(() => {
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { password:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        password:values.password,
+                    }).then(() => {
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            }
             handleCreatePost();
-            values('');
+            values.password('');
         }
     })
     
@@ -443,8 +537,26 @@ export function EditCustomEmail() {
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { customEmail:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        customEmail:values.customEmail,
+                    }).then(() => {
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            }
             handleCreatePost();
-            values('');
+            values.customEmail('');
         }
     })
     
@@ -500,31 +612,49 @@ export function EditCustomDomain() {
     const [openLikeDialog, setOpenLikeDialog] = React.useState(false);
     const handleCloseLikeDialog = () => setOpenLikeDialog(false);
 
-    // create post to firestore
-    const handleCreatePost = async () => {
-        setShowActivityIndicator(true);
-        try {
-            const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
-            const userSnapShot = await getDocs(usersRef);
-            const userId = userSnapShot.docs[0].id;
+    // // create post to firestore
+    // const handleCreatePost = async () => {
+    //     setShowActivityIndicator(true);
+    //     try {
+    //         const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+    //         const userSnapShot = await getDocs(usersRef);
+    //         const userId = userSnapShot.docs[0].id;
 
-            await updateDoc(doc(db,'users',userId),{
-                customDomain:values.customDomain,
-            }).then(() => {
-                setShowActivityIndicator(false);
-                setOpenLikeDialog(true);
+    //         await updateDoc(doc(db,'users',userId),{
+    //             customDomain:values.customDomain,
+    //         }).then(() => {
+    //             setShowActivityIndicator(false);
+    //             setOpenLikeDialog(true);
                 
-            }).catch((e) => console.error(e));
-        } catch (error) {
+    //         }).catch((e) => console.error(e));
+    //     } catch (error) {
             
-        }
-    }
+    //     }
+    // }
 
     const { handleBlur,handleChange,handleSubmit,values } = useFormik({
         initialValues: { customDomain:'' },
         onSubmit: values => {
+            const handleCreatePost = async () => {
+                setShowActivityIndicator(true);
+                try {
+                    const usersRef = query(collection(db,'users'),where("email",'==',session.user.email));
+                    const userSnapShot = await getDocs(usersRef);
+                    const userId = userSnapShot.docs[0].id;
+        
+                    await updateDoc(doc(db,'users',userId),{
+                        customDomain:values.customDomain,
+                    }).then(() => {
+                        setShowActivityIndicator(false);
+                        setOpenLikeDialog(true);
+                        
+                    }).catch((e) => console.error(e));
+                } catch (error) {
+                    
+                }
+            }
             handleCreatePost();
-            values('');
+            values.customDomain('');
         }
     })
     

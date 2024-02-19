@@ -80,13 +80,13 @@ export default function Dashboard() {
                             <DashboardProfile key={item.id}
                             header={<span className="flex items-center gap-2">Current Development <FaLaptopCode className="text-2xl text-amber-600" /></span>}
                             sidetext={<span className="uppercase">{item.data.compname}</span>}
-                            l1={"status: "}
-                            l2={"Progress: "}
+                            l1={"Deployment Status: "}
+                            l2={"Dev Progress: "}
                             l3={"Completed Features: "}
-                            l4={"Features requested: "}
+                            l4={"Features Requested: "}
                             l5={"Dev Time: "}
                             l6={"Dev Time left: "}
-                            l7={'Development Link: '}
+                            l7={'Deployment Link: '}
                             r1={item.data.status}
                             r2={<LinearWithValueLabel progressValue={item.data.progress} />}
                             r3={item.data.features_completed}

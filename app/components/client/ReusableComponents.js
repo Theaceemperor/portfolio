@@ -156,13 +156,13 @@ export function SubscribeBox() {
 
     return (
         <div id='subscription' className='mb-4 container mx-auto'>
-            <p className='mb-2 p-1 text-sm md:text-base text-gray-600 text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
+            <p className='mb-2 p-1 text-sm md:text-base text-gray-600 dark:text-wheat text-center'>Subscribe to our mailing list to stay updated on exciting news and our product updates.</p>
             <form className='flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 items-center justify-center'>
                 <input
                 id='subscribeEmail'
                 name='subscribeEmail'
                 placeholder='Email address'
-                className='max-w-lg rounded bg-transparent px-2 py-1 text-amber-600 focus:outline-none outline-none border border-amber-600 placeholder:italic'  
+                className='max-w-lg rounded bg-transparent px-2 py-1 text-amber-600 focus:outline-none outline-none border border-amber-600 placeholder:italic dark:placeholder:text-white/70'  
                 onChange={
                     (e) => setFormInput(e.target.value)
                 }
@@ -467,7 +467,7 @@ export function Project({ title, description, imageUrl, link }) {
                 {
                     link
                     ?
-                    <Link href={link} className='text-amber-600 hover:underline'>Learn more</Link>
+                    <Link href={link} as={`/project/${title.toLowerCase().split(' ').join('-').toString()}`} className='text-amber-600 hover:underline'>Learn more</Link>
                     :
                     null
                 }
@@ -565,7 +565,7 @@ export function SpadesStats() {
                         <GiSpades className="text-lg" />
                         <span>
                             <h5>Happy client's</h5>
-                            <p>120+</p>
+                            <p>99.9%</p>
                         </span>
                     </blockquote>
                     <blockquote className="w-40 flex flex-col gap-3 p-1 sm:border-l border-amber-600 px-1 sm:border-b rounded-md border-t border-r sm:border-t-transparent sm:border-r-transparent">
@@ -588,7 +588,7 @@ export function SpadesStats() {
                         <SiWebpack className="text-lg" />
                         <span>
                             <h5>Business modules</h5>
-                            <p>20+</p>
+                            <p>13+</p>
                         </span>
                     </blockquote>
                 </article>
@@ -915,7 +915,7 @@ export function SpadesSubFooter() {
                     <Link href={'https://twitter.com/@spadeshub'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaXTwitter className="text-2xl text-amber-600 rounded-full text-center" /></Link>
                     <Link href={'https://github.com/Theaceemperor/portfolio'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><BsGithub className="text-amber-600 text-2xl border-x-2 border-black rounded-full text-center" /></Link>
                     <Link href={'mailto:spadesinstitute.empire@gmail.com'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><SiGmail className="text-amber-600 text-2xl text-center" /></Link>
-                    <Link href={'https://nexvault.vercel.app'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
+                    <Link href={'https://nexvault.space'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-6 h-6 bg-amber-600 rounded-full' /></Link>
                     <Link href={'https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3'} className="hover:underline underline-offset-2 decoration-amber-600 flex items-center justify-center"><FaInstagram className="text-2xl text-amber-600 rounded-full text-center" /></Link>
                     </blockquote>
                 </li>
@@ -958,7 +958,7 @@ export function RowCta() {
               className="rounded-full border-2 text-[wheat] font-bold border-amber-600 animate-bounce text-3xl p-1"
               />
               </Link>
-              <Link href={'https://nexvault.vercel.app'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
+              <Link href={'https://nexvault.space'} className='w-8 h-8'><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-full h-auto animate-bounce bg-white border-2 border-amber-600 rounded-full' /></Link>
               <Link href={"https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3"}>
                 <FaInstagram
               className="rounded-full border-2 text-wheat font-bold border-amber-600 animate-bounce text-3xl p-1 bg-black"
@@ -1040,6 +1040,7 @@ export function SubNav() {
                 <div className='flex flex-col space-y-2 px-4 overflow-y-scroll no-scrollbar'>
                     <Link href={'/'} className={`hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Home</Link>
                     <Link href={'/projects'} className={pathName === '/projects' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Solutions/Products</Link>
+                    <Link href="/docs" onClick={() => setIsMenuOpen(false)} className={pathName === '/docs' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Docs</Link>
                     <Link href={'/about'} className={pathName === '/about' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>About Us</Link>
                     {session
                     ?
@@ -1049,7 +1050,7 @@ export function SubNav() {
                     }
                     {session
                     ?
-                    <button onClick={() => signOut()} className={"block mb-2"}>Logout</button>
+                    <button onClick={() => signOut()} className={"mb-2 hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Logout</button>
                     :
                     <Link href="/web-development/application" className={pathName === '/web-development/application' ? 'text-amber-600 font-bold' : `hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300`}>Sign Up</Link>
                     }
@@ -1070,7 +1071,7 @@ export function SubNav() {
                     <div className="container mx-auto flex lg:hidden justify-between items-center">
                         <Link href="/" onClick={() => setIsMenuOpen(false)}  className={"text-xl font-bold flex items-center justify-center animate-pulse"}>SP<GiSpades className='text-2xl' />DES</Link>
                         <div className="ml-8 mt-1">
-                            <button onClick={toggleMenu} className="">
+                            <button id='navigation-bar' name='navigationBar' onClick={toggleMenu} className="">
                                 {isMenuOpen ? <FaTimes size={24} className="font-bold" /> : <FaBars size={24} className="font-bold" />}
                             </button>
                         </div>
@@ -1079,6 +1080,7 @@ export function SubNav() {
                                 <Link href="/" className={pathName === '/' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"} onClick={() => setIsMenuOpen(false)}>Home</Link>
                                 <Link href="/about" onClick={() => setIsMenuOpen(false)} className={pathName === '/about' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>About</Link>
                                 <Link href="/projects" onClick={() => setIsMenuOpen(false)} className={pathName === '/projects' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Solutions/Products</Link>
+                                <Link href="/docs" onClick={() => setIsMenuOpen(false)} className={pathName === '/docs' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Docs</Link>
                                 <Link href="/gift-purchase" onClick={() => setIsMenuOpen(false)} className={pathName === '/gift-purchase' ? "text-wheat font-semibold block" : "block hover:underline decoration-amber-600 underline-offset-4 ease-in-out duration-300"}>Store</Link>
                                 {session
                                 ?
