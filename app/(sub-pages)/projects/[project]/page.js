@@ -3,7 +3,7 @@ import { ContactUs, GetStarted } from "@/app/components/client/ReusableComponent
 import FetchDoc from "@/app/components/fetchDoc";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CgLink } from "react-icons/cg";
@@ -38,13 +38,6 @@ export const projectsData = [
 
 export default function Page({ params }) {
     const router = useRouter();
-    const pathName = usePathname();
-
-    //Access the url search params
-    const searchParams = useSearchParams();
-
-    // extract the projectId from the url
-    // const search = searchParams.getAll('solution');
 
     const search = params.project;
 
@@ -56,32 +49,10 @@ export default function Page({ params }) {
         return <div className="text-lg ml-2">Project not found!{router.push('/projects')}</div>
     }
 
-    // const searchId = parseInt(projectsData.find((p) => String(p.id) === [].i));
-
-    // const handlePrevious = () => {
-    //     if (searchId > 1) {
-    //         router.replace(`/projects/[project]?project=${searchId - 1}`);
-    //     } else if (searchId <= 1) {
-    //         router.replace('/projects')
-    //     }
-    // }
-
-    // const handleNext = () => {
-    //     if (projectsData.find((p) => String(p.id) <= String(search))) {
-    //         router.push(`/projects/[project]?project=${searchId + 1}`);
-    //     } else {
-    //         null
-    //     }
-    // }
-
     return (
         <main>
             <Link href={'/projects'} className="mt-4 ml-2 flex items-center gap-1 text-amber-600 hover:underline underline-offset-2"><BsArrowLeft /> Back to products</Link>
             <h2 className="text-3xl font-bold text-center mt-8">{project.title}</h2>
-            {/* <nav className="flex items-center justify-between px-2 mt-8">
-                <button className="bg-amber-600 text-black py-2 px-4 rounded-md hover:bg-transparent hover:text-amber-600 focus:outline-none" onClick={handlePrevious}>Previous</button>
-                <button className="bg-amber-600 text-black py-2 px-4 rounded-md hover:bg-transparent hover:text-amber-600 focus:outline-none" onClick={handleNext}>Next</button>
-            </nav> */}
 
             <section className="container px-2 mx-auto mt-8">
                 <div className="max-w-2xl mx-auto">
