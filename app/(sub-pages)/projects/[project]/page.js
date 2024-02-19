@@ -3,7 +3,7 @@ import { ContactUs, GetStarted } from "@/app/components/client/ReusableComponent
 import FetchDoc from "@/app/components/fetchDoc";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { CgLink } from "react-icons/cg";
@@ -36,14 +36,17 @@ export const projectsData = [
     { id: 13, title: 'ZenFit Spa', description: "ZenFit Spa, a visionary project by Spadeshub, is a comprehensive spa and fitness website designed to elevate spa and fitness brands, setting them on the path for active online success. The platform embodies the essence of wellness and rejuvenation while fostering a dynamic online presence.", imageUrl: '/portfolio/zenfit.PNG', link: 'https://zenfitspa.vercel.app', detailedDesc: '/docs/zenfitspa.txt', price: 3265, category: 'Fitness' },
 ]
 
-export default function Page() {
+export default function Page({ params }) {
     const router = useRouter();
+    const pathName = usePathname();
 
     //Access the url search params
     const searchParams = useSearchParams();
 
     // extract the projectId from the url
-    const search = searchParams.getAll('solution');
+    // const search = searchParams.getAll('solution');
+
+    const search = params.project;
 
     // Find the project with the matyching ID
     const project = projectsData.find((p) => String(p.title.toLowerCase().split(' ').join('-').toString()) === String(search));

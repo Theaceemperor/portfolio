@@ -467,7 +467,7 @@ export function Project({ title, description, imageUrl, link }) {
                 {
                     link
                     ?
-                    <Link href={link} as={`/project/${title.toLowerCase().split(' ').join('-').toString()}`} className='text-amber-600 hover:underline'>Learn more</Link>
+                    <Link href={link} className='text-amber-600 hover:underline'>Learn more</Link>
                     :
                     null
                 }

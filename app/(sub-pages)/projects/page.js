@@ -70,7 +70,7 @@ export default function Page() {
 
             <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 px-4 mt-4">
                 {sortedProjects.map(project => (
-                    <Project key={project.id} description={project.description} imageUrl={project.imageUrl} link={`/projects/website?solution=${project.title.toLowerCase().split(' ').join('-').toString()}`} title={project.title} />
+                    <Project key={project.id} description={project.description} imageUrl={project.imageUrl} link={`/projects/${project.title.toLowerCase().split(' ').join('-').toString()}`} title={project.title} />
                 ))}
             </section>
         </main>
