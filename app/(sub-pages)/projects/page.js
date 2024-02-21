@@ -38,8 +38,9 @@ export default function Page() {
                 </div>
             </article>
 
-            <p className="px-2 text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center gap-1">Get your desired website in few clicks <CgLink /></Link></p>
-            <h3><Link href={'#our-projects'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8 mt-8">Our Projects <CgLink /></Link></h3>
+            <span className="px-2 text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center gap-1">Get your desired website in few clicks <CgLink /></Link></span>
+
+            <h1><Link href={'#our-solutions'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8 mt-8">Our Solutions/Modules <CgLink /></Link></h1>
 
             {/* Filter and Sort Controls */}
             <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
@@ -69,8 +70,8 @@ export default function Page() {
             </div>
 
             <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 px-4 mt-4">
-                {sortedProjects.map(project => (
-                    <Project key={project.id} description={project.description} imageUrl={project.imageUrl} link={`/projects/${project.title.toLowerCase().split(' ').join('-').toString()}`} title={project.title} />
+                {sortedProjects.map((project, index) => (
+                    <Project key={index} description={project.description} imageUrl={project.imageUrl} link={`/projects/${project.title.toLowerCase().split(' ').join('-').toString()}`} title={project.title} />
                 ))}
             </section>
         </main>
