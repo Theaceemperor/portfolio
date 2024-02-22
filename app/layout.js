@@ -5,8 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Spadeshub | Optimized digital marketing at your fingertips',
-  description: "Revolutionize your online presence and attract more organic or paid visitors with our bespoke software development and SEO services",
+  title: 'Spadeshub | Innovative web development at your fingertips',
+  description: "Revolutionize your online presence and attract more organic or paid visitors with our bespoke software development and premium optimized SEO services",
   icons: '/SPADES.ICO'
 }
 
