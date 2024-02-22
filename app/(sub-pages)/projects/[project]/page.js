@@ -9,7 +9,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { CgLink } from "react-icons/cg";
     
 export const projectsData = [
-    { title: 'ArtiScape', description: `Artiscape is a dynamic portfolio website tailored to architects, photographers, makeup artists, and other creative professionals. It serves as a digital showcase for their work, allowing them to highlight their talents and attract potential clients. Artiscape offers a visually captivating experience that embodies the essence of each individual's creativity and expertise.`, imageUrl: '/portfolio/artiscape.png', link: 'https://artiscape.vercel.app', detailedDesc: '/docs/artiscape.txt', price: 1210, category: 'Portfolio' },
+    { title: 'ArtiScape', description: `Artiscape is a dynamic portfolio website tailored to architects, photographers, makeup artists, and other creative professionals. It serves as a digital showcase for their work, allowing them to highlight their talents and attract potential clients. Artiscape offers a visually captivating experience that embodies the essence of each individual's creativity and expertise.`, imageUrl: '/portfolio/artiscape.png', link: 'https://artiscape.vercel.app', detailedDesc: '/docs/artiscape.txt', price: 1390, category: 'Portfolio' },
 
     { title: 'Catalyst Canvas', description: "Catalyst Canvas is a dynamic and engaging website module designed to showcase the impactful work of a charitable organization or non-profit entity. Seamlessly blending modern design with user-friendly functionality, Catalyst Canvas aims to provide visitors with a rich and interactive experience.", imageUrl: '/portfolio/catalyst_canvas.PNG', link: 'https://catalystcanvas.vercel.app', detailedDesc: '/docs/catalystcanvas.txt', price: 2080, category: 'NGO' },
 
