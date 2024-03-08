@@ -1,7 +1,8 @@
 'use client'
+
 import Link from "next/link";
 import React from "react";
-import { FAQ, LoginQuest, SectionHeader, ServiceCard, SpadesStats, TeamMemberCard, VisitHomePage } from "@/app/components/client/ReusableComponents";
+import { LoginQuest, SectionHeader, ServiceCard, SpadesStats, TeamMemberCard, VisitHomePage } from "@/components/ReusableComponents";
 import { Skeleton } from "@mui/material";
 
 
@@ -30,19 +31,19 @@ export default function Page() {
 
             <div id="about" className="container mx-auto mt-8 px-2">
                 <div className="mb-8">
-                    <SectionHeader headerLink={'/about#about'} headerText={'About Us'} />
-                    <p className="text-gray-600 dark:text-white/70">Discover our mission, vision, and the people behind our initiatives.</p>
+                    <SectionHeader headerLink={'#about'} headerText={'About Us'} />
+                    <p>Discover our mission, vision, and the people behind our initiatives.</p>
                 </div>
 
                 {/* mission and vission section */}
                 <section id="our-mission" className="mb-8">
                     <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#our-mission'} className={"flex items-center hover:text-amber-600"}>Our Mission</Link></h3>
-                    <p className="text-gray-600 dark:text-white/70">Our mission is to provide accessibly; fast, reliable, and streamlined web services to small businesses and institutions as fast as possible. Using our system, we will offer various types of web solutions that will be tailored to serve the changing needs of our clients.</p>
+                    <p>Our mission is to provide accessibly; fast, reliable, and streamlined web services to small businesses and institutions as fast as possible. Using our system, we will offer various types of web solutions that will be tailored to serve the changing needs of our clients.</p>
                 </section>
                 <section id="our-vision" className="mb-8">
                     <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#our-vision'} className={"flex items-center hover:text-amber-600"}>Our Vision</Link></h3>
-                    <p className="text-gray-600 dark:text-white/70">Speed and quality are our coner stones. we look to offer quality web services to small businesses and institutions looking to accelerate their online presence at affordable prices.</p>
-                    <p className="text-gray-600 dark:text-white/70">We look to build and tailor our software solutions to small businesses and Institutions, as well as help our clients update and improve their existing web services. We have established a scalable system to streamline our services so as to offer high-end services.</p>
+                    <p>Speed and quality are our coner stones. we look to offer quality web services to small businesses and institutions looking to accelerate their online presence at affordable prices.</p>
+                    <p>We look to build and tailor our software solutions to small businesses and Institutions, as well as help our clients update and improve their existing web services. We have established a scalable system to streamline our services so as to offer high-end services.</p>
                 </section>
 
                 {/* Team section */}

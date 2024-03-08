@@ -1,5 +1,4 @@
-import { BaseLayout } from "../components/client/ReusableComponents";
-
+import { BaseLayout } from "../../components/ReusableComponents";
 
 export default function Layout({ children }) {
   return (

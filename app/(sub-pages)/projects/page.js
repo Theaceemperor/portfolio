@@ -1,10 +1,12 @@
 'use client'
+
 import React from "react";
 import Link from "next/link";
-import MySwiper from "@/app/components/swiper";
+import MySwiper from "@/components/swiper";
 import { projectsData } from "./[project]/page";
 import { CgLink } from "react-icons/cg";
-import { Project } from "@/app/components/client/ReusableComponents";
+import { Project } from "@/components/ReusableComponents";
+import { Skeleton } from "@mui/material";
 
 const projects = projectsData;
 
@@ -38,9 +40,9 @@ export default function Page() {
                 </div>
             </article>
 
-            <span className="px-2 text-center"><Link href={'/web-development/application'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center gap-1">Get your desired website in few clicks <CgLink /></Link></span>
+            <span className="px-2 text-center"><Link href={'/auth/signup'} className="underline decoration-amber-600 underline-offset-1 flex items-center justify-center gap-1">Get your desired website in few clicks <CgLink /></Link></span>
 
-            <h1><Link href={'#our-solutions'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8 mt-8">Our Solutions/Modules <CgLink /></Link></h1>
+            <h1><Link href={'#solutions'} className="flex items-center justify-center hover:text-amber-600 text-xl underline underline-offset-8 mt-8">Our Modules & Solutions <CgLink /></Link></h1>
 
             {/* Filter and Sort Controls */}
             <div className="flex flex-col sm:flex-row items-center justify-center mt-4">
@@ -69,10 +71,18 @@ export default function Page() {
                 </select>
             </div>
 
-            <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 px-4 mt-4">
-                {sortedProjects.map((project, index) => (
+            <section id="solutions" className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 px-4 mt-4">
+                {sortedProjects
+                ?
+                sortedProjects.map((project, index) => (
                     <Project key={index} description={project.description} imageUrl={project.imageUrl} link={`/projects/${project.title.toLowerCase().split(' ').join('-').toString()}`} title={project.title} />
-                ))}
+                ))
+                :
+                <Skeleton sx={{
+                    backgroundColor: 'lightgray'
+                }}>
+                    <Project />
+                </Skeleton>}
             </section>
         </main>
     )

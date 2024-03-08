@@ -1,5 +1,5 @@
 
-import { FAQ, ReviewsSection, WriteReview } from "@/app/components/client/ReusableComponents";
+import { FAQ, ReviewsSection, WriteReview } from "@/components/ReusableComponents";
 import Link from "next/link";
 import React from "react";
 

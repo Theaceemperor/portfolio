@@ -1,6 +1,6 @@
 
 export const metadata = {
-  title: 'Spadeshub | Reviews',
+  title: 'Spades | Reviews & FAQ',
 }
 
 export default function Layout({ children }) {

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
 import Image from 'next/image';
-import { HeaderText, HomeNav, LoginQuest } from './components/client/ReusableComponents';
+import { HeaderText, HomeNav, LoginQuest } from '../components/ReusableComponents';
 
 export default function Home() {
   return (

@@ -1,12 +1,11 @@
 
 export const metadata = {
-  title: 'Spades | About Us',
+    title: 'Spades | T & C'
 }
 
 export default function Layout({ children }) {
-  return (
-    <>
-      {children}
-    </>
-  )
+
+    return (
+        <>{children}</>
+    )
 }

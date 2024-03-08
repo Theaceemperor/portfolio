@@ -1,6 +1,7 @@
 'use client'
-import { ContactUs, GetStarted } from "@/app/components/client/ReusableComponents";
-import FetchDoc from "@/app/components/fetchDoc";
+
+import { ContactUs, GetStarted } from "@/components/ReusableComponents";
+import FetchDoc from "@/components/fetchDoc";
 import { Skeleton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +55,7 @@ export default function Page({ params }) {
     return (
         <main>
             <Link href={'/projects'} className="mt-4 ml-2 flex items-center gap-1 text-amber-600 hover:underline underline-offset-2"><BsArrowLeft /> Back to products</Link>
-            <h2 className="text-3xl font-bold text-center mt-8">{project.title}</h2>
+            <h1 className="text-3xl font-bold text-center mt-8">{project.title}</h1>
 
             <section className="container px-2 mx-auto mt-8">
                 <div className="max-w-2xl mx-auto">
@@ -64,17 +65,17 @@ export default function Page({ params }) {
                     )}
 
                     {/* Project Title */}
-                    <h3 className={`text-xl sm:text-2xl font-bold mb-4 text-center`}><Link href={project.link} className={`flex items-center hover:text-amber-600 gap-1`}  target="_blank" rel="noopener noreferrer">{project.title}<CgLink /></Link></h3>
+                    <h2 className={`text-xl sm:text-2xl font-bold mb-4 text-center`}><Link href={project.link} className={`flex items-center hover:text-amber-600 gap-1`}  target="_blank" rel="noopener noreferrer">{project.title}<CgLink /></Link></h2>
                     <div className="mb-4">
-                        <p className="text-base md:text-lg mb-2 text-gray-800 dark:text-wheat/80">Value - ${project.price} License fee included</p>
+                        <p className="text-base md:text-lg mb-2">Value - ${project.price} License fee included</p>
                         <ContactUs />
                     </div>
 
                     {/* Project Description */}
-                    <div className="text-lg text-gray-700 dark:text-wheat/70 mb-4">{project.description}</div>
+                    <div className="text-lg mb-4">{project.description}</div>
 
                     {/* Additional Project Details can be added here */}
-                    <div className="text-lg text-gray-700 dark:text-wheat/70 mb-8">
+                    <div className="text-lg mb-8">
                         {project.detailedDesc 
                         ? 
                         <FetchDoc key={project.id} doc={project.detailedDesc} /> 

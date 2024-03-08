@@ -1,14 +1,12 @@
 'use client'
+
 import React from "react";
 import * as yup from 'yup';
 import { useFormik } from "formik";
-import { TextField,Button,Select,MenuItem } from "@mui/material";
+import { TextField,Select,MenuItem } from "@mui/material";
 import { TbGiftCardFilled } from "react-icons/tb";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/settings/firebase.settings";
-import { AdsNotification } from "@/app/components/alert";
-import { ContactUs, PaymentFileUpload } from "@/app/components/client/ReusableComponents";
-import Payment from "@/app/components/payment";
+import { ContactUs } from "@/components/ReusableComponents";
+import Payment from "@/components/payment";
 
 const validationRules = yup.object().shape({
     email:yup.string().required('This field is required'),
@@ -56,21 +54,13 @@ export default function GiftCard() {
                     <h1 className="flex gap-1 justify-center items-center mb-4">Purchase Spades gitft-card <TbGiftCardFilled 
                     className="text-amber-600 text-xl"/> </h1>   
                 </blockquote>
-                <AdsNotification 
-                alertTitle={"Website in few flicks"}
-                >
-                    <span>Grow your network in a few clicks by getting a professional website for yourself or business </span> 
-                </AdsNotification>
-                {/* <blockquote className="flex flex-col lg:flex-row md:flex-row gap-3 items-center justify-center my-5">
-                    <MyGiftProducts />
-                </blockquote> */}
                 <div className="flex items-center justify-center">
                     <form className="bg-wheat flex flex-col space-y-4 items-center rounded-lg p-4" onSubmit={handleSubmit}>
                         <div className="gap-4 grid grid-cols-2">
                             <div className="text-gray-800 flex flex-col space-y-2 items-center">
                                 <small className="font-bold">Currency</small>
                                 <Select
-                                    labelId="demo-simple-select-filled-label"
+                                    labelId="currency"
                                     id="currency"
                                     value={currency}
                                     onChange={handleCurrencyChange}
@@ -89,7 +79,7 @@ export default function GiftCard() {
                             <div className="text-gray-800 flex flex-col space-y-2 items-center">
                                 <small className="font-bold">Amount</small>
                                 <Select
-                                labelId="demo-simple-select-filled-label"
+                                labelId="amount"
                                 id="amount"
                                 value={amount}
                                 onChange={handleAmountChange}
@@ -116,6 +106,7 @@ export default function GiftCard() {
                         id="email"
                         variant="filled"
                         label="Enter receipient Email address"
+                        required
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -123,24 +114,6 @@ export default function GiftCard() {
 
                         {errors.email && touched.email
                         ? <span className="text-red-500">{errors.email}</span> : null}
-
-                        {/* <div className="text-center text-sm text-black flex flex-col space-y-2 items-center justify-center">
-                            <p>Upload transaction confirmation/hash after successful crypto payment</p>
-                            <br />
-                            <h5>Pay with Bitcoin</h5>
-                            <p
-                            className="text-xs sm:text-base w-full border-y text-center border-amber-600 p-1 rounded-lg bg-transparent"
-                            >bc1qjef244zt8glzk3z80d6x50sryeufkuc8kfxtss</p>
-                        </div>
-                        
-                        <div className="text-center text-sm text-black flex flex-col space-y-2 items-center justify-center">
-                            <h5>Pay with USDT [ERC20]</h5>
-                            <p
-                            className="text-xs sm:text-base w-full border-y text-center border-amber-600 p-1 rounded-lg bg-transparent"
-                            >0xec10Ed071DAA66d1d6C540Cebf899b56cCCE5444</p>
-                        </div> */}
-                        
-                        {/* <PaymentFileUpload /> */}
                         
                         <Payment amount={convertedAmount} email={values.email} orderDetails={orderDetails} name={'Spades Gift Card'} successFunction={handleSuccessFunction} />
 

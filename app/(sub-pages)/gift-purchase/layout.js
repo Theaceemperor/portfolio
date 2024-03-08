@@ -1,6 +1,6 @@
 
 export const metadata = {
-  title: 'Spadeshub | Buy Spades Giftcards',
+  title: 'Spades | Purchase Spades Gift cards',
 }
 
 export default function Layout({ children }) {

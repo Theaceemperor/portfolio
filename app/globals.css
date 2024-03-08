@@ -2,43 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  body {
-      font-family: serif;
+body {
+    font-family: serif;
   }
 
-  .countdown {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-  }
-  .day,
-  .hour,
-  .minute,
-  .second {
-    font-size: 2rem;
-  }
-  
-  .waiting{
-    height: 80vh;
-  }
+.countdown {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.day,
+.hour,
+.minute,
+.second {
+  font-size: 2rem;
+}
 
-  .coming-soon {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-   /* Chrome, Safari and Opera */
-   .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+.waiting{
+  height: 80vh;
+}
 
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  } 
+.coming-soon {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .chat-container {
@@ -71,4 +69,30 @@
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+}
+
+.light-theme {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  }
+
+.light-theme-heading {
+  color: wheat;
+  }
+  
+.light-theme-text {
+  color: wheat;
+  }
+
+.toggle {
+  color: black;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+}
+
+.toggle:hover {
+  color: #be4f0a;
+  font-size: 25px;
 }

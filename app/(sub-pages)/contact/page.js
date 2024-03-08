@@ -1,15 +1,14 @@
 'use client'
+
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { Button } from "@mui/material";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/settings/firebase.settings";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
-import { LoginButton2, VisitHomePage } from "@/app/components/client/ReusableComponents";
-import { OnLoginNotification } from "@/app/components/alert";
-import { ActivityIndicator4 } from "@/app/components/activity-indicator";
-import Customdialog from "@/app/components/client/CustomDialog";
+import { LoginButton2, VisitHomePage } from "@/components/ReusableComponents";
+import { OnLoginNotification } from "@/components/alert";
+import { ActivityIndicator4 } from "@/components/activity-indicator";
+import Customdialog from "@/components/CustomDialog";
 import { GiSpades } from "react-icons/gi";
 
 
@@ -25,27 +24,6 @@ export default function Page() {
     const handleCloseDialog = () => setOpenDialog(false);
     const [openFailDialog, setOpenFailDialog] = React.useState(false);
     const handleCloseFailDialog = () => setOpenFailDialog(false);
-    // const handlePostMessage = async () => {
-    //     await addDoc(collection(db,'messages'), {
-    //         owner:email,
-    //         first_name:firstName,
-    //         last_name:lastName,
-    //         body:message,
-    //         sentAt:new Date().getTime(),
-    //     }).then(async () => {
-    //         setShowAlertDialog(true);
-    //         setEmail('');
-    //         setFirstName('');
-    //         setLastName('');
-    //         setMessage('');
-    //         setTimeout(() => {
-    //             setShowAlertDialog(false);
-    //         }, 5000);
-    //     })
-    //     .catch(() => {
-    //         alert('Please try again in 3 minutes.')
-    //     })
-    // }
 
     const name = firstName + ' ' + lastName;
 
@@ -146,7 +124,7 @@ export default function Page() {
                                 required 
                                 placeholder="First Name"
                                 type="text"
-                                className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                                className="py-1 px-2 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                                 onChange={(text) => setFirstName(text.target.value)}
                                 value={firstName}
                                 />
@@ -154,14 +132,14 @@ export default function Page() {
                                 required
                                 placeholder="Last Name"
                                 type="text"
-                                className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                                className="py-1 px-2 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                                 onChange={(text) => setLastName(text.target.value)}
                                 value={lastName}
                                 />
                             </div>
                             <input 
                             required
-                            className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                            className="py-1 px-2 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                             placeholder="Subject"
                             type="text"
                             onChange={(text) => setSubject(text.target.value)}
@@ -169,7 +147,7 @@ export default function Page() {
                             
                             <input 
                             required
-                            className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                            className="py-1 px-2 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                             placeholder="Email Address"
                             type="Email"
                             onChange={(text) => setEmail(text.target.value)}
@@ -178,7 +156,7 @@ export default function Page() {
                             <textarea
                             required 
                             placeholder="Your Message"
-                            className="py-1 px-2 placeholder:text-black dark:placeholder:text-amber-600 outline-none focus:outline-none bg-transparent border-b border-amber-600"
+                            className="py-1 px-2 outline-none focus:outline-none bg-transparent border-b border-amber-600"
                             onChange={(text) => setMessage(text.target.value)}
                             value={message}
                             />
