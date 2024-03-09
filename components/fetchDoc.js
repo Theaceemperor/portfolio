@@ -21,6 +21,6 @@ export default function FetchDoc({ doc }) {
     }, []);
 
     return (
-        <div dangerouslySetInnerHTML={{ __html: codeContent }} className="flex flex-col space-y-4 leading-7" />
+        <div dangerouslySetInnerHTML={{ __html: codeContent }} className="flex flex-col space-y-4 leading-7 opacity-80" />
     )
 }

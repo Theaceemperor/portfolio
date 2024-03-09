@@ -52,6 +52,35 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
+export function WorkingSteps({ data }) {
+
+    return (
+        <div className="bg-wheat text-black flex flex-col items-center justify-center rounded p-2 space-y-2">
+            <span className="p-2 bg-black text-wheat rounded-full text-xl w-fit"> {data.id} </span>
+            <h4 className="font-bold text-xl">{data.title}</h4>
+            <p>{data.description}</p>
+        </div>
+    )
+}
+
+export function SpadesApart({ data }) {
+
+    return (
+        <div className="bg-wheat text-black rounded p-2">
+            <h4 className="font-bold mb-2 text-lg">{data.title}</h4>
+            <p>{data.description}</p>
+        </div>
+    )
+}
+
+export function TechStack({ tech }) {
+
+    return (
+        <aside className="flex justify-center items-center text-center px-4 py-2 rounded shadow-md bg-black hover:bg-wheat text-wheat hover:text-black hover:font-semibold hover:border hover:border-amber-600 hover:shadow-black shadow-amber-600 transition duration-300 ease-in-out">
+            {tech}
+        </aside>
+    )
+}
 
 export function ClientsCard({ client }) {
 
@@ -388,36 +417,29 @@ export function Notification({children,alertTitle}) {
     )
 }     
 
-export function FAQ({ question, answer }) {
+export function FAQ({ data }) {
     const ref = React.useRef();
     const isVisible1 = useIsVisible(ref);
     const [open,setOpen] = React.useState(false);
 
-    const handleOpen = () => {
-        setOpen(true);
-    }
-    const handleClose = () => {
-        setOpen(false);
-    }
+    const handleToggle = () => {
+        setOpen(!open);
+    } 
 
     return (
         <div ref={ref} className={`px-4 py-2 shadow shadow-shadow-color rounded min-w-full max-w-md transition-opacity ease-linear duration-700 ${isVisible1 ? "opacity-100" : "opacity-0"}`}>
             <span className="flex flex-row gap-4 font-semibold text-lg"> 
-                {question}
-                {
-                    open
-                    ?
-                    <button className="focus:outline-none" onClick={handleClose}><FaMinus /></button>
-                    :
-                    <button className="focus:outline-none" onClick={handleOpen}><FaPlus /></button>
-                }
+                {data.question}
+                <button className="focus:outline-none" onClick={handleToggle}>
+                    { open ? <FaMinus /> : <FaPlus /> }
+                </button>
             </span>
             {
                 open
                 ?
                 <blockquote className="flex flex-col gap-1 mt-1">
-                    <hr className="border-light-blue mx-2 sm:mx-4" />
-                    <p className='text-gray-600'>{answer}</p>
+                    <hr className="mx-2 sm:mx-4" />
+                    <p className='opacity-80'>{data.answer}</p>
                 </blockquote>
                 :
                 null
