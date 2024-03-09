@@ -52,6 +52,26 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
+
+export function TeamSection() {
+
+    return (
+        <section id="our-team" className="mb-8 px-2">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#our-team'} className={"flex items-center hover:text-amber-600"}>Our Team</Link></h3>
+            {/* Include team member profiles with images and descriptions */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teamMembers.map((item, index) => (
+                    item
+                    ?
+                    <TeamMemberCard key={index} item={item} />
+                    :
+                    <Skeleton variant="rounded" width={240} height={100} />
+                ))}
+            </div>
+        </section>
+    )
+}
+
 export function WorkingSteps({ data }) {
 
     return (

@@ -53,7 +53,20 @@ export default function Page() {
                     <p>Speed and quality are our coner stones. we look to offer quality web services to small businesses and institutions looking to accelerate their online presence at affordable prices.</p>
                     <p>We look to build and tailor our software solutions to small businesses and Institutions, as well as help our clients update and improve their existing web services. We have established a scalable system to streamline our services so as to offer high-end services.</p>
                 </section>
+
+                {/* Services Section */}
+                <section id="services" className="mb-8 px-2">
+                    <SectionHeader headerLink={'#services'} headerText={'Our Services'} />
+
+                    {/*  Services/Features Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {servicesFeaturesData.map((item, index) => (
+                            <ServiceCard key={index} item={item} />
+                        ))}
+                    </div>
+                </section>
                 
+                {/* Working steps section */}
                 <section id="working-steps" className="mb-8 px-2">
                     <h3 className="text-xl sm:text-2xl font-bold mb-4 text-center"><Link href={'#working-steps'} className={"hover:text-amber-600"}>How it works</Link></h3>
                     <div className="flex justify-center items-center">
@@ -61,17 +74,7 @@ export default function Page() {
                     </div>
                 </section>
 
-                <section id="spades" className="mb-8 px-2">
-                    <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#spades'} className={"flex items-center hover:text-amber-600"}>What sets Spades apart</Link></h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                        {
-                            spadesApartData.map((data, index) => (
-                                <SpadesApart key={index} data={data} />
-                            ))
-                        }
-                    </div>
-                </section>
-                
+                {/* Tech stack section */}
                 <section id="tech-stack" className="mb-8 bg-wheat py-8 px-4 text-black">
                     <h3 className="text-xl sm:text-2xl font-bold"><Link href={'#tech-stack'} className={"flex items-center hover:text-amber-600"}>Tech Stack</Link></h3>
                     <h4 className="mb-4">What we build with.</h4>
@@ -87,30 +90,15 @@ export default function Page() {
                     </div>
                 </section>
 
-                {/* Team section */}
-                <section id="our-team" className="mb-8 px-2">
-                    <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#our-team'} className={"flex items-center hover:text-amber-600"}>Our Team</Link></h3>
-                    {/* Include team member profiles with images and descriptions */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {teamMembers.map((item, index) => (
-                            item
-                            ?
-                            <TeamMemberCard key={index} item={item} />
-                            :
-                            <Skeleton variant="rounded" width={240} height={100} />
-                        ))}
-                    </div>
-                </section>
-
-                {/* Services Section */}
-                <section id="services" className="mb-8 px-2">
-                    <SectionHeader headerLink={'#services'} headerText={'Our Services'} />
-
-                    {/*  Services/Features Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {servicesFeaturesData.map((item, index) => (
-                            <ServiceCard key={index} item={item} />
-                        ))}
+                {/* What sets us apart */}
+                <section id="spades" className="mb-8 px-2">
+                    <h3 className="text-xl sm:text-2xl font-bold mb-4"><Link href={'#spades'} className={"flex items-center hover:text-amber-600"}>What sets Spades apart</Link></h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        {
+                            spadesApartData.map((data, index) => (
+                                <SpadesApart key={index} data={data} />
+                            ))
+                        }
                     </div>
                 </section>
             </div>
