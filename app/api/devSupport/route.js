@@ -4,7 +4,7 @@ require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 export async function POST(request) {
-    const { content } = await request.json();
+    const { name, email, ticketNumber, subject, message } = await request.json();
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -23,10 +23,10 @@ export async function POST(request) {
 
     try {
         await transporter.sendMail({
-            to: process.env.DEV_SUPPORT_EMAIL,
+            to: "spadesdev.back@gmail.com",
             subject: subject,
             text: "Dev Support",
-            html: `<h3>NEW ENTRY FOR DEV SUPPORT</h3><p>Sender: ${content.name}</p><p>Email: ${content.email}</p><p>Subject: ${content.subject}</p><p>Message: ${content.message}</p>`
+            html: `<h3>NEW ENTRY FOR DEV SUPPORT</h3><p>Ticket Number: ${ticketNumber}</p><p>Sender: ${name}</p><p>Email: ${email}</p><p>Subject: ${subject}</p><p>Message: ${message}</p>`
         })
     } catch (error) {
         console.log(error);

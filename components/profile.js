@@ -59,7 +59,7 @@ export function ShortProfile() {
                     l8={'Custom Email: '}
                     r8={ item.data.customEmail }
                     >
-                        <Link href={'/account/settings'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">edit profile information <CgLink /></Link>
+                        <Link href={'/settings'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">edit profile information <CgLink /></Link>
                     </DashboardProfile>
                 ))
             }

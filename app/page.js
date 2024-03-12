@@ -3,6 +3,7 @@ import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
 import Image from 'next/image';
 import { HeaderText, HomeNav, LoginQuest } from '../components/ReusableComponents';
+import { AdsNotification } from '@/components/alert';
 
 export default function Home() {
   return (
@@ -21,6 +22,11 @@ export default function Home() {
         <Link href={'https://nexvault.space'}><Image priority src={'/nexvault_icon.ICO'} alt='NexVault' width={500} height={500} className='w-7 h-7 bg-amber-600 rounded-full' /></Link>
         <Link href={'https://instagram.com/spadeshub?igsh=YnMwZWpmdW9mNWI3'}><FaInstagram /></Link>
       </div>
+      <AdsNotification 
+      alertTitle={"Unlock Your Site's Potential!"}
+      >
+          <span>Maximize your online impact with our bespoke web solutions. Transform your website into a powerful asset for your business growth.</span> 
+      </AdsNotification> 
     </main>
   )
 }

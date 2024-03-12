@@ -119,7 +119,7 @@ export default function Page() {
             
             <div className="mt-8 px-2 flex flex-col items-center">
                 <h1 className="text-center font-bold">WEB DEVELOPMENT APPLICATION</h1>
-                <form className="p-2 sm:p-4 flex flex-col mt-4 items-center justify-center space-y-4 bg-wheat rounded-lg shadow-lg shadow-black/70 max-w-xl"
+                <form className="p-2 sm:p-4 flex flex-col mt-4 items-center justify-center space-y-4 bg-wheat rounded-lg shadow-lg shadow-black/70 w-full max-w-xl"
                 onSubmit={handleSubmit}>
                     <h3 className="text-gray-800 text-center font-bold text-lg">FILL AND SUBMIT TO PROCEED</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">

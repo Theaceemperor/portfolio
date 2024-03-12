@@ -3,7 +3,7 @@
 import React from "react";
 import * as yup from 'yup';
 import { useSession } from "next-auth/react";
-import ActivityIndicator from "@/components/activity-indicator";
+import { ActivityIndicator2 } from "@/components/activity-indicator";
 import { useFormik } from "formik";
 import { ticketGen } from "@/assets/codeGen";
 import { OnLoginNotification } from "@/components/alert";
@@ -31,37 +31,41 @@ export default function DevSupportPage() {
         initialValues: {supportSubject: '', supportMessage: ''},
         onSubmit: values => {
            try {
-                const handleApiSubmit = async (e) => {
-                    e.preventDefault();
+                const handleApiSubmit = async () => {
                     setShowActivityIndicator(true);
 
                     const content = {
-                        name: session?.user.name,
-                        email: session?.user.email,
+                        name: session.user.name,
+                        email: session.user.email,
                         ticketNumber: ticketNumber,
                         subject: values.supportSubject,
                         message: values.supportMessage
                     }
             
-                    const response = await fetch('/api/dev-support', {
+                    const response = await fetch('/api/devSupport', {
                         method: 'POST',
                         headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json"
                         },
                         body:JSON.stringify({
-                            content,
+                            name:content.name,
+                            email:content.email,
+                            ticketNumber:content.ticketNumber,
+                            subject:content.subject,
+                            message:content.message
                         })
-                    }).then( async () => {
+                    }).then( 
+                        async () => {
                         await addDoc(collection(db,'support-tickets'), {
-                            user: session.user.email,
-                            ticket: ticketNumber,
-                            subject: values.supportSubject,
+                            user: content.email,
+                            ticket: content.ticketNumber,
+                            subject: content.subject,
                             date: new Date().getTime()
                         });
                         setOpenDialog(true);
                         setShowAlertDialog(true);
-                    }).catch((e) => {setOpenFailDialog(true)});
+                    }).catch((e) => setOpenFailDialog(true));
             
                     setShowActivityIndicator(false);
             
@@ -81,7 +85,7 @@ export default function DevSupportPage() {
             {
                 showActivityIndicator
                 ?
-                <ActivityIndicator />
+                <ActivityIndicator2 />
                 :
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-4 bg-wheat p-4 max-w-lg rounded shadow-md shadow-amber-600 text-gray-800 w-full">
                     <div className="mb-4">
@@ -174,7 +178,7 @@ export default function DevSupportPage() {
                 openProp={openDialog} 
                 handleCloseProp={handleCloseDialog} 
                 title={<span className='flex items-center text-amber-600'>SP <GiSpades />DES</span>}>
-                    We'll respond via email soon! You can check the status of this ticket on your dashboard.
+                    Thank you for your message. We'll respond via email soon! You can check the status of this ticket on your dashboard.
             </Customdialog>
             <Customdialog
                 openProp={openFailDialog} 

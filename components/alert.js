@@ -104,14 +104,14 @@ export function LoginNotification({children,alertTitle}) {
       <div className="fixed bottom-[50vh] top-[50vh] right-0 z-40 w-[300px]">
           <Collapse in={open}>
               <Alert 
-              icon={<BsPersonCheck className="text-xl text-[#de4f0a]"/>}
+              icon={<BsPersonCheck className="text-xl text-amber-600"/>}
               severity="success"
               >
                   <div className="flex justify-between items-center">
                       <AlertTitle>{alertTitle}</AlertTitle>
                       <AiOutlineCloseCircle 
                       onClick={handleClose}
-                      className="text-xl fixed top-0 right-0"/>
+                      className="text-xl text-wheat absolute top-1 right-1"/>
                   </div>
                   <blockquote>
                     {children}
@@ -138,14 +138,14 @@ export function OnLoginNotification({children,alertTitle}) {
       <div className="fixed top-12 right-0 z-30 w-[300px]">
           <Collapse in={open}>
               <Alert 
-              icon={<BsPersonCheck className="text-xl text-[#de4f0a]"/>}
+              icon={<BsPersonCheck className="text-xl text-amber-600"/>}
               severity="success"
               >
                   <div className="flex justify-between items-center">
                       <AlertTitle>{alertTitle}</AlertTitle>
                       <AiOutlineCloseCircle 
                       onClick={handleClose}
-                      className="text-xl fixed top-0 right-0"/>
+                      className="text-xl text-wheat font-bold absolute top-1 right-1"/>
                   </div>
                   <blockquote>
                     {children}

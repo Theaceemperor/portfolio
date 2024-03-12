@@ -1,3 +1,4 @@
+import { AdsNotification } from "@/components/alert";
 
 export const metadata = {
     title: 'Spades | T & C'
@@ -6,6 +7,13 @@ export const metadata = {
 export default function Layout({ children }) {
 
     return (
-        <>{children}</>
+        <>
+            <AdsNotification 
+            alertTitle={"Elevate Your Web Presence!"}
+            >
+                <span>Experience tailored web solutions for online success. Partner with us to enhance your brand's digital footprint today.</span> 
+            </AdsNotification> 
+            {children}
+        </>
     )
 }

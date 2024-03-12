@@ -674,7 +674,7 @@ export function BlogLink() {
     return (
         <div className="w-full flex items-center justify-center my-1">
             <h1 className="px-3">
-                <Link href={"https://x.com/@spadeshub"}
+                <Link href={"https://spadesblog.vercel.app"}
                 className="flex items-center justify-center">
                     <FaBlog className="text-amber-600"/>log
                 </Link>
@@ -1209,11 +1209,6 @@ export default function AppLayout({ children }) {
     return (
         <>
             {children}
-            {pathName !== "/auth" || pathName !== "/auth/signup" || pathName !== "/dashboard" || pathName !== "/account" || pathName !== "/settings" || pathName !== "/auth/signup/next-step" ? <AdsNotification 
-            alertTitle={"Elevate Your Web Presence!"}
-            >
-                <span>Experience tailored web solutions for online success. Partner with us to enhance your brand's digital footprint today.</span> 
-            </AdsNotification> : null}
         </>
     )
 }

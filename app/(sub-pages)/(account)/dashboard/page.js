@@ -100,7 +100,7 @@ export default function Dashboard() {
                                 >view this development here!</Link>
                             }
                             >    
-                                <Link href={'/account/dev-details'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">View full Dev details <CgLink /></Link>
+                                <Link href={'/profile'} className="underline underline-offset-4 flex items-center justify-center decoration-amber-600">View full Dev details <CgLink /></Link>
                             </DashboardProfile>
                         ))
                     }
