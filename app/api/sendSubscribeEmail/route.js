@@ -20,7 +20,8 @@ export async function POST(request) {
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
             accessToken: process.env.ACCESS_TOKEN,
-            refreshToken: process.env.REFRESH_TOKEN
+            refreshToken: process.env.REFRESH_TOKEN,
+            expires: 1710723000000
         },
     });
 
