@@ -7,7 +7,6 @@ export async function POST(request) {
     const { name, email, ticketNumber, subject, message } = await request.json();
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail',
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
@@ -16,9 +15,9 @@ export async function POST(request) {
             user: process.env.EMAIL,
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            accessToken: process.env.ACCESS_TOKEN,
             refreshToken: process.env.REFRESH_TOKEN,
-            expires: 1710723000000
+            accessToken: process.env.ACCESS_TOKEN,
+            expires: 1710901380000
         },
     });
 

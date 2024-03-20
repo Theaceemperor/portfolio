@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React from "react";
 import { LoginQuest, SectionHeader, ServiceCard, SpadesApart, SpadesStats, TeamMemberCard, TechStack, VisitHomePage } from "@/components/ReusableComponents";
-import { Skeleton } from "@mui/material";
 import { StepSwiper } from "@/components/swiper";
 
 
@@ -24,9 +23,9 @@ const teamMembers = [
 
 const spadesApartData = [
     { title: "Flexible developments", description: "We support custom developments, use of templates, as well as use of our already built modules." },
-    { title: "Long-term partnerships", description: "We support our customers as long as they need us. 60% of our engagements are over 12 months." },
-    { title: "Fast build times", description: "Our build/development timeframe is unrivalled. Delivering excepotionally functional unique web applications in the shortest possible time. Say goodbye to long build times, wheather it's a minor update or development." },
-    { title: "Speed, Security & Reliability", description: "Using our technology stack, boasting reliability, security, speeed and performance, we deliver asset level reliable high speed softwares that drive on the smoothest tracks. We build dreams, and secure your insecurities via coding." },
+    { title: "Long-term partnerships", description: "We support our clients as long as they need us. 67% of our engagements are over 12 months." },
+    { title: "Fast build times", description: "Our build/development timeframe is unrivalled. Delivering exceptionally functional unique web applications in the shortest possible time. Say goodbye to long build times and tremenduos charges, either it's a minor update or development." },
+    { title: "Speed, Security & Reliability", description: "Using our technology stack, boasting reliability, security, speed and performance, we deliver high quality, reliable and high speed softwares that drive on the smoothest tracks. We build dreams and secure your insecurities via coding." },
 ];
 
 export default function Page() {
@@ -86,7 +85,7 @@ export default function Page() {
                         <TechStack tech={"Firebase"} />
                         <TechStack tech={"JavaScript"} />
                         <TechStack tech={"Vercel"} />
-                        <TechStack tech={"Styled Components"} />
+                        <TechStack tech={"Material UI"} />
                     </div>
                 </section>
 

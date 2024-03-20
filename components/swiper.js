@@ -54,7 +54,7 @@ export function StepSwiper() {
     return (
       <section className="w-64 sm:w-80">
         {/* <!-- Slider main container --> */}
-        <div className="container bg-black rounded-md text-amber-600"> 
+        <div className="container"> 
           <div className="swiper">
             <div className="swiper-wrapper">
               {workingStepsData.map((data) => (

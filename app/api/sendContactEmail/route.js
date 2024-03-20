@@ -18,7 +18,7 @@ export async function POST(request) {
             clientSecret: process.env.CLIENT_SECRET,
             accessToken: process.env.ACCESS_TOKEN,
             refreshToken: process.env.REFRESH_TOKEN,
-            expires: 1710723000000
+            expires: 1710901380000
         },
     });
 

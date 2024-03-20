@@ -10,6 +10,7 @@ import { OnLoginNotification } from "@/components/alert";
 import Customdialog from "@/components/CustomDialog";
 import { GiSpades } from "react-icons/gi";
 import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/settings/firebase.settings";
 
 const validationRules = yup.object().shape({
     supportSubject:yup.string().required('This field is required.'),
@@ -31,16 +32,27 @@ export default function DevSupportPage() {
         initialValues: {supportSubject: '', supportMessage: ''},
         onSubmit: values => {
            try {
+               const content = {
+                   name: session.user.name,
+                   email: session.user.email,
+                   ticketNumber: ticketNumber,
+                   subject: values.supportSubject,
+                   message: values.supportMessage
+               };
+
+               const sendTicket = async () => {
+                    await addDoc(collection(db,'support-tickets'), {
+                        user: content.email,
+                        ticket: content.ticketNumber,
+                        status: 'open',
+                        subject: content.subject,
+                        date: new Date().getTime()
+                    });
+                };
+
                 const handleApiSubmit = async () => {
                     setShowActivityIndicator(true);
 
-                    const content = {
-                        name: session.user.name,
-                        email: session.user.email,
-                        ticketNumber: ticketNumber,
-                        subject: values.supportSubject,
-                        message: values.supportMessage
-                    }
             
                     const response = await fetch('/api/devSupport', {
                         method: 'POST',
@@ -55,14 +67,8 @@ export default function DevSupportPage() {
                             subject:content.subject,
                             message:content.message
                         })
-                    }).then( 
-                        async () => {
-                        await addDoc(collection(db,'support-tickets'), {
-                            user: content.email,
-                            ticket: content.ticketNumber,
-                            subject: content.subject,
-                            date: new Date().getTime()
-                        });
+                    }).then(() => {
+                        sendTicket();
                         setOpenDialog(true);
                         setShowAlertDialog(true);
                     }).catch((e) => setOpenFailDialog(true));
@@ -70,7 +76,9 @@ export default function DevSupportPage() {
                     setShowActivityIndicator(false);
             
                     // Clear the form fields
-                    handleChange('')
+                    values.supportMessage = ''
+                    values.supportSubject = ''
+                    setTicketNumber(generateTicket);
                 }; handleApiSubmit();
            } catch (error) {
                 console.error(error);
