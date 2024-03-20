@@ -1,9 +1,9 @@
 'use client'
 
-import React from "react";
+import React, { Suspense } from "react";
 import { FaBuysellads, FaShoppingCart } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
-import { GiChatBubble } from "react-icons/gi";
+import { GiChatBubble, GiSpades } from "react-icons/gi";
 import Link from "next/link";
 import { CgLink, CgProfile } from 'react-icons/cg';
 import { BiLogOutCircle } from "react-icons/bi";
@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { FaLaptopCode } from "react-icons/fa6";
 import { OnLoginNotification } from "@/components/alert";
 import { ShortProfile } from "@/components/profile";
-import { BlogLink, ButtonLink, DashboardProfile, DialogSlide, H1Link, VisitHomePage } from "@/components/ReusableComponents";
+import { BlogLink, ButtonLink, DashboardProfile, DialogSlide, H1Link, SupportTicketsCard, VisitHomePage } from "@/components/ReusableComponents";
 import { DevPop } from "@/components/modals";
 import Timer from "@/components/countdown-timer";
 import LinearWithValueLabel from "@/components/progress";
@@ -50,7 +50,7 @@ export default function Dashboard() {
                         }
                     }
                 }));
-               }
+               };
             handleGetDev();
         } catch (error) {
             
@@ -60,7 +60,7 @@ export default function Dashboard() {
     return (
         <>
             <main>
-                <blockquote className="my-5">
+                <blockquote className="mt-4">
                     <h3 className="flex flex-row gap-2 items-center px-5"> <CgProfile /> { session?.user.email }
                         <BiLogOutCircle className="text-xl text-amber-600"
                         onClick={() => signOut()}
@@ -74,7 +74,7 @@ export default function Dashboard() {
                         Logged in as {session?.user.name}
                     </span>
                 </OnLoginNotification>
-                <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-3 px-3 my-5">
+                <div className="w-full flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-4 px-4 mt-8">
                     <ShortProfile />
                     {
                         dev.map(item => (
@@ -106,7 +106,14 @@ export default function Dashboard() {
                     }
                 </div>
 
-                <div className="my-5 flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-5 px-5">
+                <article className="px-4 mt-8">
+                    <h3 className="text-center text-xl underline underline-offset-8 decoration-amber-600 font-semibold">Dev Support Tickets</h3>
+                    <Suspense fallback={<p>Loading tickets...</p>}>
+                        <SupportTicketsCard />
+                    </Suspense>
+                </article>
+
+                <div className="mt-8 flex flex-col lg:grid lg:grid-cols-2 md:grid md:grid-cols-2 gap-4 px-4">
                         <DashboardProfile 
                         header={"Your gift-cards"}
                         l1={"Amount: "}
@@ -118,11 +125,11 @@ export default function Dashboard() {
                             <FaShoppingCart />
 
                         </DashboardProfile>
-                        <blockquote className="flex flex-col gap-5 items-center justify-center"> 
+                        <blockquote className="flex flex-col space-y-4 items-center justify-center"> 
                             <DevPop />
 
                             <H1Link 
-                            icon={<IoMdCart />} 
+                            icon={<IoMdCart className="text-amber-600 text-xl" />} 
                             targetLink={"/gift-purchase"}
                             text={"Shop Giftcards"} 
                             />
@@ -151,8 +158,9 @@ export default function Dashboard() {
                 targetLink={handleOpenDialogAlert}
                 />
                 
-                <span className="flex items-center flex-col gap-2 mt-3">
+                <span className="flex items-center flex-col space-y-2 mt-8">
                     <VisitHomePage />
+                    <Link href={'/dev-support'} className="text-amber-600 italic font-semibold flex items-center gap-2">Dev Support <GiSpades /></Link>
                 </span>
             </main>
             <DialogSlide handleClose={handleCloseDialogAlert}

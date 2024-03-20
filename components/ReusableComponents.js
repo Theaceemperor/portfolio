@@ -2,7 +2,7 @@
 import React, { Suspense, useRef } from 'react';
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/settings/firebase.settings";
 import { ImCart } from 'react-icons/im';
 import Button from '@mui/material/Button';
@@ -53,6 +53,38 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
+export function SupportTicketsCard() {
+    const {data:session} = useSession();
+    const [supportTicket,setSupportTicket] = React.useState([]);
+
+    const getSupportTickets = async () => {
+        const q = query(collection(db,'support-tickets'),where('user','==',session.user.email));
+        const onSnapShot = await getDocs(q);
+
+        setSupportTicket(onSnapShot.docs.map(doc => {
+            return {
+                id:doc.id,
+                data:{
+                    ...doc.data()
+                }
+            };
+        }));
+    }; getSupportTickets();
+
+    return (
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {supportTicket.map((item, index) => (
+                <div key={index} className="rounded-lg shadow shadow-amber-600 p-2">
+                    <h4><b className='text-amber-600 font-semibold'>Subject:</b> {item.data.subject}</h4>
+                    <p><b className='text-amber-600 font-semibold'>Ticket:</b> {item.data.ticket}</p>
+                    <p><b className='text-amber-600 font-semibold'>Status:</b> {item.data.status}</p>
+                    <p><b className='text-amber-600 font-semibold'>Opened:</b> {timeAgo(item.data.date)}</p>
+                </div>
+            ))}
+        </div>
+    )
+}
+
 export function TeamSection() {
 
     return (
@@ -75,7 +107,7 @@ export function TeamSection() {
 export function WorkingSteps({ data }) {
 
     return (
-        <div className="bg-wheat text-black flex flex-col items-center justify-center rounded p-2 space-y-2">
+        <div className="bg-wheat text-black flex flex-col items-center justify-center rounded p-4 space-y-2">
             <span className="p-2 bg-black text-wheat rounded-full text-xl w-fit"> {data.id} </span>
             <h4 className="font-bold text-xl">{data.title}</h4>
             <p>{data.description}</p>
